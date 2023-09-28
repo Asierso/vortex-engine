@@ -6,6 +6,7 @@ package com.asierso.vortexengine.window;
 
 import org.jsfml.window.*;
 import org.jsfml.graphics.*;
+import org.jsfml.system.Clock;
 import org.jsfml.window.event.Event;
 
 /**
@@ -18,6 +19,7 @@ public class Window {
     private int width = 0;
     private int height = 0;
     private int frames = 60;
+    private float fps = 0;
     private String title = "Window";
     private Color background = Color.BLACK;
 
@@ -25,7 +27,7 @@ public class Window {
     private RenderWindow render;
 
     //Container of runtime methods
-    private RenderRuntime runtime;
+    private BaseScene runtime;
 
     //Main constructors
     public Window() {
@@ -48,6 +50,15 @@ public class Window {
     }
 
     /**
+     * Get current window dimension
+     *
+     * @return Dimension of window
+     */
+    public Dimension getSize() {
+        return new Dimension(width, height);
+    }
+
+    /**
      * Set window framerate
      *
      * @param frames Number of frames to render in a second
@@ -57,11 +68,19 @@ public class Window {
     }
 
     /**
+     * Get frames renderer in 1 second
+     * @return FPS value
+     */
+    public float getFramesPerSecond() {
+        return fps;
+    }
+
+    /**
      * Set runtime instructions when window executes
      *
      * @param runtime Runtime class
      */
-    public void setRenderRuntime(RenderRuntime runtime) {
+    public void setRenderRuntime(BaseScene runtime) {
         this.runtime = runtime;
     }
 
@@ -106,12 +125,15 @@ public class Window {
 
         //Startup execution
         runtime.start();
+
+        //Initialice FPS counter
+        Clock frameClock = new Clock();
         while (render.isOpen()) {
             reloadConfigs();
             //Refresh window and execute update method
             render.clear(background);
             Iterable<Event> events = render.pollEvents();
-            runtime.update(render, events);
+            runtime.update(this, events);
 
             //Detects close event
             events.forEach(obj -> {
@@ -123,6 +145,8 @@ public class Window {
 
             //Display
             render.display();
+            float currentTime = frameClock.restart().asSeconds();
+            fps = 1.f / currentTime ;
         }
     }
 

@@ -11,7 +11,7 @@ import org.jsfml.window.event.Event;
  *
  * @author asier
  */
-public class RenderRuntime {
+public class BaseScene {
 
     /**
      * Executes at window is showed
@@ -22,10 +22,10 @@ public class RenderRuntime {
     /**
      * Executes every window render cycle
      *
-     * @param render Takes window render SFML to draw
+     * @param window Takes window to draw
      * @param events Takes window events
      */
-    public void update(RenderWindow render, Iterable<Event> events) {
+    public void update(Window window, Iterable<Event> events) {
     }
 
     /**
