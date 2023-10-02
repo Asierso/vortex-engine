@@ -2,10 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.asierso.vortexengine.gameComponents;
+package com.asierso.vortexengine.sceneObjects;
 
+import com.asierso.vortexengine.components.Component;
 import com.asierso.vortexengine.window.Window;
 import java.util.ArrayList;
+import org.jsfml.graphics.Color;
 import org.jsfml.graphics.RenderWindow;
 import org.jsfml.system.Vector2f;
 
@@ -13,11 +15,13 @@ import org.jsfml.system.Vector2f;
  *
  * @author sobblaas
  */
-public class GameObject {
+public class GameObject implements Cloneable {
 
     private Vector2f position = new Vector2f(0, 0);
     private Vector2f boxSize = new Vector2f(0, 0);
-    private ArrayList<IComponent> components = new ArrayList<IComponent>();
+    private ArrayList<Component> components = new ArrayList<Component>();
+    private Color baseColor = Color.WHITE;
+    private float rotation = 0;
     private boolean isShowing = true;
 
     public GameObject() {
@@ -60,26 +64,34 @@ public class GameObject {
     public final boolean getVisible() {
         return isShowing;
     }
+    
+    public final void setColor(Color color){
+        baseColor = color;
+    }
+    
+    public final Color getColor(){
+        return baseColor;
+    }
 
     public final void instantiate(Window window) {
-        for (IComponent handle : components) {
+        for (Component handle : components) {
             handle.run(this);
         }
         if (isShowing) {
-            render(window.getRender());
+            render(window);
         }
 
     }
 
-    public final void addComponent(IComponent component) {
+    public final void addComponent(Component component) {
         components.add(component);
     }
     
-    public final <T extends IComponent> T getComponentById(int id){
+    public final <T extends Component> T getComponentById(int id){
         return (T)components.get(id);
     }
     
-    public final void removeComponent(IComponent component) {
+    public final void removeComponent(Component component) {
         components.remove(component);
     }
 
@@ -96,8 +108,12 @@ public class GameObject {
         }
         return col;
     }
-
-    public void render(RenderWindow render) {
+    
+    public final Object clone() throws CloneNotSupportedException{
+        return super.clone();
+    }
+    
+    public void render(Window win) {
 
     }
 }

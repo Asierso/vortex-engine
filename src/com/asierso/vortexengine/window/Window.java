@@ -4,6 +4,7 @@
  */
 package com.asierso.vortexengine.window;
 
+import com.asierso.vortexengine.miscellaneous.Dimension;
 import org.jsfml.window.*;
 import org.jsfml.graphics.*;
 import org.jsfml.system.Clock;
@@ -22,6 +23,7 @@ public class Window {
     private float fps = 0;
     private String title = "Window";
     private Color background = Color.BLACK;
+    private ConstView windowView;
 
     //SFML window instance
     private RenderWindow render;
@@ -69,6 +71,7 @@ public class Window {
 
     /**
      * Get frames renderer in 1 second
+     *
      * @return FPS value
      */
     public float getFramesPerSecond() {
@@ -126,6 +129,9 @@ public class Window {
         //Startup execution
         runtime.start();
 
+        //Save default view
+        windowView = render.getDefaultView();
+
         //Initialice FPS counter
         Clock frameClock = new Clock();
         while (render.isOpen()) {
@@ -137,16 +143,22 @@ public class Window {
 
             //Detects close event
             events.forEach(obj -> {
-                if (obj.type == Event.Type.CLOSED) {
-                    runtime.close();
-                    render.close();
+                switch (obj.type) {
+                    case CLOSED:
+                        runtime.close();
+                        render.close();
+                        break;
+                    case RESIZED:
+                        ((View) windowView).setSize(width, height);
+                        render.setView(windowView);
+                        break;
                 }
             });
 
             //Display
             render.display();
             float currentTime = frameClock.restart().asSeconds();
-            fps = 1.f / currentTime ;
+            fps = 1.f / currentTime;
         }
     }
 
