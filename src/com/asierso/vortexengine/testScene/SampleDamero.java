@@ -17,7 +17,7 @@ import org.jsfml.system.Vector2f;
 public class SampleDamero extends GameObject {
 
     @Override
-    public void render(Window win) {
+    protected void render(Window win) {
         int k = 0;
         for (int i = Math.round(this.getPosition().x); i < Math.round(this.getPosition().x + this.getBoxSize().x) / 20; i++) {
             for (int j = Math.round(this.getPosition().y); j < Math.round(this.getPosition().y + this.getBoxSize().y) / 20; j++) {

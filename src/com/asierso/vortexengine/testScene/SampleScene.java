@@ -7,11 +7,14 @@ package com.asierso.vortexengine.testScene;
 import com.asierso.vortexengine.sceneObjects.ParticleSystem;
 import com.asierso.vortexengine.components.Rigibody;
 import com.asierso.vortexengine.miscellaneous.ColorModifier;
+import com.asierso.vortexengine.sceneObjects.SoundSource;
 import com.asierso.vortexengine.sceneObjects.TextMesh;
 import com.asierso.vortexengine.window.BaseScene;
 import com.asierso.vortexengine.window.Window;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jsfml.graphics.Color;
 import org.jsfml.system.Vector2f;
 import org.jsfml.window.event.Event;
@@ -29,6 +32,7 @@ public class SampleScene extends BaseScene {
     private ParticleSystem[] ppss = {new ParticleSystem(), new ParticleSystem(), new ParticleSystem(), new ParticleSystem()};
     private TextMesh tm;
     private SampleDamero dam;
+    private SoundSource ss = new SoundSource();
 
     @Override
     public void start() {
@@ -58,8 +62,9 @@ public class SampleScene extends BaseScene {
         }
         cubes[0].addComponent(rb);
 
-        tm = new TextMesh(100, 0, "Vortex Test - ");
+        tm = new TextMesh(0, 0, "Vortex Test - ");
         tm.setFontSize(15);
+
         try {
             tm.getFont().loadFromFile(Path.of("C:/Windows/Fonts/Arial.ttf"));
         } catch (IOException ex) {
@@ -110,6 +115,7 @@ public class SampleScene extends BaseScene {
         ppss[0].setModifier(ParticleSystem.ParticleModifiers.POSITION, new Vector2f(1f, 0));
         ppss[0].setModifier(ParticleSystem.ParticleModifiers.BOX_SIZE, new Vector2f(1f, 0));
         ppss[0].setModifier(ParticleSystem.ParticleModifiers.COLOR, new ColorModifier(0, 10, 0, 0));
+        ppss[0].setModifier(ParticleSystem.ParticleModifiers.ROTATION, 1f);
 
         ppss[1].setModifier(ParticleSystem.ParticleModifiers.POSITION, new Vector2f(0f, 1f));
         ppss[1].setModifier(ParticleSystem.ParticleModifiers.BOX_SIZE, new Vector2f(0, 0));
@@ -123,8 +129,17 @@ public class SampleScene extends BaseScene {
         ppss[3].setModifier(ParticleSystem.ParticleModifiers.COLOR, new ColorModifier(10, 0, 0, -5));
 
         dam = new SampleDamero();
-        dam.setPosition(0,0);
-        dam.setColor(new Color(60,60,60,255));
+        dam.setPosition(0, 0);
+        dam.setColor(new Color(60, 60, 60, 255));
+        
+        try {
+            ss.addSoundtrack("SoundPool", Path.of("./soundpool.wav"), SoundSource.LoadModes.FILE);
+            ss.getSoundtrack("SoundPool").select();
+            ss.setPitch(3);
+            
+        } catch (Exception ex) {
+            System.out.println("A");
+        }
     }
 
     @Override
@@ -132,8 +147,7 @@ public class SampleScene extends BaseScene {
         //Draw bg
         dam.setBoxSize(rw.getSize().width, rw.getSize().height);
         dam.instantiate(rw);
-        
-        
+
         if (cubes[itq].getPosition().x + cubes[itq].getBoxSize().x >= rw.getSize().width && incremental) {
             itq++;
         } else if (cubes[itq].getPosition().x <= 0 && !incremental) {
@@ -161,7 +175,7 @@ public class SampleScene extends BaseScene {
             cubes[i].instantiate(rw);
         }
 
-        Rigibody rb = cubes[0].getComponentById(0);
+        Rigibody rb = cubes[0].getComponent("Rigibody");
         rb.setMass(massConstant);
         rb.setPonderation(Rigibody.GravityPonderations.MASS_PRECISION);
 
@@ -179,12 +193,23 @@ public class SampleScene extends BaseScene {
                 cubes[0].setPosition(0, rw.getSize().height - cubes[0].getBoxSize().y - 1);
             }
         }
+        
+        if(incremental)
+            ppss[0].stop();
+        else
+            ppss[0].start();
 
-        tm.setText("Vortex Test - " + Math.round(rw.getFramesPerSecond()) + " fps \nPos (x=" + cubes[0].getPosition().x + ",y=" + cubes[0].getPosition().y + ")\nRigiBody (acel=" + rb.getAcceleration() + ",delta=" + rb.getDelta() + ",mass=" + rb.getMass() + ")");
-        tm.instantiate(rw);
-
+        String particleDebug = "";
+        int psAmount = 0;
         for (var ps : ppss) {
             ps.instantiate(rw);
+            particleDebug += ps.getAmount() + ",";
+            psAmount += ps.getAmount();
+            
         }
+
+        tm.setText("Vortex Test Window - " + Math.round(rw.getFramesPerSecond()) + " fps \nPosition (x=" + cubes[0].getPosition().x + ",y=" + cubes[0].getPosition().y + ")\nRigibody (acel=" + rb.getAcceleration() + ",delta=" + rb.getDelta() + ",mass=" + rb.getMass() + ")\nParticles (array=[" + particleDebug + "],total=" + psAmount + ")");
+        tm.instantiate(rw);
+       
     }
 }

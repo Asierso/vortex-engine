@@ -5,6 +5,8 @@
 package com.asierso.vortexengine.testScene;
 
 import com.asierso.vortexengine.window.Window;
+import java.io.File;
+import java.nio.file.Path;
 
 /**
  *
@@ -13,8 +15,13 @@ import com.asierso.vortexengine.window.Window;
 public class VortexTest {
     public static void TestWindow() {
         Window win = new Window(300, 400);
+        try{
+        System.out.println(new File(".").getCanonicalPath());
+        }
+        catch(Exception e){
+            
+        }
         win.setTitle("Escena prueba - Vortex");
-        System.out.println("TR");
         win.setRenderRuntime(new SampleScene());
         win.instantiate();
     }

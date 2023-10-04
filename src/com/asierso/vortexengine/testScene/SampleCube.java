@@ -18,10 +18,11 @@ import org.jsfml.system.Vector2f;
 public class SampleCube extends GameObject {
 
     @Override
-    public void render(Window win) {
+    protected void render(Window win) {
         var rect = new RectangleShape();
         rect.setPosition(this.getPosition());
         rect.setSize(new Vector2f(this.getBoxSize().x, this.getBoxSize().y));
+        rect.setRotation(this.getRotation());
         rect.setFillColor(this.getColor());
         win.getRender().draw(rect);
     }
