@@ -40,13 +40,21 @@ public class GameObject implements Cloneable {
     public final void setPosition(float x, float y) {
         position = new Vector2f(x, y);
     }
-    
+
     public final void setPosition(Vector2f position) {
         this.position = position;
     }
 
     public final Vector2f getPosition() {
         return position;
+    }
+
+    public final void setRotation(float rotation) {
+        this.rotation = rotation;
+    }
+
+    public final float getRotation() {
+        return rotation;
     }
 
     public final void setBoxSize(float x, float y) {
@@ -56,45 +64,129 @@ public class GameObject implements Cloneable {
     public final Vector2f getBoxSize() {
         return boxSize;
     }
-
+    
+    /**
+     * Set GameObject visibility
+     * A component without visibility can de instantiated to render components
+     * @param showing Showing status
+     */
     public final void setVisible(boolean showing) {
         isShowing = showing;
     }
-
+    
+    /**
+     * Get GameObject current visibility
+     * @return  If GameObject is visible or not
+     */
     public final boolean getVisible() {
         return isShowing;
     }
     
-    public final void setColor(Color color){
+    /**
+     * Set GameObject color
+     * @param color The color to assign to GameObject
+     */
+    public final void setColor(Color color) {
         baseColor = color;
     }
     
-    public final Color getColor(){
+    /**
+     * Get GameObject color
+     * @return A color class
+     */
+    public final Color getColor() {
         return baseColor;
     }
 
+    /**
+     * Instantiate the GameObject in selected window. 
+     * Remember that is not needed to instantiate non-graphic GameObjects
+     * All GameObjects with any component type, must be instantiated
+     * @param window The window where render the GameObject
+     */
     public final void instantiate(Window window) {
+        //Render components before render object
         for (Component handle : components) {
             handle.run(this);
         }
+        //Render object
         if (isShowing) {
             render(window);
         }
-
     }
 
+    /**
+     * Add a new component to components ArrayList
+     * @param component The component class to add
+     */
     public final void addComponent(Component component) {
-        components.add(component);
-    }
-    
-    public final <T extends Component> T getComponentById(int id){
-        return (T)components.get(id);
-    }
-    
-    public final void removeComponent(Component component) {
-        components.remove(component);
+        if(!existsComponent(component))
+            components.add(component);
+        else
+            throw new StackOverflowError();
     }
 
+    /**
+     * Find components by id. Id represents the element index in components array
+     * @param <T> Component class
+     * @param id Id of component to get
+     * @return Component class finded
+     */
+    public final <T extends Component> T getComponent(int id) {
+        return (T) components.get(id);
+    }
+    
+    /**
+     * Find components by class name. (Only one component at the same class can be handled)
+     * @param <T> Component class
+     * @param name Simple component class name
+     * @return Component class finded
+     */
+    public final <T extends Component> T getComponent(String name) {
+        return (T) components.stream()
+                .filter(obj -> obj.getClass().getSimpleName().equals(name))
+                .findFirst().get();
+    }
+    
+    /**
+     * Detects if component class exists based in component class name
+     * @param component Component to search
+     * @return If component was found or not
+     */
+    private boolean existsComponent(Component component){
+        return components.stream()
+                .anyMatch(obj -> obj.getClass().getSimpleName().equals(component.getClass().toString()));
+    }
+    
+    /**
+     * Detects if component class exists based in component class name
+     * @param name Component class name
+     * @return If component was found or not
+     */
+    private boolean existsComponent(String name){
+        return components.stream()
+                .anyMatch(obj -> obj.getClass().getSimpleName().equals(name));
+    }
+    
+    /**
+     * Removes the specified component in GameObject component ArrayList
+     * @param name The class name of the component to delete
+     */
+    public final void removeComponent(String name) {
+        if(existsComponent(name))
+            components.remove(components.stream()
+                .filter(obj -> obj.getClass().getSimpleName().equals(name))
+                .findFirst().get());
+        else
+            throw new NoClassDefFoundError();
+    }
+
+    /**
+     * Detects if current game object collides with a target gameObject. 
+     * Consider that it works like a trigger collision (inner collisions are detected too)
+     * @param obj Target GameObject to detect
+     * @return If collision is produced
+     */
     public final boolean collisionWith(GameObject obj) {
         boolean col = false;
         for (float i = position.x; i < position.x + boxSize.x; i++) {
@@ -109,11 +201,21 @@ public class GameObject implements Cloneable {
         return col;
     }
     
-    public final Object clone() throws CloneNotSupportedException{
+    /**
+     * Clone current GameObject class to another new
+     * @return The new instance of GameObject
+     * @throws CloneNotSupportedException
+     */
+    public final Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
     
-    public void render(Window win) {
-
+    /**
+     * The method that render the GameObject "Shape"
+     * Trying to render a void GameObject that does not have a "Shape" can cause an UnsupportedOperationException
+     * @param win Window where render the GameObject "Shape"
+     */
+    protected void render(Window win) {
+        throw new UnsupportedOperationException("Cannot render a non graphic element");
     }
 }
