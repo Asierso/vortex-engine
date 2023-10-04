@@ -8,13 +8,15 @@ import org.jsfml.graphics.RenderWindow;
 import org.jsfml.window.event.Event;
 
 /**
+ * The scene contains the main execution methods of the window where the
+ * diferent GameObjects can be instantiated, handled and rendered
  *
- * @author asier
+ * @author Asierso
  */
 public class BaseScene {
 
     /**
-     * Executes at window is showed
+     * Executes where window is showed
      */
     public void start() {
     }

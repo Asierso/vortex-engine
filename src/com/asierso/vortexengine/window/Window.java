@@ -11,8 +11,10 @@ import org.jsfml.system.Clock;
 import org.jsfml.window.event.Event;
 
 /**
+ * This class is the GameWindow base class. 
+ * Contains the SFML base window and load the scenes
  *
- * @author asier
+ * @author Asierso
  */
 public class Window {
 

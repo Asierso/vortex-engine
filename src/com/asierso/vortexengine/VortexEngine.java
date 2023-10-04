@@ -4,6 +4,8 @@
  */
 package com.asierso.vortexengine;
 
+import com.asierso.vortexengine.testScene.VortexTest;
+
 /**
  *
  * @author asier
@@ -15,7 +17,7 @@ public class VortexEngine {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+        VortexTest.TestWindow();
     }
 
 }

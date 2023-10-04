@@ -13,6 +13,8 @@ import org.jsfml.graphics.RenderWindow;
 import org.jsfml.system.Vector2f;
 
 /**
+ * The base void GameObject with the basic properties needed in every object in
+ * the scene
  *
  * @author sobblaas
  */
