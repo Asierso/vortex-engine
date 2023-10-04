@@ -6,6 +6,7 @@ package com.asierso.vortexengine.sceneObjects;
 
 import com.asierso.vortexengine.miscellaneous.ColorModifier;
 import com.asierso.vortexengine.miscellaneous.Startable;
+import com.asierso.vortexengine.miscellaneous.Transform;
 import com.asierso.vortexengine.window.Window;
 import java.util.ArrayList;
 import java.util.Random;
@@ -18,7 +19,7 @@ import org.jsfml.system.Vector2f;
  *
  * @author asier
  */
-public class ParticleSystem extends GameObject implements Startable {
+public class ParticleSystem extends GameObject implements Startable, Transform {
 
     //Particle prefab (any gmo)
     private GameObject particle = null;
@@ -42,12 +43,18 @@ public class ParticleSystem extends GameObject implements Startable {
     };
 
     //Particles collection
-    private ArrayList<ParticleDictionary> instanciatedList = new ArrayList();
+    private final ArrayList<ParticleDictionary> instanciatedList = new ArrayList();
 
     //Others
-    private Clock counter = new Clock();
-    private Random rdn = new Random();
+    private final Clock counter = new Clock();
+    private final Random rdn = new Random();
 
+    /**
+     * Method that render every single particle in the ParticleSystem Handle the
+     * particle lifetime and max amount
+     *
+     * @param win Window where the ParticleSystem will be rendered
+     */
     @Override
     protected void render(Window win) {
         //Timer to calculate single particle lifetime
@@ -73,6 +80,12 @@ public class ParticleSystem extends GameObject implements Startable {
         }
     }
 
+    /**
+     * Load defined modifiers of an specific particle This modifiers make
+     * constrain changes in particles during lifetime
+     *
+     * @param particle Particle to handle
+     */
     private void loadModifiers(GameObject particle) {
         //Process position modifiers
         if (positionModifier.x != 0) {
@@ -106,6 +119,7 @@ public class ParticleSystem extends GameObject implements Startable {
                 colorModifier.a
             };
 
+            //Iterate decompose array and add or rest color modifier
             for (int i = 0; i < colorDecompose.length; i++) {
                 if (colorDecompose[i] + modifiers[i] >= 0 && colorDecompose[i] + modifiers[i] <= 255);
                 colorDecompose[i] += modifiers[i];
@@ -119,6 +133,9 @@ public class ParticleSystem extends GameObject implements Startable {
         }
     }
 
+    /**
+     * Generates new particles if the particle limit is not exceeded
+     */
     private void generateParticle() {
         //Clone gameObject in a random position if amount of particles is less than max
         if (instanciatedList.size() < maxParticles) {
@@ -140,57 +157,101 @@ public class ParticleSystem extends GameObject implements Startable {
         }
     }
 
+    /**
+     * Set the particle model object. This is a GameObject that will be
+     * instantiated like a particle
+     *
+     * @param model The GameObject model that will be used like a particle
+     */
     public final void setParticleModel(GameObject model) {
         this.particle = model;
     }
 
+    /**
+     * Set the amount limit of particles. The ParticleSystem can't exceed this
+     * limit
+     *
+     * @param max Number of max particles
+     */
     public final void setMaxParticles(int max) {
         this.maxParticles = max;
     }
 
+    /**
+     * Get the stablished limit of max particles
+     *
+     * @return Number of max particles
+     */
     public final int getMaxParticles() {
         return maxParticles;
     }
 
+    /**
+     * Set the particle lifetime in the Window. Particle will be destroyed when
+     * lifetime = 0
+     *
+     * @param lifetime Particle time of life
+     */
     public final void setLifetime(float lifetime) {
         this.lifetime = lifetime;
     }
 
+    /**
+     * Get the particle lifetime
+     *
+     * @return Particle time of life
+     */
     public final float getLifetime() {
         return lifetime;
     }
 
+    /**
+     * Get the current amount of particles instancied
+     *
+     * @return Number of elements in particles array
+     */
     public final int getAmount() {
         return instanciatedList.size();
     }
 
+    /**
+     * Starts ParticleSystem
+     */
     @Override
     public final void start() {
         isActive = true;
     }
 
+    /**
+     * Stops ParticleSystem
+     */
     @Override
     public final void stop() {
         isActive = false;
     }
 
-    public final <T> void setModifier(ParticleModifiers modifier, T value) {
+    /**
+     * Set the Particles modifier fields to a specific value The modifiers are
+     * constant values that operate the properties of the particles in each
+     * execution tick. They allow you to make animations with the particles
+     *
+     * @param modifier Field of the ParticleSystem to modify.
+     * @param value Object to which the property to be modified is set
+     */
+    public final void setModifier(ParticleModifiers modifier, Object value) {
         switch (modifier) {
-            case POSITION:
+            case POSITION ->
                 positionModifier = (Vector2f) value;
-                break;
-            case BOX_SIZE:
+            case BOX_SIZE ->
                 boxSizeModifier = (Vector2f) value;
-                break;
-            case COLOR:
+            case COLOR ->
                 colorModifier = (ColorModifier) value;
-                break;
-            case ROTATION:
+            case ROTATION ->
                 rotationModifier = (float) value;
-                break;
         }
     }
-
+    
+    //Match particle with it's lifetime
     private class ParticleDictionary {
 
         public float lifetime = 0f;
