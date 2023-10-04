@@ -56,10 +56,12 @@ public class TextMesh extends GameObject {
     }
 
     @Override
-    public void render(Window win) {
+    protected void render(Window win) {
         t.setCharacterSize(fontSize);
         t.setString(textString);
         t.setFont(font);
+        t.setPosition(this.getPosition());
+        t.setRotation(this.getRotation());
         t.setColor(this.getColor());
         win.getRender().draw(t);
     }
