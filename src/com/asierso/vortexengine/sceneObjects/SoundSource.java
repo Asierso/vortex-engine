@@ -5,7 +5,6 @@
 package com.asierso.vortexengine.sceneObjects;
 
 import com.asierso.vortexengine.miscellaneous.Startable;
-import com.asierso.vortexengine.window.Window;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -67,12 +66,8 @@ public class SoundSource extends GameObject implements Startable {
     public void addSoundtrack(String name,Object source,LoadModes mode) throws IOException {
         Soundtrack st = new Soundtrack(this,name);
         switch(mode){
-            case FILE:
-                st.loadFromFile((Path)source);
-                break;
-            case STREAM:
-                st.loadFromStream((InputStream)source);
-                break;
+            case FILE -> st.loadFromFile((Path)source);
+            case STREAM -> st.loadFromStream((InputStream)source);
         }
         soundtracks.add(st);
     }

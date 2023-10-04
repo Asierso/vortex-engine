@@ -11,7 +11,6 @@ import com.asierso.vortexengine.window.Window;
 import java.util.ArrayList;
 import java.util.Random;
 import org.jsfml.graphics.Color;
-import org.jsfml.graphics.RenderWindow;
 import org.jsfml.system.Clock;
 import org.jsfml.system.Vector2f;
 
