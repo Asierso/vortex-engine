@@ -178,6 +178,15 @@ public class GameObject implements Cloneable, Transform {
     }
 
     /**
+     * Get Transform interface of the GameObject
+     *
+     * @return The transform interface of the object
+     */
+    public final Transform getTransform() {
+        return (Transform) this;
+    }
+
+    /**
      * Instantiate the GameObject in selected window. Remember that is not
      * needed to instantiate non-graphic GameObjects All GameObjects with any
      * component type, must be instantiated
