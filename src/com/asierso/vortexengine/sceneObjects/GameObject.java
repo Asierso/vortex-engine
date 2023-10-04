@@ -5,6 +5,7 @@
 package com.asierso.vortexengine.sceneObjects;
 
 import com.asierso.vortexengine.components.Component;
+import com.asierso.vortexengine.miscellaneous.Transform;
 import com.asierso.vortexengine.window.Window;
 import java.util.ArrayList;
 import org.jsfml.graphics.Color;
@@ -15,83 +16,161 @@ import org.jsfml.system.Vector2f;
  *
  * @author sobblaas
  */
-public class GameObject implements Cloneable {
+public class GameObject implements Cloneable, Transform {
 
+    //Transform fields
     private Vector2f position = new Vector2f(0, 0);
     private Vector2f boxSize = new Vector2f(0, 0);
-    private ArrayList<Component> components = new ArrayList<Component>();
-    private Color baseColor = Color.WHITE;
     private float rotation = 0;
+
+    //Components list
+    private ArrayList<Component> components = new ArrayList<Component>();
+
+    //Others
+    private Color baseColor = Color.WHITE;
     private boolean isShowing = true;
 
+    /**
+     * Initializate GameObject
+     */
     public GameObject() {
 
     }
 
+    /**
+     * Initializate GameObject
+     *
+     * @param position The position of the object
+     */
     public GameObject(Vector2f position) {
         this.position = position;
     }
 
+    /**
+     * Initializate GameObject
+     *
+     * @param position The position of the object
+     * @param boxSize The box sife of the object
+     */
     public GameObject(Vector2f position, Vector2f boxSize) {
         this.position = position;
         this.boxSize = boxSize;
     }
 
+    /**
+     * Set the GameObject position
+     *
+     * @param x Represents the x position of the object
+     * @param y Represents the y position of the object
+     */
     public final void setPosition(float x, float y) {
         position = new Vector2f(x, y);
     }
 
+    /**
+     * Set the GameObject position
+     *
+     * @param position Represents the Vector position of the object
+     */
+    @Override
     public final void setPosition(Vector2f position) {
         this.position = position;
     }
 
+    /**
+     * Get the GameObject position
+     *
+     * @return The vector of the GameObject position
+     */
+    @Override
     public final Vector2f getPosition() {
         return position;
     }
 
+    /**
+     * Set the GameObject rotation in a specific angle
+     *
+     * @param rotation A number of the GameObject rotation angle
+     */
+    @Override
     public final void setRotation(float rotation) {
         this.rotation = rotation;
     }
 
+    /**
+     * Get GameObject rotation in degrees
+     *
+     * @return A number of the GameObject rotation angle
+     */
+    @Override
     public final float getRotation() {
         return rotation;
     }
 
+    /**
+     * Set GameObject box size. This is mostly used to define GameObject size
+     * and hitbox
+     *
+     * @param size Represents the Vector scale of the object
+     */
+    @Override
+    public void setBoxSize(Vector2f size) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    /**
+     * Set GameObject box size. This is mostly used to define GameObject size
+     * and hitbox
+     *
+     * @param x Represents the scale in x of the object
+     * @param y Represents the scale in y of the object
+     */
+    @Override
     public final void setBoxSize(float x, float y) {
         boxSize = new Vector2f(x, y);
     }
 
+    /**
+     * Get GameObject box size
+     *
+     * @return The box size of the object
+     */
+    @Override
     public final Vector2f getBoxSize() {
         return boxSize;
     }
-    
+
     /**
-     * Set GameObject visibility
-     * A component without visibility can de instantiated to render components
+     * Set GameObject visibility A component without visibility can de
+     * instantiated to render components
+     *
      * @param showing Showing status
      */
     public final void setVisible(boolean showing) {
         isShowing = showing;
     }
-    
+
     /**
      * Get GameObject current visibility
-     * @return  If GameObject is visible or not
+     *
+     * @return If GameObject is visible or not
      */
     public final boolean getVisible() {
         return isShowing;
     }
-    
+
     /**
      * Set GameObject color
+     *
      * @param color The color to assign to GameObject
      */
     public final void setColor(Color color) {
         baseColor = color;
     }
-    
+
     /**
      * Get GameObject color
+     *
      * @return A color class
      */
     public final Color getColor() {
@@ -99,9 +178,10 @@ public class GameObject implements Cloneable {
     }
 
     /**
-     * Instantiate the GameObject in selected window. 
-     * Remember that is not needed to instantiate non-graphic GameObjects
-     * All GameObjects with any component type, must be instantiated
+     * Instantiate the GameObject in selected window. Remember that is not
+     * needed to instantiate non-graphic GameObjects All GameObjects with any
+     * component type, must be instantiated
+     *
      * @param window The window where render the GameObject
      */
     public final void instantiate(Window window) {
@@ -117,17 +197,21 @@ public class GameObject implements Cloneable {
 
     /**
      * Add a new component to components ArrayList
+     *
      * @param component The component class to add
      */
     public final void addComponent(Component component) {
-        if(!existsComponent(component))
+        if (!existsComponent(component)) {
             components.add(component);
-        else
+        } else {
             throw new StackOverflowError();
+        }
     }
 
     /**
-     * Find components by id. Id represents the element index in components array
+     * Find components by id. Id represents the element index in components
+     * array
+     *
      * @param <T> Component class
      * @param id Id of component to get
      * @return Component class finded
@@ -135,9 +219,11 @@ public class GameObject implements Cloneable {
     public final <T extends Component> T getComponent(int id) {
         return (T) components.get(id);
     }
-    
+
     /**
-     * Find components by class name. (Only one component at the same class can be handled)
+     * Find components by class name. (Only one component at the same class can
+     * be handled)
+     *
      * @param <T> Component class
      * @param name Simple component class name
      * @return Component class finded
@@ -147,43 +233,49 @@ public class GameObject implements Cloneable {
                 .filter(obj -> obj.getClass().getSimpleName().equals(name))
                 .findFirst().get();
     }
-    
+
     /**
      * Detects if component class exists based in component class name
+     *
      * @param component Component to search
      * @return If component was found or not
      */
-    private boolean existsComponent(Component component){
+    private boolean existsComponent(Component component) {
         return components.stream()
                 .anyMatch(obj -> obj.getClass().getSimpleName().equals(component.getClass().toString()));
     }
-    
+
     /**
      * Detects if component class exists based in component class name
+     *
      * @param name Component class name
      * @return If component was found or not
      */
-    private boolean existsComponent(String name){
+    private boolean existsComponent(String name) {
         return components.stream()
                 .anyMatch(obj -> obj.getClass().getSimpleName().equals(name));
     }
-    
+
     /**
      * Removes the specified component in GameObject component ArrayList
+     *
      * @param name The class name of the component to delete
      */
     public final void removeComponent(String name) {
-        if(existsComponent(name))
+        if (existsComponent(name)) {
             components.remove(components.stream()
-                .filter(obj -> obj.getClass().getSimpleName().equals(name))
-                .findFirst().get());
-        else
+                    .filter(obj -> obj.getClass().getSimpleName().equals(name))
+                    .findFirst().get());
+        } else {
             throw new NoClassDefFoundError();
+        }
     }
 
     /**
-     * Detects if current game object collides with a target gameObject. 
-     * Consider that it works like a trigger collision (inner collisions are detected too)
+     * Detects if current game object collides with a target gameObject.
+     * Consider that it works like a trigger collision (inner collisions are
+     * detected too)
+     *
      * @param obj Target GameObject to detect
      * @return If collision is produced
      */
@@ -200,19 +292,22 @@ public class GameObject implements Cloneable {
         }
         return col;
     }
-    
+
     /**
      * Clone current GameObject class to another new
+     *
      * @return The new instance of GameObject
      * @throws CloneNotSupportedException
      */
     public final Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
-    
+
     /**
-     * The method that render the GameObject "Shape"
-     * Trying to render a void GameObject that does not have a "Shape" can cause an UnsupportedOperationException
+     * The method that render the GameObject "Shape" Trying to render a void
+     * GameObject that does not have a "Shape" can cause an
+     * UnsupportedOperationException
+     *
      * @param win Window where render the GameObject "Shape"
      */
     protected void render(Window win) {
