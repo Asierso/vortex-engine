@@ -64,7 +64,6 @@ public class Animator implements Component, Startable {
 
             //Check keyframes
             for (KeyFrame frame : keyFramesQueue.stream().filter(obj -> obj.getTime() > delta).toList()) {
-                System.out.println("Frame. d=" + delta);
                 //Frame time rounding
                 if (frame.getTime() % 1 == 0.0f) {
                     roundDelta = Math.round(delta);

@@ -4,8 +4,10 @@
  */
 package com.asierso.vortexengine.testScene;
 
+import com.asierso.vortexengine.components.animator.Animator;
 import com.asierso.vortexengine.sceneObjects.ParticleSystem;
 import com.asierso.vortexengine.components.Rigibody;
+import com.asierso.vortexengine.components.animator.KeyFrame;
 import com.asierso.vortexengine.miscellaneous.ColorModifier;
 import com.asierso.vortexengine.sceneObjects.SoundSource;
 import com.asierso.vortexengine.sceneObjects.TextMesh;
@@ -32,6 +34,7 @@ public class SampleScene extends BaseScene {
     private ParticleSystem[] ppss = {new ParticleSystem(), new ParticleSystem(), new ParticleSystem(), new ParticleSystem()};
     private TextMesh tm;
     private SampleDamero dam;
+    private SampleCube cubeAn = new SampleCube();
 
     @Override
     public void start() {
@@ -130,6 +133,27 @@ public class SampleScene extends BaseScene {
         dam = new SampleDamero();
         dam.setPosition(0, 0);
         dam.setColor(new Color(60, 60, 60, 255));
+
+        cubeAn.setPosition(20, 0);
+        cubeAn.setBoxSize(20,20);
+
+        KeyFrame kf = new KeyFrame();
+        kf.setPosition(0, 10);
+
+        kf.setTime(2);
+        kf.setFrameBlend(Animator.BlendMode.ADDITIVE_INTERPOLATE);
+
+        KeyFrame kf2 = new KeyFrame();
+        kf2.setPosition(0, -10);
+        kf2.setFrameBlend(Animator.BlendMode.ADDITIVE_INTERPOLATE);
+        kf2.setTime(4);
+
+        cubeAn.addComponent(new Animator());
+
+        cubeAn.<Animator>getComponent("Animator").addKeyFrame(kf);
+        cubeAn.<Animator>getComponent("Animator").addKeyFrame(kf2);
+        cubeAn.<Animator>getComponent("Animator").start();
+
     }
 
     @Override
@@ -183,11 +207,12 @@ public class SampleScene extends BaseScene {
                 cubes[0].setPosition(0, rw.getSize().height - cubes[0].getBoxSize().y - 1);
             }
         }
-        
-        if(incremental)
+
+        if (incremental) {
             ppss[0].stop();
-        else
+        } else {
             ppss[0].start();
+        }
 
         String particleDebug = "";
         int psAmount = 0;
@@ -195,11 +220,12 @@ public class SampleScene extends BaseScene {
             ps.instantiate(rw);
             particleDebug += ps.getAmount() + ",";
             psAmount += ps.getAmount();
-            
+
         }
 
         tm.setText("Vortex Test Window - " + Math.round(rw.getFramesPerSecond()) + " fps \nPosition (x=" + cubes[0].getPosition().x + ",y=" + cubes[0].getPosition().y + ")\nRigibody (acel=" + rb.getAcceleration() + ",delta=" + rb.getDelta() + ",mass=" + rb.getMass() + ")\nParticles (array=[" + particleDebug + "],total=" + psAmount + ")");
         tm.instantiate(rw);
-       
+        cubeAn.instantiate(rw);
+
     }
 }
