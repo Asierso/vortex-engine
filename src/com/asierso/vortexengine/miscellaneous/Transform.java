@@ -7,8 +7,8 @@ package com.asierso.vortexengine.miscellaneous;
 import org.jsfml.system.Vector2f;
 
 /**
- *
- * @author asier
+ * Default interface for transformable objects
+ * @author Asierso
  */
 public interface Transform {
 
