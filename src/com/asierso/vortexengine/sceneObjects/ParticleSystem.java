@@ -35,10 +35,10 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
     //Modifier type selector
     public enum ParticleModifiers {
         POSITION, BOX_SIZE, COLOR, ROTATION
-    };
+    }
 
     //Particles collection
-    private final ArrayList<ParticleDictionary> instanciatedList = new ArrayList();
+    private final ArrayList<ParticleDictionary> instantiatedList = new ArrayList<>();
 
     //Others
     private final Clock counter = new Clock();
@@ -50,6 +50,7 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
      *
      * @param win Window where the ParticleSystem will be rendered
      */
+    @SuppressWarnings("SuspiciousListRemoveInLoop")
     @Override
     protected void render(Window win) {
         //Timer to calculate single particle lifetime
@@ -61,18 +62,18 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
         }
         
         //Lifetime and particle render
-        for (int i = 0; i < instanciatedList.size() - 1; i++) {
+        for (int i = 0; i < instantiatedList.size() - 1; i++) {
             //Update lifetime and load modifiers of each particle
-            instanciatedList.get(i).lifetime -= time;
-            loadModifiers(instanciatedList.get(i).particle);
+            instantiatedList.get(i).lifetime -= time;
+            loadModifiers(instantiatedList.get(i).particle);
 
             //Lifetime check (kill particles)
-            if (instanciatedList.get(i).lifetime <= 0.0f) {
-                instanciatedList.remove(i);
+            if (instantiatedList.get(i).lifetime <= 0.0f) {
+                instantiatedList.remove(i);
             }
 
             //Instance each particle
-            instanciatedList.get(i).particle.instantiate(win);
+            instantiatedList.get(i).particle.instantiate(win);
         }
     }
 
@@ -117,8 +118,9 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
 
             //Iterate decompose array and add or rest color modifier
             for (int i = 0; i < colorDecompose.length; i++) {
-                if (colorDecompose[i] + modifiers[i] >= 0 && colorDecompose[i] + modifiers[i] <= 255);
-                colorDecompose[i] += modifiers[i];
+                if (colorDecompose[i] + modifiers[i] >= 0 && colorDecompose[i] + modifiers[i] <= 255) {
+                    colorDecompose[i] += modifiers[i];
+                }
             }
             particle.setColor(new Color(colorDecompose[0], colorDecompose[1], colorDecompose[2], colorDecompose[3]));
         }
@@ -134,13 +136,13 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
      */
     private void generateParticle() {
         //Clone gameObject in a random position if amount of particles is less than max
-        if (instanciatedList.size() < maxParticles) {
+        if (instantiatedList.size() < maxParticles) {
             GameObject handle = null;
 
             //Try to clone it and adjust position
             try {
                 handle = (GameObject) particle.clone();
-            } catch (CloneNotSupportedException e) {
+            } catch (CloneNotSupportedException ignore) {
 
             }
             if (handle == null) {
@@ -149,7 +151,7 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
             handle.setPosition(rdn.nextInt(Math.round(this.getPosition().x), Math.round(this.getPosition().x + this.getBoxSize().x)), rdn.nextInt(Math.round(this.getPosition().y), Math.round(this.getPosition().y + this.getBoxSize().y)));
 
             //Add particle to particles list
-            instanciatedList.add(new ParticleDictionary(handle, lifetime));
+            instantiatedList.add(new ParticleDictionary(handle, lifetime));
         }
     }
 
@@ -178,6 +180,7 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
      *
      * @return Number of max particles
      */
+    @SuppressWarnings("unused")
     public final int getMaxParticles() {
         return maxParticles;
     }
@@ -197,6 +200,7 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
      *
      * @return Particle time of life
      */
+
     public final float getLifetime() {
         return lifetime;
     }
@@ -207,7 +211,7 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
      * @return Number of elements in particles array
      */
     public final int getAmount() {
-        return instanciatedList.size();
+        return instantiatedList.size();
     }
 
     /**

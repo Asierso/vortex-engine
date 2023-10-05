@@ -21,7 +21,7 @@ public class GameObject implements Cloneable, Transform {
     private float rotation = 0;
 
     //Components list
-    private ArrayList<Component> components = new ArrayList<Component>();
+    private final ArrayList<Component> components = new ArrayList<>();
 
     //Others
     private Color baseColor = Color.WHITE;
@@ -47,7 +47,7 @@ public class GameObject implements Cloneable, Transform {
      * Initialize GameObject
      *
      * @param position The position of the object
-     * @param boxSize The box sife of the object
+     * @param boxSize The box size of the object
      */
     public GameObject(Vector2f position, Vector2f boxSize) {
         this.position = position;
@@ -60,6 +60,7 @@ public class GameObject implements Cloneable, Transform {
      * @param x Represents the x position of the object
      * @param y Represents the y position of the object
      */
+    
     public final void setPosition(float x, float y) {
         position = new Vector2f(x, y);
     }
@@ -152,6 +153,7 @@ public class GameObject implements Cloneable, Transform {
      *
      * @return If GameObject is visible or not
      */
+    
     public final boolean getVisible() {
         return isShowing;
     }
@@ -161,6 +163,7 @@ public class GameObject implements Cloneable, Transform {
      *
      * @param color The color to assign to GameObject
      */
+    
     public final void setColor(Color color) {
         baseColor = color;
     }
@@ -170,6 +173,8 @@ public class GameObject implements Cloneable, Transform {
      *
      * @return A color class
      */
+
+    
     public final Color getColor() {
         return baseColor;
     }
@@ -179,8 +184,9 @@ public class GameObject implements Cloneable, Transform {
      *
      * @return The transform interface of the object
      */
+    
     public final Transform getTransform() {
-        return (Transform) this;
+        return this;
     }
 
     /**
@@ -190,6 +196,7 @@ public class GameObject implements Cloneable, Transform {
      *
      * @param window The window where render the GameObject
      */
+    
     public final void instantiate(Window window) {
         //Render components before render object
         for (Component handle : components) {
@@ -206,6 +213,7 @@ public class GameObject implements Cloneable, Transform {
      *
      * @param component The component class to add
      */
+    
     public final void addComponent(Component component) {
         if (!existsComponent(component)) {
             components.add(component);
@@ -222,6 +230,7 @@ public class GameObject implements Cloneable, Transform {
      * @param id ID of component to get
      * @return Component class found
      */
+    @SuppressWarnings({"unchecked"})
     public final <T extends Component> T getComponent(int id) {
         return (T) components.get(id);
     }
@@ -234,6 +243,7 @@ public class GameObject implements Cloneable, Transform {
      * @param name Simple component class name
      * @return Component class found
      */
+    @SuppressWarnings({"unchecked", "OptionalGetWithoutIsPresent"})
     public final <T extends Component> T getComponent(String name) {
         return (T) components.stream()
                 .filter(obj -> obj.getClass().getSimpleName().equals(name))
@@ -246,6 +256,7 @@ public class GameObject implements Cloneable, Transform {
      * @param component Component to search
      * @return If component was found or not
      */
+    
     private boolean existsComponent(Component component) {
         return components.stream()
                 .anyMatch(obj -> obj.getClass().getSimpleName().equals(component.getClass().toString()));
@@ -257,6 +268,7 @@ public class GameObject implements Cloneable, Transform {
      * @param name Component class name
      * @return If component was found or not
      */
+    
     private boolean existsComponent(String name) {
         return components.stream()
                 .anyMatch(obj -> obj.getClass().getSimpleName().equals(name));
@@ -267,6 +279,8 @@ public class GameObject implements Cloneable, Transform {
      *
      * @param name The class name of the component to delete
      */
+
+    @SuppressWarnings({"OptionalGetWithoutIsPresent","unused"})
     public final void removeComponent(String name) {
         if (existsComponent(name)) {
             components.remove(components.stream()
@@ -285,6 +299,7 @@ public class GameObject implements Cloneable, Transform {
      * @param obj Target GameObject to detect
      * @return If collision is produced
      */
+    
     public final boolean collisionWith(GameObject obj) {
         boolean col = false;
         for (float i = position.x; i < position.x + boxSize.x; i++) {

@@ -21,7 +21,7 @@ public class Animator implements Component, Startable {
 
     public enum BlendMode {
         ADDITIVE, STATIC, MULTIPLY, ADDITIVE_INTERPOLATE, MULTIPLY_INTERPOLATE
-    };
+    }
 
     public final void addKeyFrame(KeyFrame key) {
         keyFrames.add(key);
@@ -48,9 +48,9 @@ public class Animator implements Component, Startable {
     public final void run(GameObject target) {
 
         if (isActive) {
-            //Calulate delta
+            //Calculate delta
             delta += clock.restart().asSeconds();
-            float roundDelta = delta;
+            float roundDelta;
 
             //Check if queue is empty and stop animator if it is
             if (keyFramesQueue.isEmpty()) {
@@ -71,15 +71,9 @@ public class Animator implements Component, Startable {
                 if (roundDelta == frame.getTime()) {
                     //Run frame representation by his blend mode
                     switch (frame.getFrameBlend()) {
-                        case STATIC -> {
-                            staticFrameRepresentation(target, frame);
-                        }
-                        case ADDITIVE -> {
-                            additiveFrameRepresentation(target, frame);
-                        }
-                        case MULTIPLY -> {
-                            multiplyFrameRepresentation(target, frame);
-                        }
+                        case STATIC -> staticFrameRepresentation(target, frame);
+                        case ADDITIVE -> additiveFrameRepresentation(target, frame);
+                        case MULTIPLY -> multiplyFrameRepresentation(target, frame);
                     }
                     //Delete animation
                     keyFramesQueue.remove(frame);

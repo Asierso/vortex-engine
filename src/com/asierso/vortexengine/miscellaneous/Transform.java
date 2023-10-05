@@ -9,21 +9,21 @@ import org.jsfml.system.Vector2f;
 public interface Transform {
 
     //Position
-    public Vector2f getPosition();
+    Vector2f getPosition();
 
-    public void setPosition(Vector2f position);
+    void setPosition(Vector2f position);
 
-    public void setPosition(float x, float y);
+    void setPosition(float x, float y);
 
     //Rotation
-    public void setRotation(float rotation);
+    void setRotation(float rotation);
 
-    public float getRotation();
+    float getRotation();
 
     //BoxSize
-    public void setBoxSize(Vector2f size);
+    void setBoxSize(Vector2f size);
 
-    public void setBoxSize(float x, float y);
+    void setBoxSize(float x, float y);
 
-    public Vector2f getBoxSize();
+    Vector2f getBoxSize();
 }

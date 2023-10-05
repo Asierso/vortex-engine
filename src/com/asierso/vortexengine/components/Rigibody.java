@@ -12,31 +12,28 @@ public class Rigibody implements Component {
     private float acceleration = 1.1f;
     private float delta = 0f;
     private float mass = 1f;
-    private float fixValue = 2f;
-    private ArrayList<GameObject> collisionalObjects = new ArrayList<GameObject>();
+    private final ArrayList<GameObject> collisionalObjects = new ArrayList<>();
 
     public enum RigibodyStates {
         STATIC, DYNAMIC, KINEMATIC
-    };
+    }
 
     public enum GravityWeighing {
         SOFT_PRECISION, MASS_PRECISION
-    };
+    }
     private RigibodyStates bodyState = RigibodyStates.DYNAMIC;
     private GravityWeighing weighing = GravityWeighing.SOFT_PRECISION;
 
     public void run(GameObject target) {
         boolean isTouchingGround = false;
         if (bodyState == RigibodyStates.DYNAMIC) {
-            if (weighing == GravityWeighing.SOFT_PRECISION) {
-                fixValue = 2f;
-            } else {
+            float fixValue = 2f;
+            if (weighing != GravityWeighing.SOFT_PRECISION) {
                 if (acceleration>= 0) {
                     fixValue = (mass * acceleration * .65f);
                 } else {
                     fixValue = 0- (mass * acceleration * .65f);
                 }
-
             }
             for (var handle : collisionalObjects) {
                 if (acceleration > 0 && (int) (target.getPosition().y + target.getBoxSize().y) <= (int) handle.getPosition().y + fixValue && (int) (target.getPosition().y + target.getBoxSize().y) >= (int) handle.getPosition().y - fixValue) {

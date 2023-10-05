@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
+
 import org.jsfml.audio.Sound;
 import org.jsfml.audio.SoundBuffer;
 
@@ -23,7 +24,7 @@ public class SoundSource extends GameObject implements Startable {
     //Load modes
     public enum LoadModes {
         FILE, STREAM
-    };
+    }
 
     public final float getPitch() {
         return sound.getPitch();
@@ -60,7 +61,7 @@ public class SoundSource extends GameObject implements Startable {
     }
 
     public void addSoundtrack(String name,Object source,LoadModes mode) throws IOException {
-        Soundtrack st = new Soundtrack(this,name);
+        Soundtrack st = new Soundtrack(this, name);
         switch(mode){
             case FILE -> st.loadFromFile((Path)source);
             case STREAM -> st.loadFromStream((InputStream)source);
@@ -72,6 +73,7 @@ public class SoundSource extends GameObject implements Startable {
         this.addSoundtrack(name,path,LoadModes.FILE);
     }
     
+    @SuppressWarnings("OptionalGetWithoutIsPresent")
     public Soundtrack getSoundtrack(String name){
         return soundtracks.stream()
                 .filter(obj->(obj.getName().equals(name)))
@@ -92,20 +94,20 @@ public class SoundSource extends GameObject implements Startable {
         sound.setPitch(1.0f);
     }
     
-    public class Soundtrack extends SoundBuffer{
-        private String name = "";
-        private SoundSource source = null;
+    public static final class Soundtrack extends SoundBuffer{
+        private final String name;
+        private final SoundSource source;
         
-        protected Soundtrack(SoundSource source, String name){
+        private Soundtrack(SoundSource source, String name){
             this.source = source;
             this.name = name;
         }
 
-        protected final String getName() {
+        private String getName() {
             return name;
         }
         
-        public final void select(){
+        public void select(){
             source.select(this);
         }
     }

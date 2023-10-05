@@ -8,7 +8,7 @@ import org.jsfml.system.Vector2f;
 
 /**
  *
- * @author asier
+ * @author Asierso
  */
 public class SampleDamero extends GameObject {
 

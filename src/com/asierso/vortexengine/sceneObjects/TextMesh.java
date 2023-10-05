@@ -20,7 +20,7 @@ public class TextMesh extends GameObject implements Transform {
     private int fontSize = 10;
     
     //Void SFML text
-    private Text t = new Text();
+    private final Text t = new Text();
 
     /**
      * Initialize TextMesh

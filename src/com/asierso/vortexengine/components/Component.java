@@ -8,5 +8,5 @@ import com.asierso.vortexengine.sceneObjects.GameObject;
  * @author sobblaas
  */
 public interface Component {
-    public void run(GameObject target);
+    void run(GameObject target);
 }

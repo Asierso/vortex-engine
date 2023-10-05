@@ -5,6 +5,6 @@ package com.asierso.vortexengine.miscellaneous;
  * @author Asierso
  */
 public interface Startable {
-    public void start();
-    public void stop();
+    void start();
+    void stop();
 }

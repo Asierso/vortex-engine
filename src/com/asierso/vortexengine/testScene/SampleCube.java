@@ -2,9 +2,7 @@ package com.asierso.vortexengine.testScene;
 
 import com.asierso.vortexengine.sceneObjects.GameObject;
 import com.asierso.vortexengine.window.Window;
-import org.jsfml.graphics.Color;
 import org.jsfml.graphics.RectangleShape;
-import org.jsfml.graphics.RenderWindow;
 import org.jsfml.system.Vector2f;
 
 /**

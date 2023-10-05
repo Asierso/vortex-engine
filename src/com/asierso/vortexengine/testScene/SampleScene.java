@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.asierso.vortexengine.testScene;
 
 import com.asierso.vortexengine.components.animator.Animator;
@@ -12,6 +8,7 @@ import com.asierso.vortexengine.miscellaneous.ColorModifier;
 import com.asierso.vortexengine.sceneObjects.TextMesh;
 import com.asierso.vortexengine.window.BaseScene;
 import com.asierso.vortexengine.window.Window;
+
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -21,7 +18,7 @@ import org.jsfml.window.event.Event;
 
 /**
  *
- * @author asier
+ * @author Asierso
  */
 public class SampleScene extends BaseScene {
 
@@ -67,7 +64,7 @@ public class SampleScene extends BaseScene {
 
         try {
             tm.getFont().loadFromFile(Path.of("C:/Windows/Fonts/Arial.ttf"));
-        } catch (IOException ex) {
+        } catch (IOException ignore) {
 
         }
 
@@ -151,7 +148,6 @@ public class SampleScene extends BaseScene {
         cubeAn.<Animator>getComponent("Animator").addKeyFrame(kf);
         cubeAn.<Animator>getComponent("Animator").addKeyFrame(kf2);
         cubeAn.<Animator>getComponent("Animator").start();
-
     }
 
     @Override
@@ -183,8 +179,8 @@ public class SampleScene extends BaseScene {
             cubes[itq].setPosition(cubes[itq].getPosition().x - 10f, cubes[itq].getPosition().y);
         }
 
-        for (int i = 0; i < cubes.length; i++) {
-            cubes[i].instantiate(rw);
+        for (SampleCube cube : cubes) {
+            cube.instantiate(rw);
         }
 
         Rigibody rb = cubes[0].getComponent("Rigibody");
@@ -212,11 +208,11 @@ public class SampleScene extends BaseScene {
             ppss[0].start();
         }
 
-        String particleDebug = "";
+        StringBuilder particleDebug = new StringBuilder();
         int psAmount = 0;
         for (var ps : ppss) {
             ps.instantiate(rw);
-            particleDebug += ps.getAmount() + ",";
+            particleDebug.append(ps.getAmount()).append(",");
             psAmount += ps.getAmount();
 
         }
