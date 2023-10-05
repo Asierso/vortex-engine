@@ -32,7 +32,6 @@ public class SampleScene extends BaseScene {
     private ParticleSystem[] ppss = {new ParticleSystem(), new ParticleSystem(), new ParticleSystem(), new ParticleSystem()};
     private TextMesh tm;
     private SampleDamero dam;
-    private SoundSource ss = new SoundSource();
 
     @Override
     public void start() {
@@ -131,15 +130,6 @@ public class SampleScene extends BaseScene {
         dam = new SampleDamero();
         dam.setPosition(0, 0);
         dam.setColor(new Color(60, 60, 60, 255));
-        
-        try {
-            ss.addSoundtrack("SoundPool", Path.of("./soundpool.wav"), SoundSource.LoadModes.FILE);
-            ss.getSoundtrack("SoundPool").select();
-            ss.setPitch(3);
-            
-        } catch (Exception ex) {
-            System.out.println("A");
-        }
     }
 
     @Override
