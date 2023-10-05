@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.asierso.vortexengine.components.animator;
 
 import com.asierso.vortexengine.components.Component;
@@ -12,7 +8,7 @@ import org.jsfml.system.Clock;
 
 /**
  *
- * @author sobblaas
+ * @author Asierso
  */
 public class Animator implements Component, Startable {
 
@@ -88,7 +84,7 @@ public class Animator implements Component, Startable {
                     //Delete animation
                     keyFramesQueue.remove(frame);
                 } else {
-                    //Detect with type of itnerpolation uses the frame (only one)
+                    //Detect with type of interpolation uses the frame (only one)
                     switch (frame.getFrameBlend()) {
                         case ADDITIVE_INTERPOLATE -> {
                             additiveFrameRepresentation(target, frame);

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.asierso.vortexengine.sceneObjects;
 
 import com.asierso.vortexengine.miscellaneous.ColorModifier;
@@ -16,7 +12,7 @@ import org.jsfml.system.Vector2f;
 
 /**
  *
- * @author asier
+ * @author Asierso
  */
 public class ParticleSystem extends GameObject implements Startable, Transform {
 
@@ -36,7 +32,7 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
     //Particle emission status (allow generation or not)
     private boolean isActive = true;
 
-    //Mdifier type selector
+    //Modifier type selector
     public enum ParticleModifiers {
         POSITION, BOX_SIZE, COLOR, ROTATION
     };
@@ -59,7 +55,7 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
         //Timer to calculate single particle lifetime
         float time = counter.restart().asSeconds();
 
-        //Instanciate new particle if is posible
+        //Instantiate new particle if is possible
         if (isActive) {
             generateParticle();
         }
@@ -81,7 +77,7 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
     }
 
     /**
-     * Load defined modifiers of an specific particle This modifiers make
+     * Load defined modifiers of a specific particle This modifiers make
      * constrain changes in particles during lifetime
      *
      * @param particle Particle to handle
@@ -178,7 +174,7 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
     }
 
     /**
-     * Get the stablished limit of max particles
+     * Get the established limit of max particles
      *
      * @return Number of max particles
      */
@@ -206,7 +202,7 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
     }
 
     /**
-     * Get the current amount of particles instancied
+     * Get the current amount of particles instantiated
      *
      * @return Number of elements in particles array
      */
@@ -251,7 +247,7 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
         }
     }
     
-    //Match particle with it's lifetime
+    //Match particle with this lifetime
     private class ParticleDictionary {
 
         public float lifetime = 0f;

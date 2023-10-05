@@ -9,14 +9,12 @@ import com.asierso.vortexengine.sceneObjects.ParticleSystem;
 import com.asierso.vortexengine.components.Rigibody;
 import com.asierso.vortexengine.components.animator.KeyFrame;
 import com.asierso.vortexengine.miscellaneous.ColorModifier;
-import com.asierso.vortexengine.sceneObjects.SoundSource;
 import com.asierso.vortexengine.sceneObjects.TextMesh;
 import com.asierso.vortexengine.window.BaseScene;
 import com.asierso.vortexengine.window.Window;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import org.jsfml.graphics.Color;
 import org.jsfml.system.Vector2f;
 import org.jsfml.window.event.Event;
@@ -27,14 +25,14 @@ import org.jsfml.window.event.Event;
  */
 public class SampleScene extends BaseScene {
 
-    private SampleCube[] cubes = {new SampleCube(), new SampleCube(), new SampleCube(), new SampleCube(), new SampleCube()};
+    private final SampleCube[] cubes = {new SampleCube(), new SampleCube(), new SampleCube(), new SampleCube(), new SampleCube()};
     private int itq = 1;
     private boolean incremental = true;
     private float massConstant = 7f;
-    private ParticleSystem[] ppss = {new ParticleSystem(), new ParticleSystem(), new ParticleSystem(), new ParticleSystem()};
+    private final ParticleSystem[] ppss = {new ParticleSystem(), new ParticleSystem(), new ParticleSystem(), new ParticleSystem()};
     private TextMesh tm;
     private SampleDamero dam;
-    private SampleCube cubeAn = new SampleCube();
+    private final SampleCube cubeAn = new SampleCube();
 
     @Override
     public void start() {
@@ -191,19 +189,19 @@ public class SampleScene extends BaseScene {
 
         Rigibody rb = cubes[0].getComponent("Rigibody");
         rb.setMass(massConstant);
-        rb.setPonderation(Rigibody.GravityPonderations.MASS_PRECISION);
+        rb.setWeighing(Rigibody.GravityWeighing.MASS_PRECISION);
 
         if (cubes[0].getPosition().y <= 0) {
             rb.setAcceleration(1.2f);
             rb.flushDelta();
-            if (incremental == true) {
+            if (incremental) {
                 cubes[0].setPosition(0, 1);
             }
         }
         if (cubes[0].getPosition().y + cubes[0].getBoxSize().y >= rw.getSize().height) {
             rb.setAcceleration(-1.2f);
             rb.flushDelta();
-            if (incremental == false) {
+            if (!incremental) {
                 cubes[0].setPosition(0, rw.getSize().height - cubes[0].getBoxSize().y - 1);
             }
         }

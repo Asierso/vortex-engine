@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.asierso.vortexengine.testScene;
 
 import com.asierso.vortexengine.sceneObjects.GameObject;
@@ -13,7 +9,7 @@ import org.jsfml.system.Vector2f;
 
 /**
  *
- * @author asier
+ * @author Asierso
  */
 public class SampleCube extends GameObject {
 

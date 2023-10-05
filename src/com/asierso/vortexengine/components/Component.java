@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.asierso.vortexengine.components;
 
 import com.asierso.vortexengine.sceneObjects.GameObject;
 
 /**
- *
+ * Simple component definition. This interface allow to define "GameObject" modification
+ * Components are renderer when GameObject is instantiated
  * @author sobblaas
  */
 public interface Component {

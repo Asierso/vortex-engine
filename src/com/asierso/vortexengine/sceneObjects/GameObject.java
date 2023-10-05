@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.asierso.vortexengine.sceneObjects;
 
 import com.asierso.vortexengine.components.Component;
@@ -9,7 +5,6 @@ import com.asierso.vortexengine.miscellaneous.Transform;
 import com.asierso.vortexengine.window.Window;
 import java.util.ArrayList;
 import org.jsfml.graphics.Color;
-import org.jsfml.graphics.RenderWindow;
 import org.jsfml.system.Vector2f;
 
 /**
@@ -33,14 +28,14 @@ public class GameObject implements Cloneable, Transform {
     private boolean isShowing = true;
 
     /**
-     * Initializate GameObject
+     * Initialize GameObject
      */
     public GameObject() {
 
     }
 
     /**
-     * Initializate GameObject
+     * Initialize GameObject
      *
      * @param position The position of the object
      */
@@ -49,7 +44,7 @@ public class GameObject implements Cloneable, Transform {
     }
 
     /**
-     * Initializate GameObject
+     * Initialize GameObject
      *
      * @param position The position of the object
      * @param boxSize The box sife of the object
@@ -111,7 +106,7 @@ public class GameObject implements Cloneable, Transform {
 
     /**
      * Set GameObject box size. This is mostly used to define GameObject size
-     * and hitbox
+     * and hit-box
      *
      * @param size Represents the Vector scale of the object
      */
@@ -122,7 +117,7 @@ public class GameObject implements Cloneable, Transform {
 
     /**
      * Set GameObject box size. This is mostly used to define GameObject size
-     * and hitbox
+     * and hit-box
      *
      * @param x Represents the scale in x of the object
      * @param y Represents the scale in y of the object
@@ -220,12 +215,12 @@ public class GameObject implements Cloneable, Transform {
     }
 
     /**
-     * Find components by id. Id represents the element index in components
+     * Find components by id. ID represents the element index in components
      * array
      *
      * @param <T> Component class
-     * @param id Id of component to get
-     * @return Component class finded
+     * @param id ID of component to get
+     * @return Component class found
      */
     public final <T extends Component> T getComponent(int id) {
         return (T) components.get(id);
@@ -237,7 +232,7 @@ public class GameObject implements Cloneable, Transform {
      *
      * @param <T> Component class
      * @param name Simple component class name
-     * @return Component class finded
+     * @return Component class found
      */
     public final <T extends Component> T getComponent(String name) {
         return (T) components.stream()
@@ -308,7 +303,6 @@ public class GameObject implements Cloneable, Transform {
      * Clone current GameObject class to another new
      *
      * @return The new instance of GameObject
-     * @throws CloneNotSupportedException
      */
     public final Object clone() throws CloneNotSupportedException {
         return super.clone();

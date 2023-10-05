@@ -63,7 +63,7 @@ public class Window {
     }
 
     /**
-     * Set window framerate
+     * Set window frame rate
      *
      * @param frames Number of frames to render in a second
      */
@@ -92,7 +92,7 @@ public class Window {
     /**
      * Get RenderWindow class (SFML component)
      *
-     * @return
+     * @return The SFML base window
      */
     public RenderWindow getRender() {
         return render;
@@ -134,7 +134,7 @@ public class Window {
         //Save default view
         windowView = render.getDefaultView();
 
-        //Initialice FPS counter
+        //Initialize FPS counter
         Clock frameClock = new Clock();
         while (render.isOpen()) {
             reloadConfigs();
@@ -165,7 +165,7 @@ public class Window {
     }
 
     /**
-     * Reload SFML configs with the setted ones (even in mainloop)
+     * Reload SFML configs with the set ones (even in main-loop)
      */
     private void reloadConfigs() {
         render.setFramerateLimit(frames);

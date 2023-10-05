@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.asierso.vortexengine.components;
 
 import com.asierso.vortexengine.sceneObjects.GameObject;
@@ -23,16 +19,16 @@ public class Rigibody implements Component {
         STATIC, DYNAMIC, KINEMATIC
     };
 
-    public enum GravityPonderations {
+    public enum GravityWeighing {
         SOFT_PRECISION, MASS_PRECISION
     };
     private RigibodyStates bodyState = RigibodyStates.DYNAMIC;
-    private GravityPonderations ponderation = GravityPonderations.SOFT_PRECISION;
+    private GravityWeighing weighing = GravityWeighing.SOFT_PRECISION;
 
     public void run(GameObject target) {
         boolean isTouchingGround = false;
         if (bodyState == RigibodyStates.DYNAMIC) {
-            if (ponderation == GravityPonderations.SOFT_PRECISION) {
+            if (weighing == GravityWeighing.SOFT_PRECISION) {
                 fixValue = 2f;
             } else {
                 if (acceleration>= 0) {
@@ -88,8 +84,8 @@ public class Rigibody implements Component {
         return mass;
     }
     
-    public final void setPonderation(GravityPonderations ponderation){
-        this.ponderation = ponderation;
+    public final void setWeighing(GravityWeighing weighing){
+        this.weighing = weighing;
     }
 
     public final ArrayList<GameObject> getCollisionalObjectList() {

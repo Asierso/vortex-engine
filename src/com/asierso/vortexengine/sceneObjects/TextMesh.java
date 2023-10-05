@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.asierso.vortexengine.sceneObjects;
 
 import com.asierso.vortexengine.miscellaneous.Transform;
@@ -12,7 +8,7 @@ import org.jsfml.graphics.Text;
 
 /**
  *
- * @author asier
+ * @author Asierso
  */
 public class TextMesh extends GameObject implements Transform {
 
@@ -20,21 +16,21 @@ public class TextMesh extends GameObject implements Transform {
     private String textString = "";
     
     //Text modifiers
-    private Font font = new Font();
+    private final Font font = new Font();
     private int fontSize = 10;
     
     //Void SFML text
     private Text t = new Text();
 
     /**
-     * Initializate TextMesh
+     * Initialize TextMesh
      */
     public TextMesh() {
 
     }
 
     /**
-     * Initializate the TextMesh in specified position
+     * Initialize the TextMesh in specified position
      *
      * @param position Represents the position Vector of the object
      * @param text Content of the TextMesh
@@ -45,7 +41,7 @@ public class TextMesh extends GameObject implements Transform {
     }
 
     /**
-     * Initializate the TextMesh in specified position (without define an Vector
+     * Initialize the TextMesh in specified position (without define a Vector
      * class)
      *
      * @param x Represents the x position of the object

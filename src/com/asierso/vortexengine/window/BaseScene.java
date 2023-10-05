@@ -9,7 +9,7 @@ import org.jsfml.window.event.Event;
 
 /**
  * The scene contains the main execution methods of the window where the
- * diferent GameObjects can be instantiated, handled and rendered
+ * different GameObjects can be instantiated, handled and rendered
  *
  * @author Asierso
  */
