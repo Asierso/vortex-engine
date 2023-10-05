@@ -72,6 +72,10 @@ public class SoundSource extends GameObject implements Startable {
         soundtracks.add(st);
     }
     
+    public void addSoundtrack(String name,String path) throws IOException {
+        this.addSoundtrack(name,path,LoadModes.FILE);
+    }
+    
     public Soundtrack getSoundtrack(String name){
         return soundtracks.stream()
                 .filter(obj->(obj.getName().equals(name)))

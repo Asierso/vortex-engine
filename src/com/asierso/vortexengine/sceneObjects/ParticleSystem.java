@@ -63,7 +63,8 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
         if (isActive) {
             generateParticle();
         }
-
+        
+        //Lifetime and particle render
         for (int i = 0; i < instanciatedList.size() - 1; i++) {
             //Update lifetime and load modifiers of each particle
             instanciatedList.get(i).lifetime -= time;
