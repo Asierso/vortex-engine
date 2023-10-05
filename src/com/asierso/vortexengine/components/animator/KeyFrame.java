@@ -14,9 +14,9 @@ import org.jsfml.system.Vector2f;
  */
 public class KeyFrame implements Transform {
 
-    private Vector2f position;
-    private Vector2f boxSize;
-    private float rotation;
+    private Vector2f position = new Vector2f(0,0);
+    private Vector2f boxSize = new Vector2f(0,0);
+    private float rotation = 0;
     private float time = 0;
     private Animator.BlendMode frameBlend = Animator.BlendMode.STATIC;
     
