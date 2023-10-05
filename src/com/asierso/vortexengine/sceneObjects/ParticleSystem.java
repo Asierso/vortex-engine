@@ -252,9 +252,9 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
     }
     
     //Match particle with this lifetime
-    private class ParticleDictionary {
+    private static class ParticleDictionary {
 
-        public float lifetime = 0f;
+        public float lifetime;
         public GameObject particle;
 
         public ParticleDictionary(GameObject particle, float lifetime) {
