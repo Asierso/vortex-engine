@@ -5,16 +5,20 @@ import com.asierso.vortexengine.sceneObjects.GameObject;
 import java.util.ArrayList;
 
 /**
+ * Basic gravity physics component. Allows to a GameObject to fall. Using MRUA
  *
- * @author sobblaas
+ * @author Asierso
  */
 public class Rigibody implements Component {
 
+    //Basic rigibody component information
     private float acceleration = 1.1f;
     private float delta = 0f;
     private float mass = 1f;
+    //Objects that handled object can collide
     private final ArrayList<GameObject> collisionalObjects = new ArrayList<>();
 
+    //Rigibody states and weighing (final position fixer) modification
     public enum RigibodyStates {
         STATIC, DYNAMIC, KINEMATIC
     }
@@ -25,18 +29,28 @@ public class Rigibody implements Component {
     private RigibodyStates bodyState = RigibodyStates.DYNAMIC;
     private GravityWeighing weighing = GravityWeighing.SOFT_PRECISION;
 
+    /**
+     * Render and calculate GameObject position based in Rigibody. Simulates the
+     * object fall and detects collisions
+     *
+     * @param target Handled GameObject
+     */
     @Override
     public void run(GameObject target) {
+        //Storages if handled target is touching a collision in Y axis (reset delta and calculate Weighing)
         boolean isTouchingGround = false;
+        //Object can fall and have collisions
         if (bodyState == RigibodyStates.DYNAMIC) {
+            //Weighing value calculation
             float fixValue = 2f;
             if (weighing != GravityWeighing.SOFT_PRECISION) {
-                if (acceleration>= 0) {
+                if (acceleration >= 0) {
                     fixValue = (mass * acceleration * .65f);
                 } else {
-                    fixValue = 0- (mass * acceleration * .65f);
+                    fixValue = 0 - (mass * acceleration * .65f);
                 }
             }
+            //Iterate array of collisoinal objects and detects collision with handled GameObejct
             for (var handle : collisionalObjects) {
                 if (acceleration > 0 && (int) (target.getPosition().y + target.getBoxSize().y) <= (int) handle.getPosition().y + fixValue && (int) (target.getPosition().y + target.getBoxSize().y) >= (int) handle.getPosition().y - fixValue) {
                     for (float i = target.getPosition().x; i < target.getPosition().x + target.getBoxSize().x; i++) {
@@ -59,9 +73,9 @@ public class Rigibody implements Component {
                 }
             }
         }
-        if (isTouchingGround || bodyState == RigibodyStates.STATIC) {
+        if (isTouchingGround || bodyState == RigibodyStates.STATIC) { //Object can't fall but have collisions
             delta = 0;
-        } else if (bodyState == RigibodyStates.DYNAMIC || bodyState == RigibodyStates.KINEMATIC) {
+        } else if (bodyState == RigibodyStates.DYNAMIC || bodyState == RigibodyStates.KINEMATIC) { //Object can fall but have collision inheritance
             target.setPosition(target.getPosition().x, target.getPosition().y + (delta * acceleration) * mass);
             delta += .1f;
         }
@@ -82,8 +96,8 @@ public class Rigibody implements Component {
     public final float getMass() {
         return mass;
     }
-    
-    public final void setWeighing(GravityWeighing weighing){
+
+    public final void setWeighing(GravityWeighing weighing) {
         this.weighing = weighing;
     }
 
