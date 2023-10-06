@@ -123,4 +123,8 @@ public class Animator implements Component, Startable {
         isActive = false;
         delta = 0;
     }
+    
+    public boolean isRunning(){
+        return isActive;
+    }
 }
