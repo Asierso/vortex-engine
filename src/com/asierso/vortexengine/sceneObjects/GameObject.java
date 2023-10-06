@@ -173,7 +173,6 @@ public class GameObject implements Cloneable, Transform {
      *
      * @return A color class
      */
-
     
     public final Color getColor() {
         return baseColor;
