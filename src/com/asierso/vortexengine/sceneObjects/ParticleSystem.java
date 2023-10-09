@@ -1,8 +1,8 @@
 package com.asierso.vortexengine.sceneObjects;
 
 import com.asierso.vortexengine.miscellaneous.ColorModifier;
-import com.asierso.vortexengine.miscellaneous.Startable;
-import com.asierso.vortexengine.miscellaneous.Transform;
+import com.asierso.vortexengine.miscellaneous.interfaces.Startable;
+import com.asierso.vortexengine.miscellaneous.interfaces.Transform;
 import com.asierso.vortexengine.window.Window;
 import java.util.ArrayList;
 import java.util.Random;

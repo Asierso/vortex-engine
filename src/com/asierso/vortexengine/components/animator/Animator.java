@@ -1,7 +1,7 @@
 package com.asierso.vortexengine.components.animator;
 
 import com.asierso.vortexengine.components.Component;
-import com.asierso.vortexengine.miscellaneous.Startable;
+import com.asierso.vortexengine.miscellaneous.interfaces.Startable;
 import com.asierso.vortexengine.sceneObjects.GameObject;
 import java.util.ArrayList;
 import org.jsfml.system.Clock;

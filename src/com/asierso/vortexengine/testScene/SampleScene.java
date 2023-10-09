@@ -1,6 +1,7 @@
 package com.asierso.vortexengine.testScene;
 
 import com.asierso.vortexengine.components.animator.Animator;
+import com.asierso.vortexengine.components.physics.Centrifuge;
 import com.asierso.vortexengine.sceneObjects.ParticleSystem;
 import com.asierso.vortexengine.components.physics.Rigibody;
 import com.asierso.vortexengine.components.animator.KeyFrame;
@@ -30,6 +31,8 @@ public class SampleScene extends BaseScene {
     private TextMesh tm;
     private SampleDamero dam;
     private final SampleCube cubeAn = new SampleCube();
+
+    private final SampleCube srot = new SampleCube();
 
     @Override
     public void start() {
@@ -130,7 +133,7 @@ public class SampleScene extends BaseScene {
         dam.setColor(new Color(60, 60, 60, 255));
 
         cubeAn.setPosition(20, 0);
-        cubeAn.setBoxSize(20,20);
+        cubeAn.setBoxSize(20, 20);
 
         KeyFrame kf = new KeyFrame();
         kf.setPosition(0, 10);
@@ -148,6 +151,15 @@ public class SampleScene extends BaseScene {
         cubeAn.<Animator>getComponent("Animator").addKeyFrame(kf);
         cubeAn.<Animator>getComponent("Animator").addKeyFrame(kf2);
         cubeAn.<Animator>getComponent("Animator").start();
+
+        srot.setPosition(100, 100);
+        srot.setRotation(15);
+        srot.setBoxSize(25, 25);
+        srot.addComponent(new Centrifuge());
+        srot.<Centrifuge>getComponent("Centrifuge").setMass(4);
+        srot.<Centrifuge>getComponent("Centrifuge").setAcceleration(2);
+        srot.<Centrifuge>getComponent("Centrifuge").addForce(20);
+
     }
 
     @Override
@@ -221,5 +233,6 @@ public class SampleScene extends BaseScene {
         tm.instantiate(rw);
         cubeAn.instantiate(rw);
 
+        srot.instantiate(rw);
     }
 }

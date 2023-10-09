@@ -1,7 +1,7 @@
 package com.asierso.vortexengine.sceneObjects;
 
 import com.asierso.vortexengine.components.Component;
-import com.asierso.vortexengine.miscellaneous.Transform;
+import com.asierso.vortexengine.miscellaneous.interfaces.Transform;
 import com.asierso.vortexengine.window.Window;
 import java.util.ArrayList;
 import org.jsfml.graphics.Color;

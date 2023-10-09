@@ -1,6 +1,6 @@
 package com.asierso.vortexengine.sceneObjects;
 
-import com.asierso.vortexengine.miscellaneous.Startable;
+import com.asierso.vortexengine.miscellaneous.interfaces.Startable;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -103,7 +103,6 @@ public class SoundSource extends GameObject implements Startable {
      * @param name The name of the sound to add
      * @param source Path or Stream of the sound to add
      * @param mode Aggregation mode of the sound
-     * @throws IOException
      */
     public void addSoundtrack(String name, Object source, LoadModes mode) throws IOException {
         Soundtrack st = new Soundtrack(this, name);
@@ -122,7 +121,6 @@ public class SoundSource extends GameObject implements Startable {
      *
      * @param name The name of the sound to add
      * @param path Path of the sound to add
-     * @throws IOException
      */
     public void addSoundtrack(String name, String path) throws IOException {
         this.addSoundtrack(name, path, LoadModes.FILE);
