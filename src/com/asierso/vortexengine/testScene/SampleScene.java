@@ -21,6 +21,7 @@ import org.jsfml.window.event.Event;
  *
  * @author Asierso
  */
+@SuppressWarnings("unused")
 public class SampleScene extends BaseScene {
 
     private final SampleCube[] cubes = {new SampleCube(), new SampleCube(), new SampleCube(), new SampleCube(), new SampleCube()};
@@ -155,11 +156,11 @@ public class SampleScene extends BaseScene {
         srot.setPosition(100, 100);
         srot.setRotation(15);
         srot.setBoxSize(25, 25);
+        srot.setColor(new Color(255,128,0));
         srot.addComponent(new Centrifuge());
         srot.<Centrifuge>getComponent("Centrifuge").setMass(4);
-        srot.<Centrifuge>getComponent("Centrifuge").setAcceleration(2);
-        srot.<Centrifuge>getComponent("Centrifuge").addForce(20);
-
+        srot.<Centrifuge>getComponent("Centrifuge").setAcceleration(3);
+        srot.<Centrifuge>getComponent("Centrifuge").addForce(40);
     }
 
     @Override
@@ -232,7 +233,6 @@ public class SampleScene extends BaseScene {
         tm.setText("Vortex Test Window - " + Math.round(rw.getFramesPerSecond()) + " fps \nPosition (x=" + cubes[0].getPosition().x + ",y=" + cubes[0].getPosition().y + ")\nRigibody (acel=" + rb.getAcceleration() + ",delta=" + rb.getDelta() + ",mass=" + rb.getMass() + ")\nParticles (array=[" + particleDebug + "],total=" + psAmount + ")");
         tm.instantiate(rw);
         cubeAn.instantiate(rw);
-
         srot.instantiate(rw);
     }
 }
