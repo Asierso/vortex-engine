@@ -77,4 +77,12 @@ public class Centrifuge implements Component {
     public void setForce(float force) {
         this.forceBuffer = force;
     }
+    
+    /**
+     * Get the processing force buffer value
+     * @return Force number
+     */
+    public float getForce(){
+        return forceBuffer;
+    }
 }
