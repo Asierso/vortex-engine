@@ -1,6 +1,6 @@
 package com.asierso.vortexengine.testScene;
 
-import com.asierso.vortexengine.sceneObjects.GameObject;
+import com.asierso.vortexengine.objects.GameObject;
 import com.asierso.vortexengine.window.Window;
 import org.jsfml.graphics.RectangleShape;
 import org.jsfml.system.Vector2f;

@@ -137,22 +137,24 @@ public class Window {
             //Refresh window and execute update method
             render.clear(background);
             Iterable<Event> events = render.pollEvents();
-            scene.update(this, events);
+            
 
             //Detects close event
             events.forEach(obj -> {
                 switch (obj.type) {
-                    case CLOSED:
+                    case CLOSED -> {
                         scene.close();
                         render.close();
-                        break;
-                    case RESIZED:
+                    }
+                    case RESIZED -> {
                         ((View) windowView).setSize(width, height);
                         render.setView(windowView);
-                        break;
+                    }
                 }
             });
-
+            
+            scene.update(this, events);
+            
             //Display
             render.display();
             float currentTime = frameClock.restart().asSeconds();

@@ -1,7 +1,7 @@
 package com.asierso.vortexengine.components.animator;
 
 import com.asierso.vortexengine.miscellaneous.interfaces.Transform;
-import com.asierso.vortexengine.sceneObjects.GameObject;
+import com.asierso.vortexengine.objects.GameObject;
 import org.jsfml.system.Vector2f;
 
 /**

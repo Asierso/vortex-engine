@@ -1,6 +1,6 @@
 package com.asierso.vortexengine.components;
 
-import com.asierso.vortexengine.sceneObjects.GameObject;
+import com.asierso.vortexengine.objects.GameObject;
 
 /**
  * Simple component definition. This interface allow to define "GameObject" modification

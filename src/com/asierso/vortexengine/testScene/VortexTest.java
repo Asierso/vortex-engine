@@ -10,7 +10,7 @@ public class VortexTest {
     public static void TestWindow() {
         Window win = new Window(300, 400);
         win.setTitle("Escena prueba - Vortex");
-        win.setScene(new SampleScene());
+        win.setScene(new SampleLayerScene());
         win.instantiate();
     }
 }

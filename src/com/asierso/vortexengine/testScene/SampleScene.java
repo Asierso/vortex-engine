@@ -2,11 +2,11 @@ package com.asierso.vortexengine.testScene;
 
 import com.asierso.vortexengine.components.animator.Animator;
 import com.asierso.vortexengine.components.physics.Centrifuge;
-import com.asierso.vortexengine.sceneObjects.ParticleSystem;
+import com.asierso.vortexengine.objects.ParticleSystem;
 import com.asierso.vortexengine.components.physics.Rigibody;
 import com.asierso.vortexengine.components.animator.KeyFrame;
 import com.asierso.vortexengine.miscellaneous.ColorModifier;
-import com.asierso.vortexengine.sceneObjects.TextMesh;
+import com.asierso.vortexengine.objects.TextMesh;
 import com.asierso.vortexengine.window.Scene;
 import com.asierso.vortexengine.window.Window;
 

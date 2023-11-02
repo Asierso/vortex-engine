@@ -4,11 +4,18 @@
  */
 package com.asierso.vortexengine.testScene;
 
+import com.asierso.vortexengine.components.events.Action;
+import com.asierso.vortexengine.components.events.callback.ActionPerform;
+import com.asierso.vortexengine.components.events.EventListener;
+import com.asierso.vortexengine.components.events.callback.EventPredicate;
 import com.asierso.vortexengine.components.physics.Rigibody;
+import com.asierso.vortexengine.objects.GameObject;
 import com.asierso.vortexengine.window.Layer;
 import com.asierso.vortexengine.window.Scene;
 import com.asierso.vortexengine.window.Window;
 import org.jsfml.graphics.Color;
+import org.jsfml.window.Keyboard;
+import org.jsfml.window.Keyboard.Key;
 import org.jsfml.window.event.Event;
 
 /**
@@ -23,9 +30,22 @@ public class SampleLayerScene implements Scene {
         scube.setPosition(10,10);
         scube.setBoxSize(20,20);
         scube.setColor(Color.BLUE);
-        var rb = new Rigibody();
-        rb.setAcceleration(2);
-        scube.addComponent(rb);
+        var liste = new EventListener();
+        
+        liste.getActionsList().add(new Action(new EventPredicate(){
+            @Override
+            public boolean run() {
+                return (Keyboard.isKeyPressed(Key.E));
+            }
+        }, new ActionPerform() {
+            @Override
+            public void run(GameObject handle) {
+                System.out.println("AA");
+            }
+            
+        }));
+        
+        scube.addComponent(liste);
         l.add(scube);
     }
 
