@@ -12,5 +12,4 @@ public class VortexEngine {
     public static void main(String[] args) {
 
     }
-
 }
