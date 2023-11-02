@@ -7,43 +7,73 @@ import java.util.ArrayList;
 import org.jsfml.system.Clock;
 
 /**
- *
+ * Component Animator allows to create animations and execute it in GameObject
  * @author Asierso
  */
 public class Animator implements Component, Startable {
 
+    //List of total keyframes and keyframes waiting to render
     private final ArrayList<KeyFrame> keyFrames = new ArrayList<>();
     private ArrayList<KeyFrame> keyFramesQueue = new ArrayList<>();
 
+    //Animation control buffers
     private boolean isActive = false;
     private float delta = 0;
+    
+    //Second timer
     private final Clock clock = new Clock();
 
+    //Keyframes blending
     public enum BlendMode {
         ADDITIVE, STATIC, MULTIPLY, ADDITIVE_INTERPOLATE, MULTIPLY_INTERPOLATE
     }
 
+    /**
+     * Add a new keyframe to keyframes list
+     * @param key Keyframe to add
+     */
     public final void addKeyFrame(KeyFrame key) {
         keyFrames.add(key);
     }
 
+    /**
+     * Creates a void keyframe and add it to keyframes list
+     * @return Keyframe list position
+     */
     public final int addVoidKeyFrame() {
         keyFrames.add(new KeyFrame());
         return keyFrames.size() - 1;
     }
 
+    /**
+     * Get specific keyframe using his id
+     * @param id Keyframe index in list
+     * @return Keyframe
+     */
     public final KeyFrame getKeyFrame(int id) {
         return keyFrames.get(id);
     }
 
+    /**
+     * Remove keyframe from keyframe list using his id
+     * @param id Keyframe index in list
+     */
     public final void removeKeyFrame(int id) {
         keyFrames.remove(id);
     }
 
+    /**
+     * Get amount of keyframe list
+     * @return Number of Keyframes
+     */
     public final int getKeyFrameAmount() {
         return keyFrames.size();
     }
 
+    /**
+     * Execute animation in component target
+     * @param target GameObject target
+     */
     @Override
     public final void run(GameObject target) {
 
@@ -66,7 +96,6 @@ public class Animator implements Component, Startable {
                 } else {
                     roundDelta = Math.round(delta * 10.0f) / 10.0f;
                 }
-                //System.out.println("D: " + roundDelta + "F: " + frame.getTime());
                 //Execute frame if is time
                 if (roundDelta == frame.getTime()) {
                     //Run frame representation by his blend mode
@@ -94,36 +123,61 @@ public class Animator implements Component, Startable {
         }
     }
 
+    /**
+     * Render Keyframe values setting it in GameObject transform interface
+     * @param target GameObject target
+     * @param frame Current rendering frame
+     */
     protected void staticFrameRepresentation(GameObject target, KeyFrame frame) {
         target.setPosition(frame.getPosition());
         target.setBoxSize(frame.getBoxSize());
         target.setRotation(frame.getRotation());
     }
 
+    /**
+     * Render Keyframe values adding it to the current gameObject transform interface
+     * @param target GameObject target
+     * @param frame Current rendering frame
+     */
     protected void additiveFrameRepresentation(GameObject target, KeyFrame frame) {
         target.setPosition(target.getPosition().x + frame.getPosition().x, target.getPosition().y + frame.getPosition().y);
         target.setBoxSize(target.getBoxSize().x + frame.getBoxSize().x, target.getBoxSize().y + frame.getBoxSize().y);
         target.setRotation(target.getRotation() + frame.getRotation());
     }
 
+    /**
+     * Render Keyframe values multiplying it to the current gameObject transform interface
+     * @param target
+     * @param frame 
+     */
     protected void multiplyFrameRepresentation(GameObject target, KeyFrame frame) {
         target.setPosition(target.getPosition().x * frame.getPosition().x, target.getPosition().y * frame.getPosition().y);
         target.setBoxSize(target.getBoxSize().x * frame.getBoxSize().x, target.getBoxSize().y * frame.getBoxSize().y);
         target.setRotation(target.getRotation() * frame.getRotation());
     }
 
+    /**
+     * Start animation
+     */
     @Override
     public void start() {
         keyFramesQueue = keyFrames;
         isActive = true;
     }
 
+    /**
+     * Stop animation
+     */
     @Override
     public void stop() {
         isActive = false;
         delta = 0;
     }
     
+    /**
+     * Check if animation is actually running
+     * @return Animation running
+     */
     public boolean isRunning(){
         return isActive;
     }
