@@ -27,7 +27,7 @@ public class Window {
     private RenderWindow render;
 
     //Container of runtime methods
-    private BaseScene runtime;
+    private Scene scene;
 
     //Main constructors
     public Window() {
@@ -79,10 +79,10 @@ public class Window {
     /**
      * Set runtime instructions when window executes
      *
-     * @param runtime Runtime class
+     * @param scene Runtime class
      */
-    public void setRenderRuntime(BaseScene runtime) {
-        this.runtime = runtime;
+    public void setScene(Scene scene) {
+        this.scene = scene;
     }
 
     /**
@@ -116,7 +116,7 @@ public class Window {
      * Instantiate SFML window
      */
     public void instantiate() {
-        if (runtime == null) {
+        if (scene == null) {
             throw new NullPointerException();
         }
         //Create render instance
@@ -125,7 +125,7 @@ public class Window {
         reloadConfigs();
 
         //Startup execution
-        runtime.start();
+        scene.start();
 
         //Save default view
         windowView = render.getDefaultView();
@@ -137,13 +137,13 @@ public class Window {
             //Refresh window and execute update method
             render.clear(background);
             Iterable<Event> events = render.pollEvents();
-            runtime.update(this, events);
+            scene.update(this, events);
 
             //Detects close event
             events.forEach(obj -> {
                 switch (obj.type) {
                     case CLOSED:
-                        runtime.close();
+                        scene.close();
                         render.close();
                         break;
                     case RESIZED:

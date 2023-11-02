@@ -7,7 +7,7 @@ import com.asierso.vortexengine.components.physics.Rigibody;
 import com.asierso.vortexengine.components.animator.KeyFrame;
 import com.asierso.vortexengine.miscellaneous.ColorModifier;
 import com.asierso.vortexengine.sceneObjects.TextMesh;
-import com.asierso.vortexengine.window.BaseScene;
+import com.asierso.vortexengine.window.Scene;
 import com.asierso.vortexengine.window.Window;
 
 import java.io.IOException;
@@ -22,7 +22,7 @@ import org.jsfml.window.event.Event;
  * @author Asierso
  */
 @SuppressWarnings("unused")
-public class SampleScene extends BaseScene {
+public class SampleScene extends Scene {
 
     private final SampleCube[] cubes = {new SampleCube(), new SampleCube(), new SampleCube(), new SampleCube(), new SampleCube()};
     private int itq = 1;

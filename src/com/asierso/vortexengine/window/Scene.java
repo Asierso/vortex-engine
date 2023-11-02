@@ -8,7 +8,7 @@ import org.jsfml.window.event.Event;
  *
  * @author Asierso
  */
-public class BaseScene {
+public class Scene {
 
     /**
      * Executes where window is showed
