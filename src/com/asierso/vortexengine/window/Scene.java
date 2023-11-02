@@ -8,13 +8,12 @@ import org.jsfml.window.event.Event;
  *
  * @author Asierso
  */
-public class Scene {
+public interface Scene {
 
     /**
      * Executes where window is showed
      */
-    public void start() {
-    }
+    public void start();
 
     /**
      * Executes every window render cycle
@@ -22,12 +21,10 @@ public class Scene {
      * @param window Takes window to draw
      * @param events Takes window events
      */
-    public void update(Window window, Iterable<Event> events) {
-    }
+    public void update(Window window, Iterable<Event> events);
 
     /**
      * Executes at window is going to close
      */
-    public void close() {
-    }
+    public void close();
 }

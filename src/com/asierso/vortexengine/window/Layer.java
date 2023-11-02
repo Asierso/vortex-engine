@@ -12,4 +12,7 @@ public class Layer extends ArrayList<GameObject> {
         for(GameObject handle : this)
             handle.instantiate(win);
     }
+    public GameObject[] getGameObjects(Class type){
+        return (GameObject[])this.stream().filter(obj -> obj.getClass() == type).toArray();
+    }
 }

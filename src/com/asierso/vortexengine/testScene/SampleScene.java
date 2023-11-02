@@ -22,7 +22,7 @@ import org.jsfml.window.event.Event;
  * @author Asierso
  */
 @SuppressWarnings("unused")
-public class SampleScene extends Scene {
+public class SampleScene implements Scene {
 
     private final SampleCube[] cubes = {new SampleCube(), new SampleCube(), new SampleCube(), new SampleCube(), new SampleCube()};
     private int itq = 1;
@@ -149,18 +149,18 @@ public class SampleScene extends Scene {
 
         cubeAn.addComponent(new Animator());
 
-        cubeAn.<Animator>getComponent("Animator").addKeyFrame(kf);
-        cubeAn.<Animator>getComponent("Animator").addKeyFrame(kf2);
-        cubeAn.<Animator>getComponent("Animator").start();
+        cubeAn.<Animator>getComponent(Animator.class).addKeyFrame(kf);
+        cubeAn.<Animator>getComponent(Animator.class).addKeyFrame(kf2);
+        cubeAn.<Animator>getComponent(Animator.class).start();
 
         srot.setPosition(100, 100);
         srot.setRotation(15);
         srot.setBoxSize(25, 25);
         srot.setColor(new Color(255,128,0));
         srot.addComponent(new Centrifuge());
-        srot.<Centrifuge>getComponent("Centrifuge").setMass(4);
-        srot.<Centrifuge>getComponent("Centrifuge").setAcceleration(3);
-        srot.<Centrifuge>getComponent("Centrifuge").addForce(40);
+        srot.<Centrifuge>getComponent(Centrifuge.class).setMass(4);
+        srot.<Centrifuge>getComponent(Centrifuge.class).setAcceleration(3);
+        srot.<Centrifuge>getComponent(Centrifuge.class).addForce(40);
     }
 
     @Override
@@ -196,7 +196,7 @@ public class SampleScene extends Scene {
             cube.instantiate(rw);
         }
 
-        Rigibody rb = cubes[0].getComponent("Rigibody");
+        Rigibody rb = cubes[0].getComponent(Rigibody.class);
         rb.setMass(massConstant);
         rb.setWeighing(Rigibody.GravityWeighing.MASS_PRECISION);
 
@@ -234,5 +234,10 @@ public class SampleScene extends Scene {
         tm.instantiate(rw);
         cubeAn.instantiate(rw);
         srot.instantiate(rw);
+    }
+
+    @Override
+    public void close() {
+
     }
 }

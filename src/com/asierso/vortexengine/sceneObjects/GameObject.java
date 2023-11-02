@@ -61,6 +61,7 @@ public class GameObject implements Cloneable, Transform {
      * @param y Represents the y position of the object
      */
     
+    @Override
     public final void setPosition(float x, float y) {
         position = new Vector2f(x, y);
     }
@@ -239,13 +240,13 @@ public class GameObject implements Cloneable, Transform {
      * be handled)
      *
      * @param <T> Component class
-     * @param name Simple component class name
+     * @param type Component class name
      * @return Component class found
      */
     @SuppressWarnings({"unchecked", "OptionalGetWithoutIsPresent"})
-    public final <T extends Component> T getComponent(String name) {
+    public final <T extends Component> T getComponent(Class type) {
         return (T) components.stream()
-                .filter(obj -> obj.getClass().getSimpleName().equals(name))
+                .filter(obj -> obj.getClass() == type)
                 .findFirst().get();
     }
 
@@ -258,7 +259,7 @@ public class GameObject implements Cloneable, Transform {
     
     private boolean existsComponent(Component component) {
         return components.stream()
-                .anyMatch(obj -> obj.getClass().getSimpleName().equals(component.getClass().toString()));
+                .anyMatch(obj -> obj.getClass() == component.getClass());
     }
 
     /**
@@ -268,22 +269,22 @@ public class GameObject implements Cloneable, Transform {
      * @return If component was found or not
      */
     
-    private boolean existsComponent(String name) {
+    private boolean existsComponent(Class type) {
         return components.stream()
-                .anyMatch(obj -> obj.getClass().getSimpleName().equals(name));
+                .anyMatch(obj -> obj.getClass() == type);
     }
 
     /**
      * Removes the specified component in GameObject component ArrayList
      *
-     * @param name The class name of the component to delete
+     * @param type class name of the component to delete
      */
 
     @SuppressWarnings({"OptionalGetWithoutIsPresent","unused"})
-    public final void removeComponent(String name) {
-        if (existsComponent(name)) {
+    public final void removeComponent(Class type) {
+        if (existsComponent(type)) {
             components.remove(components.stream()
-                    .filter(obj -> obj.getClass().getSimpleName().equals(name))
+                    .filter(obj -> obj.getClass()==type)
                     .findFirst().get());
         } else {
             throw new NoClassDefFoundError();
@@ -318,6 +319,7 @@ public class GameObject implements Cloneable, Transform {
      *
      * @return The new instance of GameObject
      */
+    @Override
     public final Object clone() throws CloneNotSupportedException {
         return super.clone();
     }
