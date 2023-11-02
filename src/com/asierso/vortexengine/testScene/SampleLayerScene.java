@@ -34,7 +34,7 @@ public class SampleLayerScene implements Scene {
         
         liste.getActionsList().add(new Action(new EventPredicate(){
             @Override
-            public boolean run() {
+            public boolean run(GameObject handle) {
                 return (Keyboard.isKeyPressed(Key.E));
             }
         }, new ActionPerform() {

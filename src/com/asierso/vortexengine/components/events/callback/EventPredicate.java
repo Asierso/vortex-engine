@@ -1,13 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.asierso.vortexengine.components.events.callback;
+
+import com.asierso.vortexengine.objects.GameObject;
 
 /**
  *
- * @author asier
+ * @author Asierso
  */
 public interface EventPredicate {
-    public boolean run();
+    /**
+     * Evaluates a condition
+     * @param handle Object implicated in evaluation
+     * @return Condition result
+     */
+    public boolean run(GameObject handle);
 }
