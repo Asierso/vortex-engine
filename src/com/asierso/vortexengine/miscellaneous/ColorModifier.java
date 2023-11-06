@@ -1,7 +1,7 @@
 package com.asierso.vortexengine.miscellaneous;
 
 /**
- *
+ * Color that can be modified in execution time. Using modifier controllers
  * @author Asierso
  */
 public class ColorModifier {

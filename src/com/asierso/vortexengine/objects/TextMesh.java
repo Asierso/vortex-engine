@@ -1,14 +1,13 @@
 package com.asierso.vortexengine.objects;
 
 import com.asierso.vortexengine.miscellaneous.interfaces.Transform;
-import com.asierso.vortexengine.objects.GameObject;
 import com.asierso.vortexengine.window.Window;
 import org.jsfml.graphics.Font;
 import org.jsfml.system.Vector2f;
 import org.jsfml.graphics.Text;
 
 /**
- *
+ * Used to create a Text like a GameObject
  * @author Asierso
  */
 public class TextMesh extends GameObject implements Transform {

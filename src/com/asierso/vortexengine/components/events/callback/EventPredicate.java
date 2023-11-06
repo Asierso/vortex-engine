@@ -3,7 +3,7 @@ package com.asierso.vortexengine.components.events.callback;
 import com.asierso.vortexengine.objects.GameObject;
 
 /**
- *
+ * Evaluates a condition to execute actions. It depends of the returned boolean value
  * @author Asierso
  */
 public interface EventPredicate {

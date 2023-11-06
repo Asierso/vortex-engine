@@ -8,5 +8,9 @@ import com.asierso.vortexengine.objects.GameObject;
  * @author sobblaas
  */
 public interface Component {
+    /**
+     * Component run method
+     * @param target handled GameObject
+     */
     void run(GameObject target);
 }

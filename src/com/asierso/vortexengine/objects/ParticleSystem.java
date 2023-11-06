@@ -11,7 +11,8 @@ import org.jsfml.system.Clock;
 import org.jsfml.system.Vector2f;
 
 /**
- *
+ * Create a particle system object
+ * A particle system instantiates GameObject using one GameObject prefab with random transform properties
  * @author Asierso
  */
 public class ParticleSystem extends GameObject implements Startable, Transform {
@@ -180,7 +181,6 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
      *
      * @return Number of max particles
      */
-    @SuppressWarnings("unused")
     public final int getMaxParticles() {
         return maxParticles;
     }

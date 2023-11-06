@@ -10,7 +10,8 @@ import org.jsfml.audio.Sound;
 import org.jsfml.audio.SoundBuffer;
 
 /**
- *
+ * Create a source of sound with custom volume and pitch
+ * A sound source can play diferent sounds added in his sountracks list
  * @author Asierso
  */
 public class SoundSource extends GameObject implements Startable {

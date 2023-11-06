@@ -1,7 +1,7 @@
 package com.asierso.vortexengine.miscellaneous;
 
 /**
- *
+ * Represents dimension in with and height as a Vector2
  * @author Asierso
  */
 public class Dimension {

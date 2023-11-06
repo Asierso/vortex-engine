@@ -3,6 +3,10 @@ package com.asierso.vortexengine.components.physics;
 import com.asierso.vortexengine.components.Component;
 import com.asierso.vortexengine.objects.GameObject;
 
+/**
+ * Basic rotatory physics component. Rotates game object using an acceleration value
+ * @author Asierso
+ */
 public class Centrifuge implements Component {
 
     //Basic rigibody component information

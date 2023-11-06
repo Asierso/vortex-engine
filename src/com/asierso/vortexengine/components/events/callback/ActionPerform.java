@@ -7,5 +7,9 @@ import com.asierso.vortexengine.objects.GameObject;
  * @author Asierso
  */
 public interface ActionPerform {
+    /**
+     * Run action method when action defined is true
+     * @param handle Handled GameObject
+     */
     public void run(GameObject handle);
 }

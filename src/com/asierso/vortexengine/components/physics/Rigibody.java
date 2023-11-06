@@ -5,8 +5,8 @@ import com.asierso.vortexengine.objects.GameObject;
 import java.util.ArrayList;
 
 /**
- * Basic gravity physics component. Allows to a GameObject to fall. Using MRUA
- *
+ * Basic gravity physics component
+ * Allows to a GameObject to fall using MRUA
  * @author Asierso
  */
 public class Rigibody implements Component {
