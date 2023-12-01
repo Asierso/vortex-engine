@@ -12,7 +12,7 @@ Vortex engine es una librería para crear videojuegos 2D simples en Java. Permit
 
 ### Requisitos previos
 - Java Development Kit (JDK) 18 o superior. Puede descargarla [aquí](https://www.oracle.com/java/technologies/javase/jdk18-archive-downloads.html)
-- JSFML: Simple and Fast Multimedia Library
+- Libreria JSFML: Simple and Fast Multimedia Library
 
 ### Pasos de compilación
 1. Clona el repositorio: `git clone https://github.com/Asierso/VortexEngine.git` o bien descargue una de las versiones "release" de VortexEngine
@@ -21,3 +21,28 @@ Vortex engine es una librería para crear videojuegos 2D simples en Java. Permit
 4. Agregue las dependencias necesarias al proyecto si no lo ha hecho con anterioridad
 
 *Nota: El proyecto fue diseñado para ser compilado vía Apache Ant*
+
+## ✍️ Ejemplos de codigo
+
+### Primera ventana
+Se muestra el fragmento de un pequeño codigo para generar una nueva ventana y renderizar una escena vacía:
+```java
+Window ventana = new Window(600,500);
+ventana.setTitle("Mi primera ventana");
+ventana.setScene(new MainScene());
+ventana.instantiate();
+```
+
+```java
+public class MainScene implements Scene{
+    @Override
+    public void start() {
+        //Se repite al iniciar la escena
+    }
+
+    @Override
+    public void update(Window window, Iterable<Event> events) {
+        //Se repite cada vez que se renderiza la escena
+    }
+}
+```
