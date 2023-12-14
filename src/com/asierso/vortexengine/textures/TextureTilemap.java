@@ -6,6 +6,7 @@ package com.asierso.vortexengine.textures;
 
 import com.asierso.vortexengine.miscellaneous.Dimension;
 import org.jsfml.graphics.IntRect;
+import org.jsfml.graphics.Sprite;
 import org.jsfml.graphics.Texture;
 import org.jsfml.system.Vector2i;
 
@@ -49,5 +50,21 @@ public class TextureTilemap {
      */
     public IntRect getTile(int dx, int dy) {
         return new IntRect(gridPos.x + (dx * tilesSize.width), gridPos.y + (dy * tilesSize.height), gridPos.x + tilesSize.width, gridPos.y + tilesSize.height);
+    }
+
+    /**
+     * Gets an sprite instance and apply to it a tile splitted in the
+     * proportionated texture
+     *
+     * @param dx Tilemap position X of the tile to get
+     * @param dy Tilemap position Y of the tile to get
+     * @param target Sprite to modify his texture
+     * @param texture Texture to split and get the tile to apply
+     * @return Sprite with the tile texture applied
+     */
+    public Sprite getSpriteTiled(int dx, int dy, Sprite target, Texture texture) {
+        target.setTexture(texture);
+        target.setTextureRect(getTile(dx, dy));
+        return target;
     }
 }
