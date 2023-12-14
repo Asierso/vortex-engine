@@ -25,7 +25,7 @@ Vortex engine es una librería para crear videojuegos 2D simples en Java. Permit
 ## ✍️ Ejemplos de codigo
 
 ### Primera ventana
-Se muestra el fragmento de un pequeño codigo para generar una nueva ventana y renderizar una escena vacía:
+Se muestra el fragmento de un pequeño código para generar una nueva ventana y renderizar una escena vacía:
 ```java
 Window ventana = new Window(600,500);
 ventana.setTitle("Mi primera ventana");
@@ -43,6 +43,50 @@ public class MainScene implements Scene{
     @Override
     public void update(Window window, Iterable<Event> events) {
         //Se repite cada vez que se renderiza la escena
+    }
+}
+```
+
+### Primer objeto
+Se muestra un pequeño fragmento de código para generar un GameObject con forma de rectangulo blanco, el cual se puede manipular mediante su transform
+
+```java
+public class Rectangulo extends GameObject {
+    @Override
+    public void render(Window win) { 
+        //Se repite al instanciar el objeto en cada actualizacion del render
+
+        //Dibujar un pequeño rectangulo
+        RectangleShape shape = new RectangleShape();
+        shape.setFillColor(Color.WHITE);
+        shape.setPosition(this.getPosition());
+        shape.setRotation(this.getRotation());
+        shape.setSize(new Vector2f(this.getBoxSize().x, this.getBoxSize().y));
+
+        //Renderiza el objeto en la ventana actual
+        win.getRender().draw(shape);
+    }
+}
+```
+
+Este objeto se puede instanciar en cualquier escena las veces que sea necesario. En el siguiente código se muestra un ejemplo de como se instancia un GameObject en una escena
+
+```java
+public class MainScene implements Scene{
+    private Rectangle rectangulo;
+    
+    @Override
+    public void start() {
+        //Se crea el objeto y se definen sus propiedades
+        rectangulo = new Rectangle();
+        rectangulo.setPosition(30,30);
+        rectangulo.setBoxSize(20,10);
+    }
+
+    @Override
+    public void update(Window window, Iterable<Event> events) {
+        //Se instancia el objeto en la escena actual
+        rectangulo.instantiate(window);
     }
 }
 ```
