@@ -51,7 +51,7 @@ public class MainScene implements Scene{
 Se muestra un pequeño fragmento de código para generar un GameObject con forma de rectangulo blanco, el cual se puede manipular mediante su transform
 
 ```java
-public class Rectangulo extends GameObject {
+public class Rectangle extends GameObject {
     @Override
     public void render(Window win) { 
         //Se repite al instanciar el objeto en cada actualizacion del render
