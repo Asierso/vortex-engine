@@ -46,7 +46,7 @@ public class MainScene implements Scene{
     }
 }
 ```
-
+---
 ### Primer objeto
 Se muestra un pequeño fragmento de código para generar un GameObject con forma de rectangulo blanco, el cual se puede manipular mediante su transform
 
@@ -90,3 +90,6 @@ public class MainScene implements Scene{
     }
 }
 ```
+
+[!NOTE]
+Se pueden agregar componentes a los GameObject usando la sentencia ```gameObject.addComponent(new Componente())``` y acceder acceder al componente, usando el metodo ```gameObject.<Componente>getComponent(Componente.class)```
