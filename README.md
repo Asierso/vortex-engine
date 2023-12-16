@@ -20,7 +20,8 @@ Vortex engine es una librería para crear videojuegos 2D simples en Java. Permit
 3. Configure la version de Java preferiblemente en la versión [jdk 18](https://www.oracle.com/java/technologies/javase/jdk18-archive-downloads.html)
 4. Agregue las dependencias necesarias al proyecto si no lo ha hecho con anterioridad
 
-*Nota: El proyecto fue diseñado para ser compilado vía Apache Ant*
+> [!NOTE]
+> El proyecto fue diseñado para ser compilado vía Apache Ant*
 
 ## ✍️ Ejemplos de codigo
 
@@ -91,5 +92,5 @@ public class MainScene implements Scene{
 }
 ```
 
-> [!NOTE]
+> [!TIP]
 > Se pueden agregar componentes a los GameObject usando la sentencia ```gameObject.addComponent(new Componente())``` y acceder acceder al componente, usando el metodo ```gameObject.<Componente>getComponent(Componente.class)```
