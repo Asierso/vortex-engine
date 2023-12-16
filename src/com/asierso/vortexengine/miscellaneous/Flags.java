@@ -3,7 +3,8 @@ package com.asierso.vortexengine.miscellaneous;
 import java.util.ArrayList;
 
 /**
- *
+ * Object used to handle entity flags and allow access to it in every time that is needed. 
+ * Is similar to have declared global proyect vars
  * @author Asierso
  */
 public class Flags {
