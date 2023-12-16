@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.asierso.vortexengine.miscellaneous;
 
 import java.util.ArrayList;
@@ -26,7 +22,11 @@ public class Flags {
         if(flagExists(entity.getKey()))
             flagList.set(getIndex(entity.getKey()),entity);
         else
-            throw new NullPointerException();
+            flagList.add(entity);
+    }
+    
+    public <T> void set(String key,T value){
+        set(new EntityFlag(key,value));
     }
     
     public void remove(EntityFlag entity){
