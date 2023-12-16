@@ -91,5 +91,5 @@ public class MainScene implements Scene{
 }
 ```
 
-[!NOTE]
-Se pueden agregar componentes a los GameObject usando la sentencia ```gameObject.addComponent(new Componente())``` y acceder acceder al componente, usando el metodo ```gameObject.<Componente>getComponent(Componente.class)```
+> [!NOTE]
+> Se pueden agregar componentes a los GameObject usando la sentencia ```gameObject.addComponent(new Componente())``` y acceder acceder al componente, usando el metodo ```gameObject.<Componente>getComponent(Componente.class)```
