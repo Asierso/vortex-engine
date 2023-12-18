@@ -5,6 +5,12 @@ package com.asierso.vortexengine.miscellaneous.interfaces;
  * @author Asierso
  */
 public interface Startable {
+    /**
+     * Begins with execution
+     */
     void start();
+    /**
+     * Stops execution
+     */
     void stop();
 }
