@@ -11,6 +11,7 @@ import org.jsfml.graphics.Texture;
 import org.jsfml.system.Vector2i;
 
 /**
+ * Make easy the process of extracts tilesets from sprite defining IntRects
  *
  * @author Asierso
  */
