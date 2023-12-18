@@ -1,4 +1,4 @@
-package com.asierso.vortexengine.miscellaneous.flags;
+package com.asierso.vortexengine.flags;
 
 import java.util.ArrayList;
 

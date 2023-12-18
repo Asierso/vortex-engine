@@ -1,4 +1,4 @@
-package com.asierso.vortexengine.miscellaneous;
+package com.asierso.vortexengine.flags;
 
 /**
  * Define single flag. A Flag is a relationship between a key (String) and a value of any type. 
