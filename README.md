@@ -21,7 +21,7 @@ Vortex engine es una librería para crear videojuegos 2D simples en Java. Permit
 4. Agregue las dependencias necesarias al proyecto si no lo ha hecho con anterioridad
 
 > [!NOTE]
-> El proyecto fue diseñado para ser compilado vía Apache Ant*
+> El proyecto fue diseñado para ser compilado vía Apache Ant
 
 ## ✍️ Ejemplos de codigo
 
