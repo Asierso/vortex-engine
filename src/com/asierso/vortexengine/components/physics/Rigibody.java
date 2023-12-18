@@ -5,8 +5,8 @@ import com.asierso.vortexengine.objects.GameObject;
 import java.util.ArrayList;
 
 /**
- * Basic gravity physics component
- * Allows to a GameObject to fall using MRUA
+ * Basic gravity physics component Allows to a GameObject to fall using MRUA
+ *
  * @author Asierso
  */
 public class Rigibody implements Component {
@@ -81,38 +81,87 @@ public class Rigibody implements Component {
         }
     }
 
+    /**
+     * Set acceleration constant to GameObject
+     *
+     * @param acceleration Acceleration value
+     */
     public final void setAcceleration(float acceleration) {
         this.acceleration = acceleration;
     }
 
+    /**
+     * Gets the current acceleration value in the time when function is called
+     *
+     * @return Current acceleration value
+     */
     public final float getAcceleration() {
         return acceleration;
     }
 
+    /**
+     * Set the mass of the GameObject to a constant value
+     *
+     * @param mass Mass of GameObject
+     */
     public final void setMass(float mass) {
         this.mass = mass;
     }
 
+    /**
+     * Gets the current mass of the GameObject
+     *
+     * @return Current mass of GameObject
+     */
     public final float getMass() {
         return mass;
     }
 
+    /**
+     * Set the weighing method to fix gravity isues at calculate physics.
+     * Weighings are useful to manage how Rigibody works with object colisions
+     * with different mass and acceleration
+     *
+     * @param weighing Weighing method
+     */
     public final void setWeighing(GravityWeighing weighing) {
         this.weighing = weighing;
     }
 
+    /**
+     * Returns an array of all GameObjects that handled GameObject can collision
+     * with
+     *
+     * @return COllisionable GameObject list
+     */
     public final ArrayList<GameObject> getCollisionalObjectList() {
         return collisionalObjects;
     }
 
+    /**
+     * Reset delta value. Delta is a tickcount that starts when object starts to
+     * move (like time un mrua)
+     */
     public final void flushDelta() {
         delta = 0;
     }
 
+    /**
+     * Get delta value. Delta is a tickcount that starts when object starts to
+     * move (like time un mrua)
+     *
+     * @return
+     */
     public final float getDelta() {
         return delta;
     }
 
+    /**
+     * Define the current body state. Body states are used to specify if object
+     * can be affected by gravity and can collision with another GameObjects
+     *
+     * @param bodyState
+     */
     public final void setBodyState(RigibodyStates bodyState) {
         this.bodyState = bodyState;
     }
