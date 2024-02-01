@@ -34,6 +34,21 @@ public final class ColorModifier {
     }
     
     /**
+     * Creates a new color modifier using a SFML color base and modifying it with custon rgba values
+     * @param base SFML base color
+     * @param r Red value
+     * @param g Green value
+     * @param b Blue value
+     * @param a Alpha value
+     */
+    public ColorModifier(Color base,int r,int g, int b, int a){
+        this.r = base.r + r;
+        this.g = base.g + g;
+        this.b = base.b + b;
+        this.a = base.a + a;
+    }
+    
+    /**
      * Parse ColorModifier to normal SFML color (set rgba values in treshold of 0-255)
      * @return SFML color
      */
