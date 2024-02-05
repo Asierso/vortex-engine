@@ -8,6 +8,7 @@ import org.jsfml.system.Clock;
 
 /**
  * Component Animator allows to create animations and execute it in GameObject
+ *
  * @author Asierso
  */
 public class Animator implements Component, Startable {
@@ -19,7 +20,8 @@ public class Animator implements Component, Startable {
     //Animation control buffers
     private boolean isActive = false;
     private float delta = 0;
-    
+    private float maxDelta = -1;
+
     //Second timer
     private final Clock clock = new Clock();
 
@@ -30,6 +32,7 @@ public class Animator implements Component, Startable {
 
     /**
      * Add a new keyframe to keyframes list
+     *
      * @param key Keyframe to add
      */
     public final void addKeyFrame(KeyFrame key) {
@@ -38,6 +41,7 @@ public class Animator implements Component, Startable {
 
     /**
      * Creates a void keyframe and add it to keyframes list
+     *
      * @return Keyframe list position
      */
     public final int addVoidKeyFrame() {
@@ -47,6 +51,7 @@ public class Animator implements Component, Startable {
 
     /**
      * Get specific keyframe using his id
+     *
      * @param id Keyframe index in list
      * @return Keyframe
      */
@@ -56,6 +61,7 @@ public class Animator implements Component, Startable {
 
     /**
      * Remove keyframe from keyframe list using his id
+     *
      * @param id Keyframe index in list
      */
     public final void removeKeyFrame(int id) {
@@ -64,14 +70,24 @@ public class Animator implements Component, Startable {
 
     /**
      * Get amount of keyframe list
+     *
      * @return Number of Keyframes
      */
     public final int getKeyFrameAmount() {
         return keyFrames.size();
     }
 
+    public final void setEndTime(float maxDelta) {
+        this.maxDelta = maxDelta;
+    }
+
+    public final float getEndTime() {
+        return maxDelta;
+    }
+
     /**
      * Execute animation in component target
+     *
      * @param target GameObject target
      */
     @Override
@@ -100,9 +116,12 @@ public class Animator implements Component, Startable {
                 if (roundDelta == frame.getTime()) {
                     //Run frame representation by his blend mode
                     switch (frame.getFrameBlend()) {
-                        case STATIC -> staticFrameRepresentation(target, frame);
-                        case ADDITIVE -> additiveFrameRepresentation(target, frame);
-                        case MULTIPLY -> multiplyFrameRepresentation(target, frame);
+                        case STATIC ->
+                            staticFrameRepresentation(target, frame);
+                        case ADDITIVE ->
+                            additiveFrameRepresentation(target, frame);
+                        case MULTIPLY ->
+                            multiplyFrameRepresentation(target, frame);
                     }
                     //Delete animation
                     keyFramesQueue.remove(frame);
@@ -120,11 +139,15 @@ public class Animator implements Component, Startable {
                     }
                 }
             }
+            if (maxDelta != -1 && delta >= maxDelta) {
+                stop();
+            }
         }
     }
 
     /**
      * Render Keyframe values setting it in GameObject transform interface
+     *
      * @param target GameObject target
      * @param frame Current rendering frame
      */
@@ -135,7 +158,9 @@ public class Animator implements Component, Startable {
     }
 
     /**
-     * Render Keyframe values adding it to the current gameObject transform interface
+     * Render Keyframe values adding it to the current gameObject transform
+     * interface
+     *
      * @param target GameObject target
      * @param frame Current rendering frame
      */
@@ -146,9 +171,11 @@ public class Animator implements Component, Startable {
     }
 
     /**
-     * Render Keyframe values multiplying it to the current gameObject transform interface
+     * Render Keyframe values multiplying it to the current gameObject transform
+     * interface
+     *
      * @param target
-     * @param frame 
+     * @param frame
      */
     protected void multiplyFrameRepresentation(GameObject target, KeyFrame frame) {
         target.setPosition(target.getPosition().x * frame.getPosition().x, target.getPosition().y * frame.getPosition().y);
@@ -173,12 +200,13 @@ public class Animator implements Component, Startable {
         isActive = false;
         delta = 0;
     }
-    
+
     /**
      * Check if animation is actually running
+     *
      * @return Animation running
      */
-    public boolean isRunning(){
+    public boolean isRunning() {
         return isActive;
     }
 }
