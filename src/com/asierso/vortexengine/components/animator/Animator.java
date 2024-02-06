@@ -4,7 +4,6 @@ import com.asierso.vortexengine.components.Component;
 import com.asierso.vortexengine.miscellaneous.interfaces.Startable;
 import com.asierso.vortexengine.objects.GameObject;
 import java.util.ArrayList;
-import org.jsfml.system.Clock;
 
 /**
  * Component Animator allows to create animations and execute it in GameObject
@@ -19,12 +18,9 @@ public class Animator implements Component, Startable {
 
     //Animation control buffers
     private boolean isActive = false;
-    private float delta = 0;
-    private float maxDelta = -1;
+    private int delta = 0;
+    private int maxDelta = 0;
     private boolean isLoop = false;
-
-    //Second timer
-    private final Clock clock = new Clock();
 
     //Keyframes blending
     public enum BlendMode {
@@ -79,22 +75,22 @@ public class Animator implements Component, Startable {
     }
 
     /**
-     * Set animation end time. Set -1 if animation never stops (his default
-     * value)
-     *
-     * @param maxDelta Max animation treshold time
+     * Set animation end time. Set a FrameTime with 0 ticks if animation stops 
+     * in his last keyframe
+     * 
+     * @param time Max animation treshold time
      */
-    public final void setEndTime(float maxDelta) {
-        this.maxDelta = maxDelta;
+    public final void setEndTime(FrameTime time) {
+        this.maxDelta = time.getTicks();
     }
 
     /**
-     * Get animation end time
+     * Get setted animation end time
      *
      * @return Max animation treshold time
      */
-    public final float getEndTime() {
-        return maxDelta;
+    public final FrameTime getEndTime() {
+        return new FrameTime(maxDelta);
     }
 
     public final boolean isLoop() {
@@ -114,23 +110,21 @@ public class Animator implements Component, Startable {
     public final void run(GameObject target) {
         if (isActive) {
             //Calculate delta
-            delta += clock.restart().asSeconds();
-            float roundDelta = 0;
+            delta += 1f;
+            
+            //Delete garbage frames
+            for (KeyFrame frame : keyFramesQueue.stream().filter(obj -> obj.getTime().getTicks() < delta).toList()) {
+                keyFramesQueue.remove(frame);
+            }
 
             //Check keyframes
-            for (KeyFrame frame : keyFramesQueue.stream().filter(obj -> obj.getTime() > delta).toList()) {
-                if (loadStopConditions(roundDelta)) {
-                    return;
+            for (KeyFrame frame : keyFramesQueue.stream().filter(obj -> obj.getTime().getTicks() >= delta).toList()) {
+                if (loadStopConditions()) {
+                    
                 }
-                //Frame time rounding
-                if (frame.getTime() % 1 == 0.0f) {
-                    roundDelta = Math.round(delta);
-                } else {
-                    roundDelta = Math.round(delta * 10.0f) / 10.0f;
-                }
-                System.out.println(roundDelta + " " + delta);
+                System.out.println("Delta " + delta + " ");
                 //Execute frame if is time
-                if (delta >= frame.getTime()) {
+                if (delta >= frame.getTime().getTicks()) {
                     //Run frame representation by his blend mode
                     switch (frame.getFrameBlend()) {
                         case STATIC ->
@@ -142,7 +136,7 @@ public class Animator implements Component, Startable {
                     }
                     System.out.println(frame.getPosition());
                     keyFramesQueue.remove(frame);
-                } else {
+                } else if(keyFramesQueue.stream().filter(obj -> obj.getTime().getTicks() > delta).toList().get(0) == frame){
                     //Detect with type of interpolation uses the frame (only one)
                     switch (frame.getFrameBlend()) {
                         case ADDITIVE_INTERPOLATE -> {
@@ -158,7 +152,7 @@ public class Animator implements Component, Startable {
             }
 
             //Check if frameTime surpases max threshold and stop it
-            loadStopConditions(roundDelta);
+            loadStopConditions();
         }
     }
 
@@ -170,38 +164,29 @@ public class Animator implements Component, Startable {
      * @param roundDelta Delta value rounded
      * @return Looping return
      */
-    private boolean loadStopConditions(float roundDelta) {
+    private boolean loadStopConditions() {
         boolean returnable = false;
         if (isLoop) { //Looping
-            if (maxDelta != -1 && roundDelta >= maxDelta) { //Delta treshold surpased
+            if (maxDelta > 0 && delta >= maxDelta) { //Delta treshold surpased
                 delta = 0;
                 keyFramesQueue = (ArrayList) keyFrames.clone();
                 returnable = true;
-            } else if (maxDelta == -1 && keyFramesQueue.isEmpty()) { //No more keyframes to render
+            } else if (maxDelta <= 0 && keyFramesQueue.isEmpty()) { //No more keyframes to render
                 delta = 0;
                 keyFramesQueue = (ArrayList) keyFrames.clone();
                 returnable = true;
             }
         } else { //Not looping
-            if (maxDelta != -1 && roundDelta >= maxDelta) { //Delta treshold surpased
+            if (maxDelta > 0 && delta >= maxDelta) { //Delta treshold surpased
                 keyFramesQueue = null;
                 stop();
                 returnable = false;
-            } else if (maxDelta == -1 && keyFramesQueue.isEmpty()) { //No more keyframes to render
+            } else if (maxDelta <= 0 && keyFramesQueue.isEmpty()) { //No more keyframes to render
                 stop();
                 returnable = false;
             }
         }
         return returnable;
-    }
-
-    /**
-     * Delete garbage frames from queue
-     */
-    private final void clearGarbageQueue() {
-        for (KeyFrame frame : keyFramesQueue.stream().filter(obj -> obj.getTime() < delta).toList()) {
-            keyFramesQueue.remove(frame);
-        }
     }
 
     /**
