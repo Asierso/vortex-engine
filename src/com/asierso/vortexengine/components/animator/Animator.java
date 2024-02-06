@@ -21,6 +21,7 @@ public class Animator implements Component, Startable {
     private boolean isActive = false;
     private float delta = 0;
     private float maxDelta = -1;
+    private boolean isLoop = false;
 
     //Second timer
     private final Clock clock = new Clock();
@@ -92,6 +93,14 @@ public class Animator implements Component, Startable {
     public final float getEndTime() {
         return maxDelta;
     }
+    
+    public final boolean isLoop(){
+        return isLoop;
+    }
+    
+    public final void setLoop(boolean isLoop){
+        this.isLoop = isLoop;
+    }
 
     /**
      * Execute animation in component target
@@ -107,8 +116,13 @@ public class Animator implements Component, Startable {
             float roundDelta = 0;
 
             //Check if queue is empty and stop animator if it is
-            if (keyFramesQueue.isEmpty()) {
+            if (keyFramesQueue.isEmpty() && !isLoop && maxDelta == -1) {
                 stop();
+                return;
+            }
+            else if(keyFramesQueue.isEmpty() && maxDelta == -1){ //Loop ends (restart animation)
+                stop();
+                start();
                 return;
             }
 
@@ -150,9 +164,14 @@ public class Animator implements Component, Startable {
             }
             
             //Check if frameTime surpases max threshold and stop it
-            if (maxDelta != -1 && roundDelta >= maxDelta) {
+            if (maxDelta != -1 && roundDelta >= maxDelta && !isLoop) {
                 keyFramesQueue = null;
                 stop();
+            }
+            else if (maxDelta != -1 && roundDelta >= maxDelta){ //Loop ends at treshold value (restart animation)
+                keyFramesQueue = null;
+                stop();
+                start();
             }
         }
     }
