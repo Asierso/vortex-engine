@@ -79,7 +79,9 @@ public class Animator implements Component, Startable {
     }
 
     /**
-     * Set animation end time. Set -1 if animation never stops (his default value)
+     * Set animation end time. Set -1 if animation never stops (his default
+     * value)
+     *
      * @param maxDelta Max animation treshold time
      */
     public final void setEndTime(float maxDelta) {
@@ -88,17 +90,18 @@ public class Animator implements Component, Startable {
 
     /**
      * Get animation end time
+     *
      * @return Max animation treshold time
      */
     public final float getEndTime() {
         return maxDelta;
     }
-    
-    public final boolean isLoop(){
+
+    public final boolean isLoop() {
         return isLoop;
     }
-    
-    public final void setLoop(boolean isLoop){
+
+    public final void setLoop(boolean isLoop) {
         this.isLoop = isLoop;
     }
 
@@ -109,34 +112,25 @@ public class Animator implements Component, Startable {
      */
     @Override
     public final void run(GameObject target) {
-
         if (isActive) {
             //Calculate delta
             delta += clock.restart().asSeconds();
             float roundDelta = 0;
 
-            //Check if queue is empty and stop animator if it is
-            if (keyFramesQueue.isEmpty() && !isLoop && maxDelta == -1) {
-                stop();
-                return;
-            }
-            else if(keyFramesQueue.isEmpty() && maxDelta == -1){ //Loop ends (restart animation)
-                stop();
-                start();
-                return;
-            }
-
             //Check keyframes
             for (KeyFrame frame : keyFramesQueue.stream().filter(obj -> obj.getTime() > delta).toList()) {
+                if (loadStopConditions(roundDelta)) {
+                    return;
+                }
                 //Frame time rounding
                 if (frame.getTime() % 1 == 0.0f) {
                     roundDelta = Math.round(delta);
                 } else {
                     roundDelta = Math.round(delta * 10.0f) / 10.0f;
                 }
-                
+                System.out.println(roundDelta + " " + delta);
                 //Execute frame if is time
-                if (roundDelta == frame.getTime()) {
+                if (delta >= frame.getTime()) {
                     //Run frame representation by his blend mode
                     switch (frame.getFrameBlend()) {
                         case STATIC ->
@@ -146,7 +140,7 @@ public class Animator implements Component, Startable {
                         case MULTIPLY ->
                             multiplyFrameRepresentation(target, frame);
                     }
-                    //Delete animation
+                    System.out.println(frame.getPosition());
                     keyFramesQueue.remove(frame);
                 } else {
                     //Detect with type of interpolation uses the frame (only one)
@@ -162,17 +156,51 @@ public class Animator implements Component, Startable {
                     }
                 }
             }
-            
+
             //Check if frameTime surpases max threshold and stop it
-            if (maxDelta != -1 && roundDelta >= maxDelta && !isLoop) {
+            loadStopConditions(roundDelta);
+        }
+    }
+
+    /**
+     * Detects if current animation is at max time treshold or doesn't have more
+     * keyframes to render. Method returns true only if animation has to be
+     * looped
+     *
+     * @param roundDelta Delta value rounded
+     * @return Looping return
+     */
+    private boolean loadStopConditions(float roundDelta) {
+        boolean returnable = false;
+        if (isLoop) { //Looping
+            if (maxDelta != -1 && roundDelta >= maxDelta) { //Delta treshold surpased
+                delta = 0;
+                keyFramesQueue = (ArrayList) keyFrames.clone();
+                returnable = true;
+            } else if (maxDelta == -1 && keyFramesQueue.isEmpty()) { //No more keyframes to render
+                delta = 0;
+                keyFramesQueue = (ArrayList) keyFrames.clone();
+                returnable = true;
+            }
+        } else { //Not looping
+            if (maxDelta != -1 && roundDelta >= maxDelta) { //Delta treshold surpased
                 keyFramesQueue = null;
                 stop();
-            }
-            else if (maxDelta != -1 && roundDelta >= maxDelta){ //Loop ends at treshold value (restart animation)
-                keyFramesQueue = null;
+                returnable = false;
+            } else if (maxDelta == -1 && keyFramesQueue.isEmpty()) { //No more keyframes to render
                 stop();
-                start();
+                returnable = false;
             }
+        }
+        return returnable;
+    }
+
+    /**
+     * Delete garbage frames from queue
+     */
+    private final void clearGarbageQueue() {
+        for (KeyFrame frame : keyFramesQueue.stream().filter(obj -> obj.getTime() < delta).toList()) {
+            keyFramesQueue.remove(frame);
         }
     }
 
@@ -219,7 +247,7 @@ public class Animator implements Component, Startable {
      */
     @Override
     public void start() {
-        keyFramesQueue = keyFrames;
+        keyFramesQueue = (ArrayList) keyFrames.clone();
         isActive = true;
     }
 
