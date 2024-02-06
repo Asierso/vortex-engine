@@ -77,10 +77,18 @@ public class Animator implements Component, Startable {
         return keyFrames.size();
     }
 
+    /**
+     * Set animation end time. Set -1 if animation never stops (his default value)
+     * @param maxDelta Max animation treshold time
+     */
     public final void setEndTime(float maxDelta) {
         this.maxDelta = maxDelta;
     }
 
+    /**
+     * Get animation end time
+     * @return Max animation treshold time
+     */
     public final float getEndTime() {
         return maxDelta;
     }
@@ -96,7 +104,7 @@ public class Animator implements Component, Startable {
         if (isActive) {
             //Calculate delta
             delta += clock.restart().asSeconds();
-            float roundDelta;
+            float roundDelta = 0;
 
             //Check if queue is empty and stop animator if it is
             if (keyFramesQueue.isEmpty()) {
@@ -112,6 +120,7 @@ public class Animator implements Component, Startable {
                 } else {
                     roundDelta = Math.round(delta * 10.0f) / 10.0f;
                 }
+                
                 //Execute frame if is time
                 if (roundDelta == frame.getTime()) {
                     //Run frame representation by his blend mode
@@ -139,7 +148,10 @@ public class Animator implements Component, Startable {
                     }
                 }
             }
-            if (maxDelta != -1 && delta >= maxDelta) {
+            
+            //Check if frameTime surpases max threshold and stop it
+            if (maxDelta != -1 && roundDelta >= maxDelta) {
+                keyFramesQueue = null;
                 stop();
             }
         }
