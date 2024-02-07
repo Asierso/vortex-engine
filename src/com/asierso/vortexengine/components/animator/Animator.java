@@ -24,9 +24,42 @@ public class Animator implements Component, Startable {
     private int maxDelta = 0;
     private boolean isLoop = false;
 
-    //Keyframes blending
+    /**
+     * Blending mode of the KeyFrame to make animations
+     */
     public enum BlendMode {
-        ADDITIVE, STATIC, MULTIPLY, ADDITIVE_INTERPOLATE, MULTIPLY_INTERPOLATE, DYNAMIC_INTERPOLATE
+        /**
+         * Static animation. Animator adds KeyFrame values from GameObject
+         * values when keyframe is rendered
+         */
+        ADDITIVE,
+        /**
+         * Static animation. Animator sets KeyFrame values from GameObject
+         * values when keyframe is rendered
+         */
+        STATIC,
+        /**
+         * Static animation. Animator multiplies KeyFrame values from GameObject
+         * values when keyframe is rendered
+         */
+        MULTIPLY,
+        /**
+         * Interpolated animation. Animator adds KeyFrame values like a constant
+         * every tick from GameObject values when keyframe is going to be render
+         */
+        ADDITIVE_INTERPOLATE,
+        /**
+         * Interpolated animation. Animator multiplies KeyFrame values like a
+         * constant every tick from GameObject values when keyframe is going to
+         * be render
+         */
+        MULTIPLY_INTERPOLATE,
+        /**
+         * Interpolated animation. Animator calculates Gameobject motion every
+         * tick using the difference between lastand current keyframe when
+         * keyframe is going to be rendered
+         */
+        DYNAMIC_INTERPOLATE
     }
 
     /**
@@ -133,7 +166,7 @@ public class Animator implements Component, Startable {
             if (!keyFramesQueue.stream().filter(obj -> obj.getTime().getTicks() >= delta && obj.getFrameBlend() == BlendMode.DYNAMIC_INTERPOLATE).toList().isEmpty()) {
                 for (int i = 0; i < keyFramesQueue.size(); i++) {
                     if (keyFramesQueue.get(i).getFrameBlend() == BlendMode.DYNAMIC_INTERPOLATE && i > 0) {
-                        keyFramesQueue.set(i, frameInterpolator(keyFramesQueue.get(i-1), keyFramesQueue.get(i)));
+                        keyFramesQueue.set(i, frameInterpolator(keyFramesQueue.get(i - 1), keyFramesQueue.get(i)));
                     }
                 }
             }
