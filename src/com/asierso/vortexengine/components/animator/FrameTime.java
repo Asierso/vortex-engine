@@ -14,8 +14,21 @@ public class FrameTime {
     private int ticks; //time representation
 
     //Measure types
+
+    /**
+     * FrameTime measures to representate time
+     */
     public enum TimeMeasure {
-        UNITS, TICKS
+
+        /**
+         * Units time measure. 1 unit = 100 ticks
+         */
+        UNITS,
+
+        /**
+         * Base time measure. 1 ticks = 0.01 unit
+         */
+        TICKS
     };
 
     /**
@@ -106,6 +119,10 @@ public class FrameTime {
         return (units * 100) + ticks;
     }
 
+    /**
+     * Get FrameTime String representation
+     * @return FrameTime String
+     */
     @Override
     public String toString() {
         return "FrameTime{" + "units=" + units + ", ticks=" + ticks + '}';

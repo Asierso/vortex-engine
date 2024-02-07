@@ -25,8 +25,19 @@ public class SoundSource extends GameObject implements Startable {
     private final ArrayList<Soundtrack> soundtracks = new ArrayList<>();
 
     //Load modes
+    /**
+     * Load modes to load sound resource
+     */
     public enum LoadModes {
-        FILE, STREAM
+
+        /**
+         * Sound file resource
+         */
+        FILE,
+        /**
+         * Sound stream resource
+         */
+        STREAM
     }
 
     /**
@@ -106,6 +117,7 @@ public class SoundSource extends GameObject implements Startable {
      * @param name The name of the sound to add
      * @param source Path or Stream of the sound to add
      * @param mode Aggregation mode of the sound
+     * @throws java.io.IOException Resource not founded
      */
     public void addSoundtrack(String name, Object source, LoadModes mode) throws IOException {
         Soundtrack st = new Soundtrack(this, name);
@@ -124,6 +136,7 @@ public class SoundSource extends GameObject implements Startable {
      *
      * @param name The name of the sound to add
      * @param path Path of the sound to add
+     * @throws java.io.IOException File not founded
      */
     public void addSoundtrack(String name, String path) throws IOException {
         this.addSoundtrack(name, path, LoadModes.FILE);
@@ -173,14 +186,19 @@ public class SoundSource extends GameObject implements Startable {
     }
 
     /**
-     * Overrides GameObject render 
-     * @param win 
+     * Overrides GameObject render
+     *
+     * @param win
      */
     @Override
     protected void render(Window win) {
-        
+
     }
 
+    /**
+     * Single sound track playable by a SoundSource. It's identified by a sound
+     * track name (String)
+     */
     public static final class Soundtrack extends SoundBuffer {
 
         private final String name;

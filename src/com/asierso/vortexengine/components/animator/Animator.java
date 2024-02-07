@@ -314,7 +314,7 @@ public class Animator implements Component, Startable {
      *
      * @return Animation running
      */
-    public boolean isRunning() {
+    public final boolean isRunning() {
         return isActive;
     }
 }

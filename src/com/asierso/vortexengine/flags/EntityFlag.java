@@ -54,6 +54,10 @@ public class EntityFlag<T> {
         this.value = value;
     }    
 
+    /**
+     * Get EntityFlag String representation
+     * @return
+     */
     @Override
     public String toString() {
         return "EntityFlag{" + "key=" + key + ", value=" + value + '}';
