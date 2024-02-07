@@ -19,12 +19,43 @@ public class Rigibody implements Component {
     private final ArrayList<GameObject> collisionalObjects = new ArrayList<>();
 
     //Rigibody states and weighing (final position fixer) modification
+    /**
+     * Gravity states that a GameObject with this component can handle
+     */
     public enum RigibodyStates {
-        STATIC, DYNAMIC, KINEMATIC
+
+        /**
+         * Object isn't affected by gravity but can interact with collisionable
+         * objects
+         */
+        STATIC,
+        /**
+         * Object is affected by gravity and physics and can interact with
+         * collisionable objects
+         */
+        DYNAMIC,
+        /**
+         * Object is affected by gravity and physics but is inmutable by
+         * collisonable objects
+         */
+        KINEMATIC
     }
 
+    /**
+     * Sets the method of Rigibody MRUA algoritm to fix gravity speed and final
+     * position, based in math position weighing. This could avoid collision
+     * errors between dynamic GameObjects
+     */
     public enum GravityWeighing {
-        SOFT_PRECISION, MASS_PRECISION
+
+        /**
+         * Adapted for soft objects with low mass values
+         */
+        SOFT_PRECISION,
+        /**
+         * Adapted for heavy objects with high mass values
+         */
+        MASS_PRECISION
     }
     private RigibodyStates bodyState = RigibodyStates.DYNAMIC;
     private GravityWeighing weighing = GravityWeighing.SOFT_PRECISION;

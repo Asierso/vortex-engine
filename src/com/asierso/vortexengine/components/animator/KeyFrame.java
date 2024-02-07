@@ -8,7 +8,7 @@ import org.jsfml.system.Vector2f;
  * Basic Keyframe contains Transform definitions to adjust when Animator is running and in specified time
  * @author Asierso
  */
-public class KeyFrame implements Transform {
+public class KeyFrame implements Transform, Cloneable {
     //Transform private fields
     private Vector2f position = new Vector2f(0,0);
     private Vector2f boxSize = new Vector2f(0,0);
@@ -109,4 +109,22 @@ public class KeyFrame implements Transform {
         return boxSize;
     }
 
+    /**
+     * Get KeyFrame representation String
+     * @return KeyFrame String
+     */
+    @Override
+    public String toString() {
+        return "KeyFrame{" + "position=" + position + ", boxSize=" + boxSize + ", rotation=" + rotation + ", time=" + time + ", frameBlend=" + frameBlend + '}';
+    }
+
+    /**
+     * Clones current KeyFrame object
+     * @return Cloned KeyFrame
+     * @throws CloneNotSupportedException Error at clonning current KeyFrame
+     */
+    @Override
+    public KeyFrame clone() throws CloneNotSupportedException{
+        return (KeyFrame) super.clone();
+    }
 }

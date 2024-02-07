@@ -4,6 +4,8 @@ import com.asierso.vortexengine.components.Component;
 import com.asierso.vortexengine.miscellaneous.interfaces.Startable;
 import com.asierso.vortexengine.objects.GameObject;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import org.jsfml.system.Vector2f;
 
@@ -24,9 +26,42 @@ public class Animator implements Component, Startable {
     private int maxDelta = 0;
     private boolean isLoop = false;
 
-    //Keyframes blending
+    /**
+     * Blending mode of the KeyFrame to make animations
+     */
     public enum BlendMode {
-        ADDITIVE, STATIC, MULTIPLY, ADDITIVE_INTERPOLATE, MULTIPLY_INTERPOLATE, DYNAMIC_INTERPOLATE
+        /**
+         * Static animation. Animator adds KeyFrame values from GameObject
+         * values when keyframe is rendered
+         */
+        ADDITIVE,
+        /**
+         * Static animation. Animator sets KeyFrame values from GameObject
+         * values when keyframe is rendered
+         */
+        STATIC,
+        /**
+         * Static animation. Animator multiplies KeyFrame values from GameObject
+         * values when keyframe is rendered
+         */
+        MULTIPLY,
+        /**
+         * Interpolated animation. Animator adds KeyFrame values like a constant
+         * every tick from GameObject values when keyframe is going to be render
+         */
+        ADDITIVE_INTERPOLATE,
+        /**
+         * Interpolated animation. Animator multiplies KeyFrame values like a
+         * constant every tick from GameObject values when keyframe is going to
+         * be render
+         */
+        MULTIPLY_INTERPOLATE,
+        /**
+         * Interpolated animation. Animator calculates Gameobject motion every
+         * tick using the difference between lastand current keyframe when
+         * keyframe is going to be rendered
+         */
+        DYNAMIC_INTERPOLATE
     }
 
     /**
@@ -121,8 +156,6 @@ public class Animator implements Component, Startable {
     @Override
     public final void run(GameObject target) {
         if (isActive) {
-            //Calculate delta
-            delta += 1f;
 
             //Delete garbage frames
             for (KeyFrame frame : keyFramesQueue.stream().filter(obj -> obj.getTime().getTicks() < delta).toList()) {
@@ -132,11 +165,19 @@ public class Animator implements Component, Startable {
             //Dynamic interpolate conversion
             if (!keyFramesQueue.stream().filter(obj -> obj.getTime().getTicks() >= delta && obj.getFrameBlend() == BlendMode.DYNAMIC_INTERPOLATE).toList().isEmpty()) {
                 for (int i = 0; i < keyFramesQueue.size(); i++) {
-                    if (keyFramesQueue.get(i).getFrameBlend() == BlendMode.DYNAMIC_INTERPOLATE && i > 0) {
-                        keyFramesQueue.set(i, frameInterpolator(keyFramesQueue.get(i-1), keyFramesQueue.get(i)));
+                    if (keyFramesQueue.get(i).getFrameBlend() == BlendMode.DYNAMIC_INTERPOLATE && i > 0) { //Gets dynamic interpolation frames
+                        //Resolve dynamic interpolation with calculated additive interpolation and static keyframe at end
+                        KeyFrame targetFrame = keyFramesQueue.get(i);
+                        targetFrame.setFrameBlend(BlendMode.STATIC);
+                        //Add new frames
+                        keyFramesQueue.set(i, frameInterpolator(keyFramesQueue.get(i - 1), keyFramesQueue.get(i)));
+                        keyFramesQueue.add(i + 1, targetFrame);
                     }
                 }
             }
+
+            //Calculate delta
+            delta += 1f;
 
             //Check keyframes
             for (KeyFrame frame : keyFramesQueue.stream().filter(obj -> obj.getTime().getTicks() >= delta).toList()) {
@@ -182,10 +223,10 @@ public class Animator implements Component, Startable {
         if (isLoop) { //Looping
             if (maxDelta > 0 && delta >= maxDelta) { //Delta treshold surpased
                 delta = 0;
-                keyFramesQueue = (ArrayList) keyFrames.clone();
+                keyFramesQueue = cloneFrames(); //Clone frames from keyFrames
             } else if (maxDelta <= 0 && keyFramesQueue.isEmpty()) { //No more keyframes to render
                 delta = 0;
-                keyFramesQueue = (ArrayList) keyFrames.clone();
+                keyFramesQueue = cloneFrames(); //Clone frames from keyFrames
             }
         } else { //Not looping
             if (maxDelta > 0 && delta >= maxDelta) { //Delta treshold surpased
@@ -250,12 +291,33 @@ public class Animator implements Component, Startable {
         handle.setPosition(new Vector2f(
                 (b.getPosition().x - a.getPosition().x) / (b.getTime().getTicks() - a.getTime().getTicks()),
                 (b.getPosition().y - a.getPosition().y) / (b.getTime().getTicks() - a.getTime().getTicks())));
+
         handle.setBoxSize(new Vector2f(
                 (b.getBoxSize().x - a.getBoxSize().x) / (b.getTime().getTicks() - a.getTime().getTicks()),
                 (b.getBoxSize().y - a.getBoxSize().y) / (b.getTime().getTicks() - a.getTime().getTicks())));
+
         handle.setRotation(
                 (b.getRotation() - a.getRotation()) / (b.getTime().getTicks() - a.getTime().getTicks()));
+
         return handle;
+    }
+
+    /**
+     * Clone keyFrames list to a new list of keyFrames (keyFrames in the new
+     * list are cloned)
+     *
+     * @return Cloned KeyFrame list
+     */
+    protected ArrayList<KeyFrame> cloneFrames() {
+        ArrayList<KeyFrame> cloned = new ArrayList<>();
+        for (KeyFrame handle : keyFrames) {
+            try {
+                cloned.add(handle.clone());
+            } catch (CloneNotSupportedException ignore) {
+
+            }
+        }
+        return cloned;
     }
 
     /**
@@ -263,7 +325,7 @@ public class Animator implements Component, Startable {
      */
     @Override
     public void start() {
-        keyFramesQueue = (ArrayList) keyFrames.clone();
+        keyFramesQueue = cloneFrames();
         isActive = true;
     }
 
@@ -281,7 +343,7 @@ public class Animator implements Component, Startable {
      *
      * @return Animation running
      */
-    public boolean isRunning() {
+    public final boolean isRunning() {
         return isActive;
     }
 }

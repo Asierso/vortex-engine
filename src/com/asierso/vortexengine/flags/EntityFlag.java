@@ -5,6 +5,7 @@ package com.asierso.vortexengine.flags;
  * A collection of EntityTag works like a dictionary to set custom settings
  * 
  * @author Asierso
+ * @param <T> Value of flag
  */
 public class EntityFlag<T> {
     //Private flag key value
@@ -52,4 +53,13 @@ public class EntityFlag<T> {
     public void setValue(T value) {
         this.value = value;
     }    
+
+    /**
+     * Get EntityFlag String representation
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "EntityFlag{" + "key=" + key + ", value=" + value + '}';
+    }
 }

@@ -53,87 +53,42 @@ public abstract class GameObject implements Cloneable, Transform {
         this.position = position;
         this.boxSize = boxSize;
     }
-
-    /**
-     * Set the GameObject position
-     *
-     * @param x Represents the x position of the object
-     * @param y Represents the y position of the object
-     */
     
     @Override
     public final void setPosition(float x, float y) {
         position = new Vector2f(x, y);
     }
 
-    /**
-     * Set the GameObject position
-     *
-     * @param position Represents the Vector position of the object
-     */
     @Override
     public final void setPosition(Vector2f position) {
         this.position = position;
     }
 
-    /**
-     * Get the GameObject position
-     *
-     * @return The vector of the GameObject position
-     */
     @Override
     public final Vector2f getPosition() {
         return position;
     }
 
-    /**
-     * Set the GameObject rotation in a specific angle
-     *
-     * @param rotation A number of the GameObject rotation angle
-     */
     @Override
     public final void setRotation(float rotation) {
         this.rotation = rotation;
     }
 
-    /**
-     * Get GameObject rotation in degrees
-     *
-     * @return A number of the GameObject rotation angle
-     */
     @Override
     public final float getRotation() {
         return rotation;
     }
 
-    /**
-     * Set GameObject box size. This is mostly used to define GameObject size
-     * and hit-box
-     *
-     * @param size Represents the Vector scale of the object
-     */
     @Override
     public void setBoxSize(Vector2f size) {
         boxSize = size;
     }
 
-    /**
-     * Set GameObject box size. This is mostly used to define GameObject size
-     * and hit-box
-     *
-     * @param x Represents the scale in x of the object
-     * @param y Represents the scale in y of the object
-     */
     @Override
     public final void setBoxSize(float x, float y) {
         boxSize = new Vector2f(x, y);
     }
-
-    /**
-     * Get GameObject box size
-     *
-     * @return The box size of the object
-     */
+    
     @Override
     public final Vector2f getBoxSize() {
         return boxSize;

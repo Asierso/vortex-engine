@@ -11,8 +11,9 @@ import org.jsfml.system.Clock;
 import org.jsfml.system.Vector2f;
 
 /**
- * Create a particle system object
- * A particle system instantiates GameObject using one GameObject prefab with random transform properties
+ * Create a particle system object A particle system instantiates GameObject
+ * using one GameObject prefab with random transform properties
+ *
  * @author Asierso
  */
 public class ParticleSystem extends GameObject implements Startable, Transform {
@@ -33,9 +34,29 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
     //Particle emission status (allow generation or not)
     private boolean isActive = true;
 
-    //Modifier type selector
+    /**
+     * Properties of entire particle system that can be modified. Modifications
+     * in particle system affects to every particle generated with the same
+     * ParticleSystem. ParticleSystem object is inmutable by modifiers
+     */
     public enum ParticleModifiers {
-        POSITION, BOX_SIZE, COLOR, ROTATION
+
+        /**
+         * Modify particle position
+         */
+        POSITION,
+        /**
+         * Modify particle boxsize
+         */
+        BOX_SIZE,
+        /**
+         * Modify particle color
+         */
+        COLOR,
+        /**
+         * Modify particle rotation
+         */
+        ROTATION
     }
 
     //Particles collection
@@ -61,7 +82,7 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
         if (isActive) {
             generateParticle();
         }
-        
+
         //Lifetime and particle render
         for (int i = 0; i < instantiatedList.size() - 1; i++) {
             //Update lifetime and load modifiers of each particle
@@ -200,7 +221,6 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
      *
      * @return Particle time of life
      */
-
     public final float getLifetime() {
         return lifetime;
     }
@@ -250,7 +270,7 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
                 rotationModifier = (float) value;
         }
     }
-    
+
     //Match particle with this lifetime
     private static class ParticleDictionary {
 

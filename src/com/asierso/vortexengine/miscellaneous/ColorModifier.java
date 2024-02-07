@@ -7,16 +7,24 @@ import org.jsfml.graphics.Color;
  * @author Asierso
  */
 public final class ColorModifier {
-    //Red value
+    /**
+     * Red value
+     */
     public int r;
-    
-    //Green value
+
+    /**
+     * Green value
+     */
     public int g;
     
-    //Blue value
+    /**
+     * Blue value
+     */
     public int b;
     
-    //Aplha value
+    /**
+     * Alpha value
+     */
     public int a;
     
     /**
@@ -60,6 +68,10 @@ public final class ColorModifier {
         return new Color(r,g,b,a);
     }
 
+    /**
+     * Get ColorModifier String representation
+     * @return ColorModifier String
+     */
     @Override
     public String toString() {
         return "ColorModifier{" + "r=" + r + ", g=" + g + ", b=" + b + ", a=" + a + '}';

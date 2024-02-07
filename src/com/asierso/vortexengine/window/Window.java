@@ -30,9 +30,18 @@ public class Window {
     private Scene scene;
 
     //Main constructors
+    
+    /**
+     * Creates a void Window with undefined size
+     */
     public Window() {
     }
 
+    /**
+     * Creates a void Window with specified size in px
+     * @param width Window width
+     * @param height Window height
+     */
     public Window(int width, int height) {
         setSize(width, height);
     }
@@ -44,7 +53,7 @@ public class Window {
      * @param width Horizontal size
      * @param height Vertical size
      */
-    public void setSize(int width, int height) {
+    public final void setSize(int width, int height) {
         this.width = width;
         this.height = height;
     }
@@ -54,7 +63,7 @@ public class Window {
      *
      * @return Dimension of window
      */
-    public Dimension getSize() {
+    public final Dimension getSize() {
         return new Dimension(width, height);
     }
 
@@ -63,7 +72,7 @@ public class Window {
      *
      * @param frames Number of frames to render in a second
      */
-    public void setFrameRate(int frames) {
+    public final void setFrameRate(int frames) {
         this.frames = frames;
     }
 
@@ -72,7 +81,7 @@ public class Window {
      *
      * @return FPS value
      */
-    public float getFramesPerSecond() {
+    public final float getFramesPerSecond() {
         return fps;
     }
 
@@ -81,7 +90,7 @@ public class Window {
      *
      * @param scene Runtime class
      */
-    public void setScene(Scene scene) {
+    public final void setScene(Scene scene) {
         this.scene = scene;
     }
 
@@ -90,7 +99,7 @@ public class Window {
      *
      * @return The SFML base window
      */
-    public RenderWindow getRender() {
+    public final RenderWindow getRender() {
         return render;
     }
 
@@ -99,7 +108,7 @@ public class Window {
      *
      * @param title String title
      */
-    public void setTitle(String title) {
+    public final void setTitle(String title) {
         this.title = title;
     }
 
@@ -108,7 +117,7 @@ public class Window {
      *
      * @param color Background color
      */
-    public void setBackground(Color color) {
+    public final void setBackground(Color color) {
         this.background = color;
     }
 
