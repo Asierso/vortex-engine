@@ -59,4 +59,9 @@ public final class ColorModifier {
         a = (a < 0? 0 : a > 255? 255 : a);
         return new Color(r,g,b,a);
     }
+
+    @Override
+    public String toString() {
+        return "ColorModifier{" + "r=" + r + ", g=" + g + ", b=" + b + ", a=" + a + '}';
+    }
 }
