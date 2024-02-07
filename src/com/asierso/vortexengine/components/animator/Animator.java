@@ -141,7 +141,6 @@ public class Animator implements Component, Startable {
                         case MULTIPLY ->
                             multiplyFrameRepresentation(target, frame);
                     }
-                    System.out.println(frame.getPosition());
                     keyFramesQueue.remove(frame);
                 } else if (keyFramesQueue.stream().filter(obj -> obj.getTime().getTicks() > delta).toList().get(0) == frame) {
                     //Detect with type of interpolation uses the frame (only one)
