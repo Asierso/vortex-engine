@@ -75,9 +75,9 @@ public class Animator implements Component, Startable {
     }
 
     /**
-     * Set animation end time. Set a FrameTime with 0 ticks if animation stops 
+     * Set animation end time. Set a FrameTime with 0 ticks if animation stops
      * in his last keyframe
-     * 
+     *
      * @param time Max animation treshold time
      */
     public final void setEndTime(FrameTime time) {
@@ -93,10 +93,20 @@ public class Animator implements Component, Startable {
         return new FrameTime(maxDelta);
     }
 
+    /**
+     * Gets if animator loops keyframes when reach end
+     *
+     * @return Loop value
+     */
     public final boolean isLoop() {
         return isLoop;
     }
 
+    /**
+     * Set if animator have to loop frames
+     *
+     * @param isLoop Loop value
+     */
     public final void setLoop(boolean isLoop) {
         this.isLoop = isLoop;
     }
@@ -111,7 +121,7 @@ public class Animator implements Component, Startable {
         if (isActive) {
             //Calculate delta
             delta += 1f;
-            
+
             //Delete garbage frames
             for (KeyFrame frame : keyFramesQueue.stream().filter(obj -> obj.getTime().getTicks() < delta).toList()) {
                 keyFramesQueue.remove(frame);
@@ -119,10 +129,7 @@ public class Animator implements Component, Startable {
 
             //Check keyframes
             for (KeyFrame frame : keyFramesQueue.stream().filter(obj -> obj.getTime().getTicks() >= delta).toList()) {
-                if (loadStopConditions()) {
-                    
-                }
-                System.out.println("Delta " + delta + " ");
+                loadStopConditions();
                 //Execute frame if is time
                 if (delta >= frame.getTime().getTicks()) {
                     //Run frame representation by his blend mode
@@ -136,7 +143,7 @@ public class Animator implements Component, Startable {
                     }
                     System.out.println(frame.getPosition());
                     keyFramesQueue.remove(frame);
-                } else if(keyFramesQueue.stream().filter(obj -> obj.getTime().getTicks() > delta).toList().get(0) == frame){
+                } else if (keyFramesQueue.stream().filter(obj -> obj.getTime().getTicks() > delta).toList().get(0) == frame) {
                     //Detect with type of interpolation uses the frame (only one)
                     switch (frame.getFrameBlend()) {
                         case ADDITIVE_INTERPOLATE -> {
@@ -160,33 +167,24 @@ public class Animator implements Component, Startable {
      * Detects if current animation is at max time treshold or doesn't have more
      * keyframes to render. Method returns true only if animation has to be
      * looped
-     *
-     * @param roundDelta Delta value rounded
-     * @return Looping return
      */
-    private boolean loadStopConditions() {
-        boolean returnable = false;
+    private void loadStopConditions() {
         if (isLoop) { //Looping
             if (maxDelta > 0 && delta >= maxDelta) { //Delta treshold surpased
                 delta = 0;
                 keyFramesQueue = (ArrayList) keyFrames.clone();
-                returnable = true;
             } else if (maxDelta <= 0 && keyFramesQueue.isEmpty()) { //No more keyframes to render
                 delta = 0;
                 keyFramesQueue = (ArrayList) keyFrames.clone();
-                returnable = true;
             }
         } else { //Not looping
             if (maxDelta > 0 && delta >= maxDelta) { //Delta treshold surpased
                 keyFramesQueue = null;
                 stop();
-                returnable = false;
             } else if (maxDelta <= 0 && keyFramesQueue.isEmpty()) { //No more keyframes to render
                 stop();
-                returnable = false;
             }
         }
-        return returnable;
     }
 
     /**
