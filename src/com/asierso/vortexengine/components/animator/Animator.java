@@ -132,8 +132,8 @@ public class Animator implements Component, Startable {
             //Dynamic interpolate conversion
             if (!keyFramesQueue.stream().filter(obj -> obj.getTime().getTicks() >= delta && obj.getFrameBlend() == BlendMode.DYNAMIC_INTERPOLATE).toList().isEmpty()) {
                 for (int i = 0; i < keyFramesQueue.size(); i++) {
-                    if (keyFramesQueue.get(i).getFrameBlend() == BlendMode.DYNAMIC_INTERPOLATE && i != 0) {
-                        keyFramesQueue.set(i, frameInterpolator(keyFramesQueue.get(i), keyFramesQueue.get(i - 1)));
+                    if (keyFramesQueue.get(i).getFrameBlend() == BlendMode.DYNAMIC_INTERPOLATE && i > 0) {
+                        keyFramesQueue.set(i, frameInterpolator(keyFramesQueue.get(i-1), keyFramesQueue.get(i)));
                     }
                 }
             }
@@ -246,6 +246,7 @@ public class Animator implements Component, Startable {
     protected KeyFrame frameInterpolator(KeyFrame a, KeyFrame b) {
         KeyFrame handle = new KeyFrame();
         handle.setFrameBlend(BlendMode.ADDITIVE_INTERPOLATE);
+        handle.setTime(b.getTime());
         handle.setPosition(new Vector2f(
                 (b.getPosition().x - a.getPosition().x) / (b.getTime().getTicks() - a.getTime().getTicks()),
                 (b.getPosition().y - a.getPosition().y) / (b.getTime().getTicks() - a.getTime().getTicks())));
