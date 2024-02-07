@@ -13,7 +13,7 @@ import org.jsfml.system.Vector2f;
  *
  * @author Asierso
  */
-public class GameObject implements Cloneable, Transform {
+public abstract class GameObject implements Cloneable, Transform {
 
     //Transform fields
     private Vector2f position = new Vector2f(0, 0);
@@ -325,13 +325,9 @@ public class GameObject implements Cloneable, Transform {
     }
 
     /**
-     * The method that render the GameObject "Shape" Trying to render a void
-     * GameObject that does not have a "Shape" can cause an
-     * UnsupportedOperationException
+     * The method that render the GameObject "Shape"
      *
      * @param win Window where render the GameObject "Shape"
      */
-    protected void render(Window win) {
-        throw new UnsupportedOperationException("Cannot render a non graphic element");
-    }
+    protected abstract void render(Window win);
 }

@@ -1,6 +1,7 @@
 package com.asierso.vortexengine.objects;
 
 import com.asierso.vortexengine.miscellaneous.interfaces.Startable;
+import com.asierso.vortexengine.window.Window;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -10,8 +11,9 @@ import org.jsfml.audio.Sound;
 import org.jsfml.audio.SoundBuffer;
 
 /**
- * Create a source of sound with custom volume and pitch
- * A sound source can play diferent sounds added in his sountracks list
+ * Create a source of sound with custom volume and pitch A sound source can play
+ * diferent sounds added in his sountracks list
+ *
  * @author Asierso
  */
 public class SoundSource extends GameObject implements Startable {
@@ -168,6 +170,15 @@ public class SoundSource extends GameObject implements Startable {
         sound.setVolume(50f);
         sound.setLoop(false);
         sound.setPitch(1.0f);
+    }
+
+    /**
+     * Overrides GameObject render 
+     * @param win 
+     */
+    @Override
+    protected void render(Window win) {
+        
     }
 
     public static final class Soundtrack extends SoundBuffer {

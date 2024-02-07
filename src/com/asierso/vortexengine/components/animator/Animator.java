@@ -4,6 +4,8 @@ import com.asierso.vortexengine.components.Component;
 import com.asierso.vortexengine.miscellaneous.interfaces.Startable;
 import com.asierso.vortexengine.objects.GameObject;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import org.jsfml.system.Vector2f;
 
 /**
  * Component Animator allows to create animations and execute it in GameObject
@@ -24,7 +26,7 @@ public class Animator implements Component, Startable {
 
     //Keyframes blending
     public enum BlendMode {
-        ADDITIVE, STATIC, MULTIPLY, ADDITIVE_INTERPOLATE, MULTIPLY_INTERPOLATE
+        ADDITIVE, STATIC, MULTIPLY, ADDITIVE_INTERPOLATE, MULTIPLY_INTERPOLATE, DYNAMIC_INTERPOLATE
     }
 
     /**
@@ -127,6 +129,15 @@ public class Animator implements Component, Startable {
                 keyFramesQueue.remove(frame);
             }
 
+            //Dynamic interpolate conversion
+            if (!keyFramesQueue.stream().filter(obj -> obj.getTime().getTicks() >= delta && obj.getFrameBlend() == BlendMode.DYNAMIC_INTERPOLATE).toList().isEmpty()) {
+                for (int i = 0; i < keyFramesQueue.size(); i++) {
+                    if (keyFramesQueue.get(i).getFrameBlend() == BlendMode.DYNAMIC_INTERPOLATE && i > 0) {
+                        keyFramesQueue.set(i, frameInterpolator(keyFramesQueue.get(i-1), keyFramesQueue.get(i)));
+                    }
+                }
+            }
+
             //Check keyframes
             for (KeyFrame frame : keyFramesQueue.stream().filter(obj -> obj.getTime().getTicks() >= delta).toList()) {
                 loadStopConditions();
@@ -215,13 +226,36 @@ public class Animator implements Component, Startable {
      * Render Keyframe values multiplying it to the current gameObject transform
      * interface
      *
-     * @param target
-     * @param frame
+     * @param target GameObject target
+     * @param frame Current rendering frame
      */
     protected void multiplyFrameRepresentation(GameObject target, KeyFrame frame) {
         target.setPosition(target.getPosition().x * frame.getPosition().x, target.getPosition().y * frame.getPosition().y);
         target.setBoxSize(target.getBoxSize().x * frame.getBoxSize().x, target.getBoxSize().y * frame.getBoxSize().y);
         target.setRotation(target.getRotation() * frame.getRotation());
+    }
+
+    /**
+     * Calculate dynamic interpolation between two frames. The result is an
+     * additive interpolation keyframe
+     *
+     * @param a Interpolation start frame
+     * @param b Interpolation end frame
+     * @return Additive interpolation keyframe
+     */
+    protected KeyFrame frameInterpolator(KeyFrame a, KeyFrame b) {
+        KeyFrame handle = new KeyFrame();
+        handle.setFrameBlend(BlendMode.ADDITIVE_INTERPOLATE);
+        handle.setTime(b.getTime());
+        handle.setPosition(new Vector2f(
+                (b.getPosition().x - a.getPosition().x) / (b.getTime().getTicks() - a.getTime().getTicks()),
+                (b.getPosition().y - a.getPosition().y) / (b.getTime().getTicks() - a.getTime().getTicks())));
+        handle.setBoxSize(new Vector2f(
+                (b.getBoxSize().x - a.getBoxSize().x) / (b.getTime().getTicks() - a.getTime().getTicks()),
+                (b.getBoxSize().y - a.getBoxSize().y) / (b.getTime().getTicks() - a.getTime().getTicks())));
+        handle.setRotation(
+                (b.getRotation() - a.getRotation()) / (b.getTime().getTicks() - a.getTime().getTicks()));
+        return handle;
     }
 
     /**
