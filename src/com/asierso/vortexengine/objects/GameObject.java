@@ -325,9 +325,7 @@ public abstract class GameObject implements Cloneable, Transform {
     }
 
     /**
-     * The method that render the GameObject "Shape" Trying to render a void
-     * GameObject that does not have a "Shape" can cause an
-     * UnsupportedOperationException
+     * The method that render the GameObject "Shape"
      *
      * @param win Window where render the GameObject "Shape"
      */
