@@ -15,7 +15,7 @@ public class KeyFrame implements Transform {
     private float rotation = 0;
     
     //Keyframe control
-    private float time = 0;
+    private FrameTime time;
     private Animator.BlendMode frameBlend = Animator.BlendMode.STATIC;
     
     /**
@@ -55,7 +55,7 @@ public class KeyFrame implements Transform {
      * Set Keyframe render time
      * @param time Time when frame will be renderer
      */
-    public void setTime(float time) {
+    public void setTime(FrameTime time) {
         this.time = time;
     }
 
@@ -63,7 +63,7 @@ public class KeyFrame implements Transform {
      * Get keyframe render time
      * @return Time when frame will be renderer
      */
-    public float getTime() {
+    public FrameTime getTime() {
         return time;
     }
 
