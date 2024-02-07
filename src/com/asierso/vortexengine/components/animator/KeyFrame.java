@@ -109,11 +109,20 @@ public class KeyFrame implements Transform, Cloneable {
         return boxSize;
     }
 
+    /**
+     * Get KeyFrame representation String
+     * @return KeyFrame String
+     */
     @Override
     public String toString() {
         return "KeyFrame{" + "position=" + position + ", boxSize=" + boxSize + ", rotation=" + rotation + ", time=" + time + ", frameBlend=" + frameBlend + '}';
     }
 
+    /**
+     * Clones current KeyFrame object
+     * @return Cloned KeyFrame
+     * @throws CloneNotSupportedException Error at clonning current KeyFrame
+     */
     @Override
     public KeyFrame clone() throws CloneNotSupportedException{
         return (KeyFrame) super.clone();
