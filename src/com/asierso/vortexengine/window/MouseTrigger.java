@@ -4,14 +4,13 @@
  */
 package com.asierso.vortexengine.window;
 
-import com.asierso.vortexengine.window.Window;
 import org.jsfml.graphics.IntRect;
 import org.jsfml.system.Vector2i;
 import org.jsfml.window.Mouse;
 
 /**
  *
- * @author sobblaas
+ * @author Asierso
  */
 public class MouseTrigger {
 
