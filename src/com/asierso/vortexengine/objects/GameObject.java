@@ -55,27 +55,27 @@ public abstract class GameObject implements Cloneable, Transform {
     }
     
     @Override
-    public final void setPosition(float x, float y) {
+    public void setPosition(float x, float y) {
         position = new Vector2f(x, y);
     }
 
     @Override
-    public final void setPosition(Vector2f position) {
+    public void setPosition(Vector2f position) {
         this.position = position;
     }
 
     @Override
-    public final Vector2f getPosition() {
+    public Vector2f getPosition() {
         return position;
     }
 
     @Override
-    public final void setRotation(float rotation) {
+    public void setRotation(float rotation) {
         this.rotation = rotation;
     }
 
     @Override
-    public final float getRotation() {
+    public float getRotation() {
         return rotation;
     }
 
@@ -85,12 +85,12 @@ public abstract class GameObject implements Cloneable, Transform {
     }
 
     @Override
-    public final void setBoxSize(float x, float y) {
+    public void setBoxSize(float x, float y) {
         boxSize = new Vector2f(x, y);
     }
     
     @Override
-    public final Vector2f getBoxSize() {
+    public Vector2f getBoxSize() {
         return boxSize;
     }
 
@@ -100,7 +100,7 @@ public abstract class GameObject implements Cloneable, Transform {
      *
      * @param showing Showing status
      */
-    public final void setVisible(boolean showing) {
+    public void setVisible(boolean showing) {
         isShowing = showing;
     }
 
@@ -110,7 +110,7 @@ public abstract class GameObject implements Cloneable, Transform {
      * @return If GameObject is visible or not
      */
     
-    public final boolean getVisible() {
+    public boolean getVisible() {
         return isShowing;
     }
 
@@ -120,7 +120,7 @@ public abstract class GameObject implements Cloneable, Transform {
      * @param color The color to assign to GameObject
      */
     
-    public final void setColor(Color color) {
+    public void setColor(Color color) {
         baseColor = color;
     }
 
@@ -130,7 +130,7 @@ public abstract class GameObject implements Cloneable, Transform {
      * @return A color class
      */
     
-    public final Color getColor() {
+    public Color getColor() {
         return baseColor;
     }
 
