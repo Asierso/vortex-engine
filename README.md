@@ -17,10 +17,10 @@ Vortex engine es una librería para crear videojuegos 2D simples en Java. Permit
 ### Pasos de compilación
 1. Clona el repositorio: `git clone https://github.com/Asierso/VortexEngine.git` o bien descargue una de las versiones "release" de VortexEngine
 2. Configure la version de Java preferiblemente en la versión [jdk 18](https://www.oracle.com/java/technologies/javase/jdk18-archive-downloads.html)
-3. Agregue las dependencias necesarias al proyecto si no lo ha hecho con anterioridad
+3. Compile el proyecto con Apache Maven usando `mvn package`
 
 > [!NOTE]
-> El proyecto fue diseñado para ser compilado vía Apache Ant
+> No se han realizado tests en versiones de java inferiores a la 18.0 por lo que se pueden experimentar bugs o incompatibilidades
 
 ## ✍️ Ejemplos de codigo
 
