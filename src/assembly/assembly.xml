@@ -1,0 +1,21 @@
+<assembly>
+    <id>jar-with-dependencies-and-classes</id>
+    <formats>
+        <format>jar</format>
+    </formats>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>/</outputDirectory>
+            <unpack>true</unpack>
+            <includes>
+                <include>*:*:*:*</include>
+            </includes>
+            <useProjectArtifact>true</useProjectArtifact>
+            <unpackOptions>
+                <excludes>
+                    <exclude>**/*.class</exclude>
+                </excludes>
+            </unpackOptions>
+        </dependencySet>
+    </dependencySets>
+</assembly>

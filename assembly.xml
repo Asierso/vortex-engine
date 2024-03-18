@@ -1,0 +1,16 @@
+<assembly>
+    <id>jar-with-dependencies-and-classes</id>
+    <formats>
+        <format>jar</format>
+    </formats>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>org</outputDirectory>
+            <unpack>true</unpack>
+            <includes>
+                <include>org.jsfml.jsfml</include>
+            </includes>
+            <useProjectArtifact>true</useProjectArtifact>
+        </dependencySet>
+    </dependencySets>
+</assembly>
