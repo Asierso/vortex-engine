@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.asierso.vortexengine.window;
 
 import org.jsfml.graphics.IntRect;
@@ -9,7 +5,7 @@ import org.jsfml.system.Vector2i;
 import org.jsfml.window.Mouse;
 
 /**
- *
+ * Allows to integrate mouse functions in scenes
  * @author Asierso
  */
 public class MouseTrigger {
