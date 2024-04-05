@@ -19,6 +19,13 @@
             <systemPath>${basedir}/lib/jsfml.jar</systemPath>
         </dependency>
     </dependencies>
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Asierso Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/Asierso/VortexEngine</url>
+        </repository>
+    </distributionManagement>
     <!-- Build .class dependencies-->
     <build>
         <plugins>
