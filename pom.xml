@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.asierso</groupId>
-    <artifactId>VortexEngine</artifactId>
+    <artifactId>vortex-engine</artifactId>
     <version>1.1-RELEASE</version>
     <packaging>jar</packaging>
     <properties>
@@ -23,7 +23,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Asierso Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/Asierso/VortexEngine</url>
+            <url>https://maven.pkg.github.com/Asierso/vortex-engine</url>
         </repository>
     </distributionManagement>
     <!-- Build .class dependencies-->
