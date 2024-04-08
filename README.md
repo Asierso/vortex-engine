@@ -34,7 +34,7 @@ Recuerde que para poder usar el paquete debe de agregar la URL del repositorio a
 
 ### Requisitos previos
 - Java Development Kit (JDK) 18 o superior. Puede descargarla [aquí](https://www.oracle.com/java/technologies/javase/jdk18-archive-downloads.html)
-- Libreria JSFML: Simple and Fast Multimedia Library
+- Instalación de Apache Maven. Puede descargarla [aquí](https://maven.apache.org/download.cgi)
 
 ### Pasos de compilación
 1. Clona el repositorio: `git clone https://github.com/Asierso/VortexEngine.git` o bien descargue una de las versiones "release" de VortexEngine
