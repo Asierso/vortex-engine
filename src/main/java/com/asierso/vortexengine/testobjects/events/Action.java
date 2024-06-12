@@ -1,7 +1,7 @@
-package com.asierso.vortexengine.components.events;
+package com.asierso.vortexengine.testobjects.events;
 
-import com.asierso.vortexengine.components.events.callback.ActionPerform;
-import com.asierso.vortexengine.components.events.callback.EventPredicate;
+import com.asierso.vortexengine.testobjects.events.callback.ActionPerform;
+import com.asierso.vortexengine.testobjects.events.callback.EventPredicate;
 import com.asierso.vortexengine.objects.GameObject;
 
 /**

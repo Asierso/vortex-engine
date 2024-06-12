@@ -1,7 +1,7 @@
 package com.asierso.vortexengine.tests;
 
-import com.asierso.vortexengine.components.SampleCube;
-import com.asierso.vortexengine.components.TestWindow;
+import com.asierso.vortexengine.testobjects.SampleCube;
+import com.asierso.vortexengine.testobjects.TestWindow;
 import com.asierso.vortexengine.window.Scene;
 import com.asierso.vortexengine.window.Window;
 import org.jsfml.graphics.Color;
@@ -11,10 +11,10 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-public class Damero {
+public class TestDamero {
     @Test
     public void createDamero(){
-        new TestWindow(new Scene() {
+        TestWindow t = new TestWindow("Static damero test",new Scene() {
             private ArrayList<SampleCube> list = new ArrayList<>();
             @Override
             public void start() {
@@ -43,12 +43,14 @@ public class Damero {
             }
         },2000);
 
+        t.run();
         Assert.assertTrue(true);
+
     }
 
     @Test
     public void createRotatingDamero(){
-        new TestWindow(new Scene() {
+        TestWindow t = new TestWindow("Rotating damero test",new Scene() {
             private ArrayList<SampleCube> list = new ArrayList<>();
             @Override
             public void start() {
@@ -80,6 +82,7 @@ public class Damero {
             }
         },3000);
 
+        t.run();
         Assert.assertTrue(true);
     }
 }

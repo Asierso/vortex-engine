@@ -1,4 +1,4 @@
-package com.asierso.vortexengine.components;
+package com.asierso.vortexengine.testobjects;
 
 import com.asierso.vortexengine.window.Scene;
 import com.asierso.vortexengine.window.Window;
@@ -20,11 +20,8 @@ public class TestWindow {
         this.millis = millis;
     }
 
-    public void run() throws Exception{
+    public void run(){
         t.start();
-
-        if(!t.isAlive())
-            throw new Exception();
 
         try{
             Thread.sleep(millis);

@@ -1,6 +1,6 @@
 package com.asierso.vortexengine.objects;
 
-import com.asierso.vortexengine.components.Component;
+import com.asierso.vortexengine.testobjects.Component;
 import com.asierso.vortexengine.miscellaneous.interfaces.Transform;
 import com.asierso.vortexengine.window.Window;
 import java.util.ArrayList;
@@ -220,7 +220,7 @@ public abstract class GameObject implements Cloneable, Transform {
     /**
      * Detects if component class exists based in component class name
      *
-     * @param name Component class name
+     * @param type Component class name
      * @return If component was found or not
      */
     

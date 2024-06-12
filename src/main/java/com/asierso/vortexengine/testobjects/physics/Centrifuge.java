@@ -1,6 +1,6 @@
-package com.asierso.vortexengine.components.physics;
+package com.asierso.vortexengine.testobjects.physics;
 
-import com.asierso.vortexengine.components.Component;
+import com.asierso.vortexengine.testobjects.Component;
 import com.asierso.vortexengine.objects.GameObject;
 
 /**

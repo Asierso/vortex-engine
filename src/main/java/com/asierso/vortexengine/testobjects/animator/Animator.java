@@ -1,12 +1,10 @@
-package com.asierso.vortexengine.components.animator;
+package com.asierso.vortexengine.testobjects.animator;
 
-import com.asierso.vortexengine.components.Component;
+import com.asierso.vortexengine.testobjects.Component;
 import com.asierso.vortexengine.miscellaneous.interfaces.Startable;
 import com.asierso.vortexengine.objects.GameObject;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
+
 import org.jsfml.system.Vector2f;
 
 /**
