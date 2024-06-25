@@ -1,6 +1,6 @@
-package com.asierso.vortexengine.testobjects.animator;
+package com.asierso.vortexengine.components.animator;
 
-import com.asierso.vortexengine.testobjects.Component;
+import com.asierso.vortexengine.components.Component;
 import com.asierso.vortexengine.miscellaneous.interfaces.Startable;
 import com.asierso.vortexengine.objects.GameObject;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.asierso.vortexengine.testobjects.events.callback;
+package com.asierso.vortexengine.components.events.callback;
 
 import com.asierso.vortexengine.objects.GameObject;
 

@@ -1,6 +1,6 @@
-package com.asierso.vortexengine.testobjects.events;
+package com.asierso.vortexengine.components.events;
 
-import com.asierso.vortexengine.testobjects.Component;
+import com.asierso.vortexengine.components.Component;
 import com.asierso.vortexengine.objects.GameObject;
 import java.util.ArrayList;
 

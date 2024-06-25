@@ -6,8 +6,9 @@ import com.asierso.vortexengine.window.Window;
 public class TestWindow {
     private Thread t;
     private int millis;
+    private Window win;
     public TestWindow(String testName, Scene scene, int millis){
-        Window win = new Window(400,300);
+        win = new Window(400,300);
         win.setTitle(testName);
         win.setScene(scene);
 
@@ -26,7 +27,7 @@ public class TestWindow {
         try{
             Thread.sleep(millis);
         }catch (Exception ignore){}
-
+        win.close();
         t.interrupt();
     }
 }

@@ -1,4 +1,4 @@
-package com.asierso.vortexengine.testobjects.animator;
+package com.asierso.vortexengine.components.animator;
 
 import com.asierso.vortexengine.miscellaneous.interfaces.Transform;
 import com.asierso.vortexengine.objects.GameObject;

@@ -178,4 +178,11 @@ public class Window {
         render.setFramerateLimit(frames);
         render.setTitle(title);
     }
+
+    /**
+     * Close window
+     */
+    public void close() {
+        render.close();
+    }
 }

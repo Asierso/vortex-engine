@@ -1,6 +1,6 @@
 package com.asierso.vortexengine.objects;
 
-import com.asierso.vortexengine.testobjects.Component;
+import com.asierso.vortexengine.components.Component;
 import com.asierso.vortexengine.miscellaneous.interfaces.Transform;
 import com.asierso.vortexengine.window.Window;
 import java.util.ArrayList;

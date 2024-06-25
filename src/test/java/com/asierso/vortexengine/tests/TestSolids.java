@@ -2,8 +2,8 @@ package com.asierso.vortexengine.tests;
 
 import com.asierso.vortexengine.testobjects.SampleCube;
 import com.asierso.vortexengine.testobjects.TestWindow;
-import com.asierso.vortexengine.testobjects.physics.Centrifuge;
-import com.asierso.vortexengine.testobjects.physics.Rigibody;
+import com.asierso.vortexengine.components.physics.Centrifuge;
+import com.asierso.vortexengine.components.physics.Rigibody;
 import com.asierso.vortexengine.window.Scene;
 import com.asierso.vortexengine.window.Window;
 import org.jsfml.graphics.Color;

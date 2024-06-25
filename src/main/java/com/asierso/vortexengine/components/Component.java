@@ -1,4 +1,4 @@
-package com.asierso.vortexengine.testobjects;
+package com.asierso.vortexengine.components;
 
 import com.asierso.vortexengine.objects.GameObject;
 
