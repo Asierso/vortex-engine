@@ -12,7 +12,7 @@ import org.jsfml.audio.SoundBuffer;
 
 /**
  * Create a source of sound with custom volume and pitch A sound source can play
- * diferent sounds added in his sountracks list
+ * different sounds added in his soundtracks list
  *
  * @author Asierso
  */
@@ -131,7 +131,7 @@ public class SoundSource extends GameObject implements Startable {
     }
 
     /**
-     * Add a new soundtrack to soundList like a file. Uses addSountrack method
+     * Add a new soundtrack to soundList like a file. Uses add soundtrack method
      * with FILE load mode
      *
      * @param name The name of the sound to add
@@ -143,10 +143,10 @@ public class SoundSource extends GameObject implements Startable {
     }
 
     /**
-     * Get a specific soundtrack of the sountrack list by their name
+     * Get a specific soundtrack of the soundtrack list by their name
      *
      * @param name The name of the soundtrack to select
-     * @return Sountrack object
+     * @return Soundtrack object
      */
     @SuppressWarnings("OptionalGetWithoutIsPresent")
     public Soundtrack getSoundtrack(String name) {
@@ -156,7 +156,7 @@ public class SoundSource extends GameObject implements Startable {
     }
 
     /**
-     * Get a specific soundtrack of the sountrack list by their position in the
+     * Get a specific soundtrack of the soundtrack list by their position in the
      * list
      *
      * @param id The index of the soundtrack to select
@@ -188,7 +188,7 @@ public class SoundSource extends GameObject implements Startable {
     /**
      * Overrides GameObject render
      *
-     * @param win
+     * @param win Window render
      */
     @Override
     protected void render(Window win) {
@@ -196,8 +196,8 @@ public class SoundSource extends GameObject implements Startable {
     }
 
     /**
-     * Single sound track playable by a SoundSource. It's identified by a sound
-     * track name (String)
+     * Single soundtrack playable by a SoundSource.
+     * It's identified by a soundtrack name (String)
      */
     public static final class Soundtrack extends SoundBuffer {
 
@@ -225,7 +225,7 @@ public class SoundSource extends GameObject implements Startable {
         }
 
         /**
-         * Select the sountrack. This is used to add the sound to the
+         * Select the soundtrack. This is used to add the sound to the
          * reproduction buffer in SoundSource
          */
         public void select() {

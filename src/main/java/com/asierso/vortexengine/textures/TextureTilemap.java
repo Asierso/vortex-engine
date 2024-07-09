@@ -7,7 +7,7 @@ import org.jsfml.graphics.Texture;
 import org.jsfml.system.Vector2i;
 
 /**
- * Make easy the process of extracts tilesets from sprite defining IntRects
+ * Make easy the process of extracts tile sets from sprite defining rect shapes
  *
  * @author Asierso
  */
@@ -17,7 +17,7 @@ public class TextureTilemap {
     private Vector2i gridPos;
 
     /**
-     * Initialize tilemap. Set the timemap dimension
+     * Initialize tile map. Set the tile map dimension
      *
      * @param tilesSize Size of all single tiles
      */
@@ -27,7 +27,7 @@ public class TextureTilemap {
     }
 
     /**
-     * Set the tilemap dimension and position of the grid to get the tiles
+     * Set the tile map dimension and position of the grid to get the tiles
      *
      * @param tilesSize Size of all single tiles
      * @param gridPos Position of the grid in texture
@@ -38,23 +38,23 @@ public class TextureTilemap {
     }
 
     /**
-     * Get a tile of the tilemap. Coords are based in tile position inside
-     * tilemap scaled by tile size
+     * Get a tile of the tile map. Cords are based in tile position inside
+     * tile map scaled by tile size
      *
-     * @param dx Tilemap position X of the tile to get
-     * @param dy Tilemap position Y of the tile to get
-     * @return Rect of the tile splitted
+     * @param dx Tile map position X of the tile to get
+     * @param dy Tile map position Y of the tile to get
+     * @return Rect of the tile split
      */
     public IntRect getTile(int dx, int dy) {
         return new IntRect(gridPos.x + (dx * tilesSize.width), gridPos.y + (dy * tilesSize.height), gridPos.x + tilesSize.width, gridPos.y + tilesSize.height);
     }
 
     /**
-     * Gets an sprite instance and apply to it a tile splitted in the
-     * proportionated texture
+     * Gets a sprite instance and apply to it a tile split in the
+     * proportional texture
      *
-     * @param dx Tilemap position X of the tile to get
-     * @param dy Tilemap position Y of the tile to get
+     * @param dx Tile map position X of the tile to get
+     * @param dy Tile map position Y of the tile to get
      * @param target Sprite to modify his texture
      * @param texture Texture to split and get the tile to apply
      * @return Sprite with the tile texture applied

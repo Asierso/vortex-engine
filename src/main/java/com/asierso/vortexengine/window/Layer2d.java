@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.asierso.vortexengine.window;
 
 import com.asierso.vortexengine.objects.GameObject;
@@ -9,11 +5,13 @@ import java.util.ArrayList;
 
 /**
  * Allow to create a matrix layer used to render more GameObjects at the same time in the same z-axis
+ *
  * @author Asierso
  */
 public class Layer2d extends ArrayList<ArrayList<GameObject>> {
     /**
      * Instantiate all GameObjects added to current Layer2D
+     *
      * @param win Window where objects will be renderer
      */
     public void instantiate(Window win){
@@ -23,6 +21,7 @@ public class Layer2d extends ArrayList<ArrayList<GameObject>> {
     }
     /**
      * Get an array of GameObjects finding it by his class inside Layer2D
+     *
      * @param type GameObject class to find
      * @return Array of found GameObjects
      */

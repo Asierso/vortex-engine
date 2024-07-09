@@ -12,7 +12,7 @@ public class MouseTrigger {
 
     private IntRect rect;
     private final int yBound = 30;
-    private Vector2i lastMcoords;
+    private Vector2i lastMouseCords;
     private IntRect lastRect;
     private final Window target;
     private float cooldownTime;
@@ -73,13 +73,13 @@ public class MouseTrigger {
         var dx = Mouse.getPosition().x - target.getRender().getPosition().x;
         var dy = Mouse.getPosition().y - target.getRender().getPosition().y - yBound;
         if (isMouseHover() && Mouse.isButtonPressed(button) && cooldownDelta <= 0) {
-            lastMcoords = new Vector2i(dx, dy);
+            lastMouseCords = new Vector2i(dx, dy);
             lastRect = new IntRect(rect.left, rect.width, rect.top, rect.height);
             cooldownDelta = cooldownTime;
             return true;
         } else {
-            if (!Mouse.isButtonPressed(button) || (lastMcoords != null && lastRect != null && (lastMcoords.x != dx
-                    || lastMcoords.y != dy
+            if (!Mouse.isButtonPressed(button) || (lastMouseCords != null && lastRect != null && (lastMouseCords.x != dx
+                    || lastMouseCords.y != dy
                     || lastRect.left != rect.left
                     || lastRect.top != rect.top
                     || lastRect.width != rect.width

@@ -17,7 +17,7 @@ public class Layer extends ArrayList<GameObject> {
             handle.instantiate(win);
     }
     /**
-     * Get a array of GameObjects finding it by his class
+     * Get an array of GameObjects finding it by his class
      * @param type GameObject class to find
      * @return Array of found GameObjects
      */
