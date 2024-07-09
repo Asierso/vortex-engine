@@ -18,6 +18,8 @@ public class Window {
     private int width = 0;
     private int height = 0;
     private int frames = 60;
+    private FrameRate frate = FrameRate.FPS60;
+    private boolean vsync;
     private float fps = 0;
     private String title = "Window";
     private Color background = Color.BLACK;
@@ -68,12 +70,22 @@ public class Window {
     }
 
     /**
-     * Set window frame rate
+     * Set window frame rate profile. This guarantee that a void
+     * game window at least reach profile minimum amount of FPS on Windows devices
      *
-     * @param frames Number of frames to render in a second
+     * @param frameRate Frame rate profile to render in a second
      */
-    public final void setFrameRate(int frames) {
+    public final void setFrameRateProfile(FrameRate frameRate) {
+        this.frate = frameRate;
+    }
+
+    /**
+     * Set the window frame rate manually. Use this method sets frame profile in "specific" to take effect.
+     * This doesn't guarantee to reach specified frame rate in a void window at Windows devices
+     */
+    public final void setFrameRate(int frames){
         this.frames = frames;
+        frate = FrameRate.SPECIFIC;
     }
 
     /**
@@ -122,9 +134,9 @@ public class Window {
     }
 
     /**
-     * Instantiate SFML window
+     * Render SFML window
      */
-    public void instantiate() {
+    private void render() {
         if (scene == null) {
             throw new NullPointerException();
         }
@@ -161,9 +173,8 @@ public class Window {
                     }
                 }
             });
-            
+
             scene.update(this, events);
-            
             //Display
             render.display();
             float currentTime = frameClock.restart().asSeconds();
@@ -172,17 +183,50 @@ public class Window {
     }
 
     /**
+     * Shows window
+     */
+    public void show(){
+        render();
+    }
+
+    /**
+     * Instantiates SFML Window. Use show() instead
+     *
+     * @deprecated instantiate
+     */
+    @Deprecated
+    public void instantiate(){
+        render();
+    }
+
+    /**
      * Reload SFML configs with the set ones (even in main-loop)
      */
     private void reloadConfigs() {
-        render.setFramerateLimit(frames);
+        switch(frate){
+            case FPS30 -> render.setFramerateLimit(45);
+            case FPS60 -> render.setFramerateLimit(150);
+            case FPS120 -> render.setFramerateLimit(310);
+            case SPECIFIC -> render.setFramerateLimit(frames);
+        }
         render.setTitle(title);
+        render.setVerticalSyncEnabled(vsync);
     }
 
     /**
      * Close window
      */
     public void close() {
-        render.close();
+        if(render != null) //Avoid null pointer exception at non-rendering window
+            render.close();
+    }
+
+    /**
+     * Set window VSYNC option
+     *
+     * @param vsync Enables or disables vsync mode
+     */
+    public void setVsync(boolean vsync){
+        this.vsync = vsync;
     }
 }
