@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Object used to handle entity flags and allow access to it in every time that is needed. 
- * Is similar to have declared global proyect vars
+ * Is similar to have declared global project vars
  * @author Asierso
  */
 public class Flags {
@@ -12,11 +12,11 @@ public class Flags {
     private static Flags instance;
     private Flags(){}
     
-    //Colection used to storage flags (work as an indexed dictionary)
-    private ArrayList<EntityFlag> flagList = new ArrayList<>();
+    //Collection used to storage flags (work as an indexed dictionary)
+    private final ArrayList<EntityFlag<Object>> flagList = new ArrayList<>();
     
     /**
-     * Get current instance of the flags system. Alls flags will de storaged in the same flag system instance
+     * Get current instance of the flag system. Alls flags will de storage in the same flag system instance
      * @return The instance of Flags
      */
     public static synchronized Flags getInstance(){
@@ -27,11 +27,13 @@ public class Flags {
     }
     
     /**
-     * Set a entityflag inside flags array. 
+     * Set a EntityFlag inside flags array.
      * If the flag exists, the method modify his value and if the flag not exist, method adds it
      * @param entity Flag to set
      */
     public void set(EntityFlag entity){
+        if(entity == null)
+            return;
         if(flagExists(entity.getKey()))
             flagList.set(getIndex(entity.getKey()),entity);
         else
@@ -39,7 +41,7 @@ public class Flags {
     }
     
     /**
-     * Set a entityflag inside flags array. Method creates a new EntityFlag objects. 
+     * Set an EntityFlag inside flags array. Method creates a new EntityFlag objects.
      * If the flag exists, the method modify his value and if the flag not exist, method adds it
      * @param <T> Type of the value to assign
      * @param key Key value of the flag
@@ -72,9 +74,9 @@ public class Flags {
     }
     
     /**
-     * Detects if there is a flag defined with the privided key value.
+     * Detects if there is a flag defined with the provided key value.
      * @param key Key value to filter the flag
-     * @return Boolean of the flag existance
+     * @return Boolean of the flag existence
      */
     public boolean flagExists(String key){
         return flagList.stream().anyMatch(obj->obj.getKey().equals(key));
@@ -83,7 +85,7 @@ public class Flags {
     /**
      * Get entity flag filtered by his key value. If it's not detected, method will return null
      * @param key Key value used to filter
-     * @return Getted entity flag
+     * @return Gotten entity flag
      */
     public EntityFlag get(String key){
         EntityFlag result = null;

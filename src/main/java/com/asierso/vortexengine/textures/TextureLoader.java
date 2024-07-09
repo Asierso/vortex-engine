@@ -28,7 +28,7 @@ public class TextureLoader {
     
     /**
      * Gets SFML texture object with the image loaded
-     * @return 
+     * @return Texture loaded
      */
     public Texture getTexture(){
         return texture;

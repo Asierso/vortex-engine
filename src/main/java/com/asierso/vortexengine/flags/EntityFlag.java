@@ -56,7 +56,7 @@ public class EntityFlag<T> {
 
     /**
      * Get EntityFlag String representation
-     * @return
+     * @return EntityFlag key and value pair
      */
     @Override
     public String toString() {
