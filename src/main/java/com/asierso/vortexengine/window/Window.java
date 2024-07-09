@@ -18,7 +18,7 @@ public class Window {
     private int width = 0;
     private int height = 0;
     private int frames = 60;
-    private FrameRate frate = FrameRate.FPS60;
+    private FrameRate frameRate = FrameRate.FPS60;
     private boolean vsync;
     private float fps = 0;
     private String title = "Window";
@@ -76,7 +76,7 @@ public class Window {
      * @param frameRate Frame rate profile to render in a second
      */
     public final void setFrameRateProfile(FrameRate frameRate) {
-        this.frate = frameRate;
+        this.frameRate = frameRate;
     }
 
     /**
@@ -85,7 +85,7 @@ public class Window {
      */
     public final void setFrameRate(int frames){
         this.frames = frames;
-        frate = FrameRate.SPECIFIC;
+        frameRate = FrameRate.SPECIFIC;
     }
 
     /**
@@ -203,7 +203,7 @@ public class Window {
      * Reload SFML configs with the set ones (even in main-loop)
      */
     private void reloadConfigs() {
-        switch(frate){
+        switch(frameRate){
             case FPS30 -> render.setFramerateLimit(45);
             case FPS60 -> render.setFramerateLimit(150);
             case FPS120 -> render.setFramerateLimit(310);
