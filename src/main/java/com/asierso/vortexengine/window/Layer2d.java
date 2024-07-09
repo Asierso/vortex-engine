@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Layer2d extends ArrayList<ArrayList<GameObject>> {
     /**
-     * Instantiate all GameObjecs added to current Layer2d
+     * Instantiate all GameObjects added to current Layer2D
      * @param win Window where objects will be renderer
      */
     public void instantiate(Window win){
@@ -22,7 +22,7 @@ public class Layer2d extends ArrayList<ArrayList<GameObject>> {
                 handle.instantiate(win);
     }
     /**
-     * Get a array of GameObjects finding it by his class inside Layer2d
+     * Get an array of GameObjects finding it by his class inside Layer2D
      * @param type GameObject class to find
      * @return Array of found GameObjects
      */

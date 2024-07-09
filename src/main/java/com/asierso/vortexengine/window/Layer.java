@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class Layer extends ArrayList<GameObject> {
     /**
-     * Instantiate all GameObjecs added to current Layer
+     * Instantiate all GameObjects added to current Layer
      * @param win Window where objects will be renderer
      */
     public void instantiate(Window win){
