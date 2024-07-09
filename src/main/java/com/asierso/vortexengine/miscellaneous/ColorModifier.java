@@ -42,7 +42,7 @@ public final class ColorModifier {
     }
     
     /**
-     * Creates a new color modifier using a SFML color base and modifying it with custon rgba values
+     * Creates a new color modifier using a SFML color base and modifying it with rgba values
      * @param base SFML base color
      * @param r Red value
      * @param g Green value
@@ -57,14 +57,14 @@ public final class ColorModifier {
     }
     
     /**
-     * Parse ColorModifier to normal SFML color (set rgba values in treshold of 0-255)
+     * Parse ColorModifier to normal SFML color (set rgba values in threshold of 0-255)
      * @return SFML color
      */
     public Color getParsedColor(){
-        r = (r < 0? 0 : r > 255? 255 : r);
-        g = (g < 0? 0 : g > 255? 255 : g);
-        b = (b < 0? 0 : b > 255? 255 : b);
-        a = (a < 0? 0 : a > 255? 255 : a);
+        r = ((r < 0) ? 0 : ((r > 255) ? 255 : r));
+        g = ((g < 0) ? 0 : ((g > 255) ? 255 : g));
+        b = ((b < 0) ? 0 : ((b > 255) ? 255 : b));
+        a = ((a < 0) ? 0 : ((a > 255) ? 255 : a));
         return new Color(r,g,b,a);
     }
 
