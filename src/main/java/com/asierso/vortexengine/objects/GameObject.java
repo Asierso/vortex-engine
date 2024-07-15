@@ -145,6 +145,17 @@ public abstract class GameObject implements Cloneable, Transform {
     }
 
     /**
+     * Set Transform properties of the GameObject.
+     *
+     * @param transform Transform object of apply
+     */
+    public final void setTransform(Transform transform) {
+        setPosition(transform.getPosition());
+        setBoxSize(transform.getBoxSize());
+        setRotation(transform.getRotation());
+    }
+
+    /**
      * Instantiate the GameObject in selected window. Remember that is not
      * needed to instantiate non-graphic GameObjects All GameObjects with any
      * component type, must be instantiated

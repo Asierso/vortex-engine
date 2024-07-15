@@ -2,6 +2,7 @@ package com.asierso.vortexengine.tests;
 
 import com.asierso.vortexengine.components.events.Action;
 import com.asierso.vortexengine.components.events.callback.EventPredicate;
+import com.asierso.vortexengine.miscellaneous.TransformBuilder;
 import com.asierso.vortexengine.objects.GameObject;
 import com.asierso.vortexengine.objects.ui.UIGameObject;
 import com.asierso.vortexengine.testobjects.TestWindow;
@@ -33,8 +34,7 @@ public class TestUI {
                         context.getRender().draw(shape);
                     }
                 };
-                uig.setPosition(20,20);
-                uig.setBoxSize(20,20);
+                uig.setTransform(new TransformBuilder().inPosition(20,20).withSize(20,20).getTransform());
                 uig.setColor(Color.RED);
             }
 
