@@ -1,6 +1,10 @@
 package com.asierso.vortexengine.tests;
 
+import com.asierso.vortexengine.components.events.Action;
+import com.asierso.vortexengine.components.events.callback.ActionPerform;
+import com.asierso.vortexengine.components.events.callback.EventPredicate;
 import com.asierso.vortexengine.miscellaneous.TransformBuilder;
+import com.asierso.vortexengine.objects.GameObject;
 import com.asierso.vortexengine.objects.ui.UIGameObject;
 import com.asierso.vortexengine.testobjects.TestWindow;
 import com.asierso.vortexengine.window.Scene;
@@ -25,7 +29,7 @@ public class TestUI {
                         shape.setSize(getBoxSize());
                         shape.setRotation(getRotation());
                         shape.setPosition(getPosition());
-                        if(getMouseTrigger().isMouseHover()) {
+                        if(isMouseHover()) {
                             shape.setFillColor(getColor());
                         }
                         context.getRender().draw(shape);
@@ -33,6 +37,21 @@ public class TestUI {
                 };
                 uig.setTransform(new TransformBuilder().inPosition(20,20).withSize(20,20).getTransform());
                 uig.setColor(Color.RED);
+                uig.addAction(new Action(
+                        new EventPredicate() {
+                            @Override
+                            public boolean run(GameObject handle) {
+                                UIGameObject o = (UIGameObject) handle;
+                                return o.isMouseHover();
+                            }
+                        },
+                        new ActionPerform() {
+                            @Override
+                            public void run(GameObject handle) {
+                                handle.setPosition(50,50);
+                            }
+                        }
+                ));
             }
 
             @Override

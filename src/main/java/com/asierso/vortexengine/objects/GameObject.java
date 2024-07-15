@@ -53,6 +53,15 @@ public abstract class GameObject implements Cloneable, Transform {
         this.position = position;
         this.boxSize = boxSize;
     }
+
+    /**
+     * Initialize GameObject
+     *
+     * @param transform The transform of the object
+     */
+    public GameObject(Transform transform){
+        setTransform(transform);
+    }
     
     @Override
     public void setPosition(float x, float y) {

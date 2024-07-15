@@ -8,7 +8,7 @@ import org.jsfml.window.Mouse;
  * Allows to integrate mouse functions in scenes
  * @author Asierso
  */
-public class MouseTrigger {
+public class MouseTrigger implements MouseEvents {
 
     private IntRect rect;
     private final int yBound = 30;
