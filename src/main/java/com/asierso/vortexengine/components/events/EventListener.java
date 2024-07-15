@@ -5,7 +5,7 @@ import com.asierso.vortexengine.objects.GameObject;
 import java.util.ArrayList;
 
 /**
- * Event listener allows GameObject to have embebed conditions. This is usefull to create input events
+ * Event listener allows GameObject to have embed conditions. This is useful to create input events
  * @author Asierso
  */
 public class EventListener implements Component {

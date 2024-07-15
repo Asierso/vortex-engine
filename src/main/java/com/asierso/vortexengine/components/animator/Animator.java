@@ -45,18 +45,18 @@ public class Animator implements Component, Startable {
         MULTIPLY,
         /**
          * Interpolated animation. Animator adds KeyFrame values like a constant
-         * every tick from GameObject values when keyframe is going to be render
+         * every tick from GameObject values when keyframe is going to be rendered
          */
         ADDITIVE_INTERPOLATE,
         /**
          * Interpolated animation. Animator multiplies KeyFrame values like a
          * constant every tick from GameObject values when keyframe is going to
-         * be render
+         * be rendered
          */
         MULTIPLY_INTERPOLATE,
         /**
-         * Interpolated animation. Animator calculates Gameobject motion every
-         * tick using the difference between lastand current keyframe when
+         * Interpolated animation. Animator calculates GameObject motion every
+         * tick using the difference between last and current keyframe when
          * keyframe is going to be rendered
          */
         DYNAMIC_INTERPOLATE
@@ -113,16 +113,16 @@ public class Animator implements Component, Startable {
      * Set animation end time. Set a FrameTime with 0 ticks if animation stops
      * in his last keyframe
      *
-     * @param time Max animation treshold time
+     * @param time Max animation threshold time
      */
     public final void setEndTime(FrameTime time) {
         this.maxDelta = time.getTicks();
     }
 
     /**
-     * Get setted animation end time
+     * Get set animation end time
      *
-     * @return Max animation treshold time
+     * @return Max animation threshold time
      */
     public final FrameTime getEndTime() {
         return new FrameTime(maxDelta);
@@ -207,19 +207,19 @@ public class Animator implements Component, Startable {
                 }
             }
 
-            //Check if frameTime surpases max threshold and stop it
+            //Check if frameTime surpasses max threshold and stop it
             loadStopConditions();
         }
     }
 
     /**
-     * Detects if current animation is at max time treshold or doesn't have more
+     * Detects if current animation is at max time threshold or doesn't have more
      * keyframes to render. Method returns true only if animation has to be
      * looped
      */
     private void loadStopConditions() {
         if (isLoop) { //Looping
-            if (maxDelta > 0 && delta >= maxDelta) { //Delta treshold surpased
+            if (maxDelta > 0 && delta >= maxDelta) { //Delta threshold surpassed
                 delta = 0;
                 keyFramesQueue = cloneFrames(); //Clone frames from keyFrames
             } else if (maxDelta <= 0 && keyFramesQueue.isEmpty()) { //No more keyframes to render
@@ -227,7 +227,7 @@ public class Animator implements Component, Startable {
                 keyFramesQueue = cloneFrames(); //Clone frames from keyFrames
             }
         } else { //Not looping
-            if (maxDelta > 0 && delta >= maxDelta) { //Delta treshold surpased
+            if (maxDelta > 0 && delta >= maxDelta) { //Delta threshold surpassed
                 keyFramesQueue = null;
                 stop();
             } else if (maxDelta <= 0 && keyFramesQueue.isEmpty()) { //No more keyframes to render

@@ -26,7 +26,7 @@ public class KeyFrame implements Transform, Cloneable {
     }
     
     /**
-     * Creates a keyframe basing his vaues in a current GameObject
+     * Creates a keyframe basing his values in a current GameObject
      * @param reference Referenced GameObject 
      */
     public KeyFrame(GameObject reference){
@@ -121,7 +121,7 @@ public class KeyFrame implements Transform, Cloneable {
     /**
      * Clones current KeyFrame object
      * @return Cloned KeyFrame
-     * @throws CloneNotSupportedException Error at clonning current KeyFrame
+     * @throws CloneNotSupportedException Error at cloning current KeyFrame
      */
     @Override
     public KeyFrame clone() throws CloneNotSupportedException{

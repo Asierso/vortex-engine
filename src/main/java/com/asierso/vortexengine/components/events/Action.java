@@ -5,7 +5,7 @@ import com.asierso.vortexengine.components.events.callback.EventPredicate;
 import com.asierso.vortexengine.objects.GameObject;
 
 /**
- * Defines single action. Actions are composed by his condition and the code to execute if its true
+ * Defines single action. Actions are composed by his condition and the code to execute if it's true
  * @author Asierso
  */
 public class Action {
@@ -15,8 +15,8 @@ public class Action {
     
     /**
      * Main construction of action
-     * @param predicate Expresion to evaluate every action execution
-     * @param perform Code to execute if the expresion return is true
+     * @param predicate Expression to evaluate every action execution
+     * @param perform Code to execute if the expression return is true
      */
     public Action(EventPredicate predicate,ActionPerform perform){
         this.predicate = predicate;

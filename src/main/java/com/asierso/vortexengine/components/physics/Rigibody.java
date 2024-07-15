@@ -25,24 +25,24 @@ public class Rigibody implements Component {
     public enum RigibodyStates {
 
         /**
-         * Object isn't affected by gravity but can interact with collisionable
+         * Object isn't affected by gravity but can interact with collisional
          * objects
          */
         STATIC,
         /**
          * Object is affected by gravity and physics and can interact with
-         * collisionable objects
+         * collision objects
          */
         DYNAMIC,
         /**
-         * Object is affected by gravity and physics but is inmutable by
-         * collisonable objects
+         * Object is affected by gravity and physics but is immutable by
+         * collisional objects
          */
         KINEMATIC
     }
 
     /**
-     * Sets the method of Rigibody MRUA algoritm to fix gravity speed and final
+     * Sets the method of Rigibody MRUA algorithm to fix gravity speed and final
      * position, based in math position weighing. This could avoid collision
      * errors between dynamic GameObjects
      */
@@ -81,7 +81,7 @@ public class Rigibody implements Component {
                     fixValue = 0 - (mass * acceleration * .65f);
                 }
             }
-            //Iterate array of collisoinal objects and detects collision with handled GameObejct
+            //Iterate array of collisional objects and detects collision with handled GameObject
             for (var handle : collisionalObjects) {
                 if (acceleration > 0 && (int) (target.getPosition().y + target.getBoxSize().y) <= (int) handle.getPosition().y + fixValue && (int) (target.getPosition().y + target.getBoxSize().y) >= (int) handle.getPosition().y - fixValue) {
                     for (float i = target.getPosition().x; i < target.getPosition().x + target.getBoxSize().x; i++) {
@@ -149,8 +149,8 @@ public class Rigibody implements Component {
     }
 
     /**
-     * Set the weighing method to fix gravity isues at calculate physics.
-     * Weighings are useful to manage how Rigibody works with object colisions
+     * Set the weighing method to fix gravity issues at calculate physics.
+     * Weightings are useful to manage how Rigibody works with object collisions
      * with different mass and acceleration
      *
      * @param weighing Weighing method
@@ -163,14 +163,14 @@ public class Rigibody implements Component {
      * Returns an array of all GameObjects that handled GameObject can collision
      * with
      *
-     * @return COllisionable GameObject list
+     * @return Collisional GameObject list
      */
     public final ArrayList<GameObject> getCollisionalObjectList() {
         return collisionalObjects;
     }
 
     /**
-     * Reset delta value. Delta is a tickcount that starts when object starts to
+     * Reset delta value. Delta is a tick-count that starts when object starts to
      * move (like time un mrua)
      */
     public final void flushDelta() {
@@ -178,10 +178,10 @@ public class Rigibody implements Component {
     }
 
     /**
-     * Get delta value. Delta is a tickcount that starts when object starts to
+     * Get delta value. Delta is a tick-count that starts when object starts to
      * move (like time un mrua)
      *
-     * @return
+     * @return delta time
      */
     public final float getDelta() {
         return delta;
@@ -191,7 +191,7 @@ public class Rigibody implements Component {
      * Define the current body state. Body states are used to specify if object
      * can be affected by gravity and can collision with another GameObjects
      *
-     * @param bodyState
+     * @param bodyState Physical state of the body
      */
     public final void setBodyState(RigibodyStates bodyState) {
         this.bodyState = bodyState;

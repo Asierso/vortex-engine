@@ -1,10 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.asierso.vortexengine.components.animator;
 
 /**
+ * Allows to represent time using internal ticks
  *
  * @author asierso
  */
@@ -16,7 +14,7 @@ public class FrameTime {
     //Measure types
 
     /**
-     * FrameTime measures to representate time
+     * FrameTime measures to represent time
      */
     public enum TimeMeasure {
 
@@ -40,8 +38,8 @@ public class FrameTime {
     }
 
     /**
-     * Create FrameTime with ticks value. Ticks vlaue will parsed automatically
-     * if surpases 100 ticks incrementing units
+     * Create FrameTime with ticks value. Ticks value will parse automatically
+     * if surpasses 100 ticks incrementing units
      *
      * @param ticks Ticks value
      */
@@ -51,8 +49,8 @@ public class FrameTime {
     }
 
     /**
-     * Create FrameTime with cusotm units and ticks value Ticks vlaue will
-     * parsed automatically if surpases 100 ticks incrementing units
+     * Create FrameTime with custom units and ticks value will
+     * parse automatically if surpasses 100 ticks incrementing units
      *
      * @param units Units value (1 unit = 100 ticks)
      * @param ticks Ticks value
@@ -64,8 +62,8 @@ public class FrameTime {
     }
 
     /**
-     * Normalizate time following the rule: 1 ud = 100 ticks This method is used
-     * internally to parse units na dticks value
+     * Normalize time following the rule: 1 ud = 100 ticks This method is used
+     * internally to parse units na ticks value
      */
     private void timeNormalization() {
         if (ticks > 99) {
@@ -76,8 +74,8 @@ public class FrameTime {
 
     /**
      * Get FrameTime time measure. Returned time measure is the actual value of
-     * selected measure Example: If you initialize a FrameTime with 120 ticks
-     * and you request units value, method will returns 1
+     * selected measure Example: If you initialize a FrameTime with 120 tick, and
+     * you request units value, method will return 1
      *
      * @param measure Measure type to return
      * @return Measure value
@@ -94,8 +92,8 @@ public class FrameTime {
     }
 
     /**
-     * Set time value in specified measure format. Value will parsed
-     * automatically if surpases 100 ticks incrementing units
+     * Set time value in specified measure format. Value will parse
+     * automatically if surpasses 100 ticks incrementing units
      *
      * @param measure Measure type to set
      * @param value Value to set
@@ -121,6 +119,7 @@ public class FrameTime {
 
     /**
      * Get FrameTime String representation
+     *
      * @return FrameTime String
      */
     @Override

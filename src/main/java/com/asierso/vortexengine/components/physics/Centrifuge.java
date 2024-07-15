@@ -13,7 +13,7 @@ public class Centrifuge implements Component {
     private float acceleration = 1f;
     private float mass = 1f;
 
-    //Similar to delta. Used to acumulate added forces
+    //Similar to delta. Used to accumulate added forces
     private float forceBuffer = 0;
 
     /**
@@ -76,7 +76,7 @@ public class Centrifuge implements Component {
 
     /**
      * Set the centrifuge force of the forceBuffer to a constant value. This variable is used to calculate component rotation speed
-     * @param force Force numer to set
+     * @param force Force number to set
      */
     public void setForce(float force) {
         this.forceBuffer = force;
