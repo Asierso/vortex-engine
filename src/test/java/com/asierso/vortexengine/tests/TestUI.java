@@ -1,9 +1,6 @@
 package com.asierso.vortexengine.tests;
 
-import com.asierso.vortexengine.components.events.Action;
-import com.asierso.vortexengine.components.events.callback.EventPredicate;
 import com.asierso.vortexengine.miscellaneous.TransformBuilder;
-import com.asierso.vortexengine.objects.GameObject;
 import com.asierso.vortexengine.objects.ui.UIGameObject;
 import com.asierso.vortexengine.testobjects.TestWindow;
 import com.asierso.vortexengine.window.Scene;
