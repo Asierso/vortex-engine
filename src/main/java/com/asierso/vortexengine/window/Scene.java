@@ -13,18 +13,18 @@ public interface Scene {
     /**
      * Executes where window is showed
      */
-    public void start();
+    void start();
 
     /**
      * Executes every window render cycle
      *
-     * @param window Takes window to draw
+     * @param context Takes window to draw. Window is taken as draw context
      * @param events Takes window events
      */
-    public void update(Window window, Iterable<Event> events);
+    void update(Window context, Iterable<Event> events);
 
     /**
      * Executes at window is going to close
      */
-    public void close();
+    void close();
 }

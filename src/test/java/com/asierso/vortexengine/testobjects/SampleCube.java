@@ -7,12 +7,12 @@ import org.jsfml.graphics.RectangleShape;
 public class SampleCube extends GameObject {
 
     @Override
-    protected void render(Window win) {
+    protected void render(Window context) {
         RectangleShape shape = new RectangleShape();
         shape.setSize(getBoxSize());
         shape.setRotation(getRotation());
         shape.setPosition(getPosition());
         shape.setFillColor(getColor());
-        win.getRender().draw(shape);
+        context.getRender().draw(shape);
     }
 }

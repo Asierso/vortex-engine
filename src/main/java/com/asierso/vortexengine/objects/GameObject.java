@@ -282,7 +282,7 @@ public abstract class GameObject implements Cloneable, Transform {
     /**
      * The method that render the GameObject "Shape"
      *
-     * @param win Window where render the GameObject "Shape"
+     * @param context Window where render the GameObject "Shape"
      */
-    protected abstract void render(Window win);
+    protected abstract void render(Window context);
 }

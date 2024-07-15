@@ -70,11 +70,11 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
      * Method that render every single particle in the ParticleSystem Handle the
      * particle lifetime and max amount
      *
-     * @param win Window where the ParticleSystem will be rendered
+     * @param context Window where the ParticleSystem will be rendered
      */
     @SuppressWarnings("SuspiciousListRemoveInLoop")
     @Override
-    protected void render(Window win) {
+    protected void render(Window context) {
         //Timer to calculate single particle lifetime
         float time = counter.restart().asSeconds();
 
@@ -95,7 +95,7 @@ public class ParticleSystem extends GameObject implements Startable, Transform {
             }
 
             //Instance each particle
-            instantiatedList.get(i).particle.instantiate(win);
+            instantiatedList.get(i).particle.instantiate(context);
         }
     }
 

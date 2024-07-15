@@ -188,10 +188,10 @@ public class SoundSource extends GameObject implements Startable {
     /**
      * Overrides GameObject render
      *
-     * @param win Window render
+     * @param context Window render
      */
     @Override
-    protected void render(Window win) {
+    protected void render(Window context) {
 
     }
 
