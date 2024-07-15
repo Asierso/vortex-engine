@@ -33,8 +33,8 @@ public class TestDamero {
             }
 
             @Override
-            public void update(Window window, Iterable<Event> events) {
-                list.forEach(obj -> obj.instantiate(window));
+            public void update(Window context, Iterable<Event> events) {
+                list.forEach(obj -> obj.instantiate(context));
             }
 
             @Override
@@ -69,10 +69,10 @@ public class TestDamero {
             }
 
             @Override
-            public void update(Window window, Iterable<Event> events) {
+            public void update(Window context, Iterable<Event> events) {
                 list.forEach(obj -> {
                     obj.setRotation(obj.getRotation()+2);
-                    obj.instantiate(window);
+                    obj.instantiate(context);
                 });
             }
 

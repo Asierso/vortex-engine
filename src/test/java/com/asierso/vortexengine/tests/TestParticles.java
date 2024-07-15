@@ -43,9 +43,9 @@ public class TestParticles {
             }
 
             @Override
-            public void update(Window window, Iterable<Event> events) {
-                ps.instantiate(window);
-                ps2.instantiate(window);
+            public void update(Window context, Iterable<Event> events) {
+                ps.instantiate(context);
+                ps2.instantiate(context);
             }
 
             @Override
@@ -124,12 +124,12 @@ public class TestParticles {
             }
 
             @Override
-            public void update(Window window, Iterable<Event> events) {
-                ps.instantiate(window);
-                ps2.instantiate(window);
-                ps3.instantiate(window);
-                ps4.instantiate(window);
-                ps5.instantiate(window);
+            public void update(Window context, Iterable<Event> events) {
+                ps.instantiate(context);
+                ps2.instantiate(context);
+                ps3.instantiate(context);
+                ps4.instantiate(context);
+                ps5.instantiate(context);
             }
 
             @Override
@@ -174,8 +174,8 @@ public class TestParticles {
             }
 
             @Override
-            public void update(Window window, Iterable<Event> events) {
-                psList.forEach(o -> o.instantiate(window));
+            public void update(Window context, Iterable<Event> events) {
+                psList.forEach(o -> o.instantiate(context));
             }
 
             @Override

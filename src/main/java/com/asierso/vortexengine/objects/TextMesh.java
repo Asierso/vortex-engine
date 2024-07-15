@@ -101,10 +101,10 @@ public class TextMesh extends GameObject implements Transform {
     /**
      * Render the TextMesh in the specified Window
      *
-     * @param win The Window where render the text
+     * @param context The Window where render the text
      */
     @Override
-    protected void render(Window win) {
+    protected void render(Window context) {
         //Update text properties
         t.setCharacterSize(fontSize);
         t.setString(textString);
@@ -114,6 +114,6 @@ public class TextMesh extends GameObject implements Transform {
         t.setColor(this.getColor());
 
         //Render text
-        win.getRender().draw(t);
+        context.getRender().draw(t);
     }
 }

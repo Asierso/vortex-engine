@@ -34,10 +34,10 @@ public class TestFPS {
             }
 
             @Override
-            public void update(Window window, Iterable<Event> events) {
-                txm.setText(NumberFormat.getIntegerInstance().format(window.getFramesPerSecond()) + " FPS");
-                txm.instantiate(window);
-                fpsPerFrame.add(window.getFramesPerSecond());
+            public void update(Window context, Iterable<Event> events) {
+                txm.setText(NumberFormat.getIntegerInstance().format(context.getFramesPerSecond()) + " FPS");
+                txm.instantiate(context);
+                fpsPerFrame.add(context.getFramesPerSecond());
             }
 
             @Override
@@ -75,10 +75,10 @@ public class TestFPS {
             }
 
             @Override
-            public void update(Window window, Iterable<Event> events) {
-                txm.setText(NumberFormat.getIntegerInstance().format(window.getFramesPerSecond()) + " FPS");
-                txm.instantiate(window);
-                fpsPerFrame.add(window.getFramesPerSecond());
+            public void update(Window context, Iterable<Event> events) {
+                txm.setText(NumberFormat.getIntegerInstance().format(context.getFramesPerSecond()) + " FPS");
+                txm.instantiate(context);
+                fpsPerFrame.add(context.getFramesPerSecond());
             }
 
             @Override
@@ -116,10 +116,10 @@ public class TestFPS {
             }
 
             @Override
-            public void update(Window window, Iterable<Event> events) {
-                txm.setText(NumberFormat.getIntegerInstance().format(window.getFramesPerSecond()) + " FPS");
-                txm.instantiate(window);
-                fpsPerFrame.add(window.getFramesPerSecond());
+            public void update(Window context, Iterable<Event> events) {
+                txm.setText(NumberFormat.getIntegerInstance().format(context.getFramesPerSecond()) + " FPS");
+                txm.instantiate(context);
+                fpsPerFrame.add(context.getFramesPerSecond());
             }
 
             @Override

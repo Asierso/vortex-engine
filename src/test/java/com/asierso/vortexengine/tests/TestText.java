@@ -46,8 +46,8 @@ public class TestText {
             }
 
             @Override
-            public void update(Window window, Iterable<Event> events) {
-                txmList.forEach(o -> o.instantiate(window));
+            public void update(Window context, Iterable<Event> events) {
+                txmList.forEach(o -> o.instantiate(context));
             }
 
             @Override
@@ -82,8 +82,8 @@ public class TestText {
             }
 
             @Override
-            public void update(Window window, Iterable<Event> events) {
-                txm.instantiate(window);
+            public void update(Window context, Iterable<Event> events) {
+                txm.instantiate(context);
             }
 
             @Override

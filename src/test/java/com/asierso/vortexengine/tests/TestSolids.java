@@ -43,10 +43,10 @@ public class TestSolids {
             }
 
             @Override
-            public void update(Window window, Iterable<Event> events) {
-                sc.instantiate(window);
-                sc2.instantiate(window);
-                sc3.instantiate(window);
+            public void update(Window context, Iterable<Event> events) {
+                sc.instantiate(context);
+                sc2.instantiate(context);
+                sc3.instantiate(context);
                 if(sc.getPosition().y > 300){
                     sc.setPosition(25,25);
                     sc.<Rigibody>getComponent(Rigibody.class).flushDelta();
@@ -102,10 +102,10 @@ public class TestSolids {
             }
 
             @Override
-            public void update(Window window, Iterable<Event> events) {
-                sc.instantiate(window);
-                sc2.instantiate(window);
-                sc3.instantiate(window);
+            public void update(Window context, Iterable<Event> events) {
+                sc.instantiate(context);
+                sc2.instantiate(context);
+                sc3.instantiate(context);
                 if(sc.getPosition().y > 300){
                     sc.setPosition(25,25);
                     sc.<Rigibody>getComponent(Rigibody.class).flushDelta();
@@ -157,9 +157,9 @@ public class TestSolids {
             }
 
             @Override
-            public void update(Window window, Iterable<Event> events) {
-                sc.instantiate(window);
-                floor.instantiate(window);
+            public void update(Window context, Iterable<Event> events) {
+                sc.instantiate(context);
+                floor.instantiate(context);
 
                 if(sc.getPosition().y > floor.getPosition().y + 50)
                     Assert.fail();
@@ -201,9 +201,9 @@ public class TestSolids {
             }
 
             @Override
-            public void update(Window window, Iterable<Event> events) {
-                sc.instantiate(window);
-                floor.instantiate(window);
+            public void update(Window context, Iterable<Event> events) {
+                sc.instantiate(context);
+                floor.instantiate(context);
 
                 if(sc.getPosition().y > floor.getPosition().y + 50)
                     Assert.fail();
@@ -238,8 +238,8 @@ public class TestSolids {
             }
 
             @Override
-            public void update(Window window, Iterable<Event> events) {
-                sc.instantiate(window);
+            public void update(Window context, Iterable<Event> events) {
+                sc.instantiate(context);
             }
 
             @Override
@@ -271,8 +271,8 @@ public class TestSolids {
             }
 
             @Override
-            public void update(Window window, Iterable<Event> events) {
-                sc.instantiate(window);
+            public void update(Window context, Iterable<Event> events) {
+                sc.instantiate(context);
             }
 
             @Override
