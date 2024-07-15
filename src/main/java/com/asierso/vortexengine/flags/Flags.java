@@ -1,5 +1,7 @@
 package com.asierso.vortexengine.flags;
 
+import com.asierso.vortexengine.exceptions.FlagNotExistsException;
+
 import java.util.ArrayList;
 
 /**
@@ -59,7 +61,7 @@ public class Flags {
         if(flagExists(entity.getKey()))
             flagList.remove(entity);
         else
-            throw new NullPointerException();
+            throw new FlagNotExistsException(entity.getKey());
     }
     
     /**
@@ -70,7 +72,7 @@ public class Flags {
         if(flagExists(key))
             flagList.remove(getIndex(key));
         else
-            throw new NullPointerException();
+            throw new FlagNotExistsException(key);
     }
     
     /**

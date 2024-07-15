@@ -1,5 +1,7 @@
 package com.asierso.vortexengine.flags;
 
+import com.asierso.vortexengine.exceptions.InvalidFlagKeyException;
+
 /**
  * Define single flag. A Flag is a relationship between a key (String) and a value of any type. 
  * A collection of EntityTag works like a dictionary to set custom settings
@@ -7,7 +9,7 @@ package com.asierso.vortexengine.flags;
  * @author Asierso
  * @param <T> Value of flag
  */
-public class EntityFlag<T> {
+public final class EntityFlag<T> {
     //Private flag key value
     private String key;
     private T value;
@@ -18,8 +20,12 @@ public class EntityFlag<T> {
      * @param value Value assigned to the flag
      */
     public EntityFlag(String key, T value){
-        this.key = key;
-        this.value = value;
+        if(key.isBlank())
+            throw new InvalidFlagKeyException(key);
+        else {
+            this.key = key;
+            this.value = value;
+        }
     }
 
     /**
@@ -35,7 +41,10 @@ public class EntityFlag<T> {
      * @param key Key value to assign
      */
     public void setKey(String key) {
-        this.key = key;
+        if(key.isBlank())
+            throw new InvalidFlagKeyException(key);
+        else
+            this.key = key;
     }
 
     /**
